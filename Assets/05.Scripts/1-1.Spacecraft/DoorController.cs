@@ -54,10 +54,9 @@ public class DoorController : MonoBehaviour
         {
             float newScale = doorLightOriginScale.x + 77f;
             doorLight.transform.localScale = new Vector3(newScale, doorLightOriginScale.y, doorLightOriginScale.z);
-
+            
             elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-        
+        } 
+        yield return null;
     }
 }
