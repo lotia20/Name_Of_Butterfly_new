@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17276844, g: 0.21589246, b: 0.2978263, a: 1}
+  m_IndirectSpecularColor: {r: 0.17276788, g: 0.21589147, b: 0.29782534, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1758,7 +1758,7 @@ MonoBehaviour:
   doorLight: {fileID: 2597105700464124298}
   doorU: {fileID: 8569233734438857637}
   doorD: {fileID: 6174716629961889060}
-  openSpeed: 0.35
+  openSpeed: 0.2
 --- !u!4 &1894037224
 Transform:
   m_ObjectHideFlags: 0
@@ -3418,7 +3418,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.5, y: -0.5, z: 0.5, w: 0.5}
   m_LocalPosition: {x: 3.6232805, y: 1.2, z: 0.15}
-  m_LocalScale: {x: 0.1, y: 60, z: 228.15666}
+  m_LocalScale: {x: 77, y: 60, z: 228.15666}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7395318869361060855}
