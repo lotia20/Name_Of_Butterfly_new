@@ -1140,6 +1140,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeabe04723ccc3349a7d74ab90b1f50c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  highlightSource: {fileID: 874779071}
+  selectableTags:
+  - SelectableDrawing
+  - SelectablePasswordScreen
+  - SelectableIdCard
+  maxDistance: 2
 --- !u!4 &874779073
 Transform:
   m_ObjectHideFlags: 0

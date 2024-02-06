@@ -1,16 +1,16 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class OutlineSelection : MonoBehaviour
 {
-    AudioSource highlightSource;
+    [SerializeField] private AudioSource highlightSource;
+    [SerializeField] private string[] selectableTags = { "SelectableDrawing", "SelectablePasswordScreen", "SelectableIdCard" };
+    [SerializeField] private float maxDistance = 2f;
+
     public static bool IsOutlineEnabled { get; private set; } = false;
     public static GameObject ClosestObject { get; private set; }
 
-    private Transform highlight;
     private Transform selection;
     private bool isSoundPlaying = false;
-
 
     void Start()
     {
@@ -19,96 +19,92 @@ public class OutlineSelection : MonoBehaviour
 
     void Update()
     {
-        // Highlight
-        if (highlight != null)
-        {
-            UpdateOutlineStatus(false);
-            highlight = null;
-        }
+        GameObject closestObject = FindClosestObject(selectableTags);
 
-        // 하이라이트 넣을 태그 -> 리스트에 추가 및 삭제하여 재사용
-        string[] tagsToFind = { "SelectableDrawing", "SelectablePasswordScreen" };
-        GameObject closestObject = FindClosestObject(tagsToFind);
         if (closestObject != null)
         {
-            highlight = closestObject.transform;
-            ClosestObject = closestObject;
+            UpdateClosestObject(closestObject);
 
-            if (highlight.tag.Contains("Selectable") && highlight != selection)
+            if (ShouldHighlight(closestObject))
             {
-                //outline이라는 컴포넌트를 CO에 추가함
-                if (highlight.gameObject.TryGetComponent(out Outline outlineComponent))
-                {
-                    outlineComponent.enabled = true;
-                    UpdateOutlineStatus(true);
+                ProcessHighlight(closestObject);
+            }
 
-                }
-                //게임 내에서 두꼐 및 색상 조정하지 않으면 스크립트에서 설정가능
-                else
-                {
-                    Outline outline = highlight.gameObject.AddComponent<Outline>();
-                    outline.OutlineColor = Color.cyan;
-                    outline.OutlineWidth = 5.0f;
-                    outline.enabled = true;
-                    UpdateOutlineStatus(true);
-                }
-            }
-            else
-            {
-                highlight = null;
-            }
+            ProcessSelection();
+        }
+        else
+        {
+            ClearHighlightAndSelection();
         }
 
-        // Selection : 
-        if (closestObject != null)
+    }
+
+    bool ShouldHighlight(GameObject obj)
+    {
+        return obj.tag.Contains("Selectable") && obj.transform != selection && IsObjectInView(obj);
+    }
+
+    void ProcessHighlight(GameObject obj)
+    {
+        ClearOutlineComponent(selection);
+        AddOrUpdateOutlineComponent(obj);
+        selection = obj.transform;
+        PlaySelectionSound();
+    }
+
+
+    void ProcessSelection()
+    {
+        if (selection != null)
         {
-            if (selection != null)
-            {
-                Outline outlineComponent = selection.gameObject.GetComponent<Outline>();
-                if (outlineComponent != null)
-                {
-                    outlineComponent.enabled = false;
-                    UpdateOutlineStatus(false);
-                }
-
-                selection = closestObject.transform;
-                outlineComponent = selection.gameObject.GetComponent<Outline>();
-                if (outlineComponent != null && IsObjectInView(closestObject))
-                {
-                    outlineComponent.enabled = true;
-                    UpdateOutlineStatus(true);
-                }
-
-                highlight = null;
-            }
-            else
-            {
-                selection = closestObject.transform;
-                Outline outlineComponent = selection.gameObject.GetComponent<Outline>();
-
-                if (outlineComponent != null)
-                {
-                    outlineComponent.enabled = true;
-                    UpdateOutlineStatus(true);
-                }
-
-            }
-        }
-
-        if (IsOutlineEnabled && IsObjectInView(ClosestObject) && !isSoundPlaying)
-        {
-            PlaySelectionSound();
-        }
-
-        if (!IsObjectInView(ClosestObject))
-        {
-            isSoundPlaying = false;
+            AddOrUpdateOutlineComponent(selection.gameObject);
         }
     }
+
+    void ClearHighlightAndSelection()
+    {
+        ClearOutlineComponent(selection);
+        selection = null;
+    }
+
+    void AddOrUpdateOutlineComponent(GameObject obj)
+    {
+        if (obj.TryGetComponent(out Outline outlineComponent))
+        {
+            outlineComponent.enabled = true;
+            UpdateOutlineStatus(true);
+        }
+        else
+        {
+            Outline outline = obj.AddComponent<Outline>();
+            outline.OutlineColor = Color.cyan;
+            outline.OutlineWidth = 5.0f;
+            outline.enabled = true;
+            UpdateOutlineStatus(true);
+        }
+    }
+
+    void ClearOutlineComponent(Transform objTransform)
+    {
+        if (objTransform != null)
+        {
+            Outline outlineComponent = objTransform.gameObject.GetComponent<Outline>();
+            if (outlineComponent != null)
+            {
+                outlineComponent.enabled = false;
+                UpdateOutlineStatus(false);
+            }
+        }
+    }
+
+    void UpdateClosestObject(GameObject obj)
+    {
+        ClosestObject = obj;
+    }
+
+
     bool IsObjectInView(GameObject obj)
     {
-        //플레이어 오브젝트 근접거리 2f로 설정 -> 변경가능
-        float maxDistance = 2f;
         if (obj != null)
         {
             Vector3 screenPoint = Camera.main.WorldToViewportPoint(obj.transform.position);
