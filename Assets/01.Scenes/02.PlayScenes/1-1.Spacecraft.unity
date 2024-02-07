@@ -275,6 +275,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   passwordTextBox: {fileID: 8677623767270776844}
   successSound: {fileID: 8300000, guid: 9b9631b6b1679b34ba92f51bfd1ef52e, type: 3}
+  clickSound: {fileID: 8300000, guid: e90e98cd5cb73b644abe230d068cb175, type: 3}
 --- !u!4 &148081288
 Transform:
   m_ObjectHideFlags: 0
@@ -1942,9 +1943,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2766e7af4ae63ca45a6a429bcbcc28c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  frontSound: {fileID: 0}
-  backSound: {fileID: 0}
-  resetSound: {fileID: 0}
+  frontSound: {fileID: 8300000, guid: 3888ec7ce4850ed4f89885dff35e22f9, type: 3}
+  backSound: {fileID: 8300000, guid: 3888ec7ce4850ed4f89885dff35e22f9, type: 3}
+  resetSound: {fileID: 8300000, guid: 3888ec7ce4850ed4f89885dff35e22f9, type: 3}
   distanceToCamera: 0.6
 --- !u!114 &187243962439533691
 MonoBehaviour:

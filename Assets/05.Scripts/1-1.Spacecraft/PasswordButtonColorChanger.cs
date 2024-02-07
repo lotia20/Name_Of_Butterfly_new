@@ -12,6 +12,7 @@ public class PasswordButtonColorChanger : MonoBehaviour
 
     public TextMeshPro passwordTextBox;
     public AudioClip successSound;
+    public AudioClip clickSound;
 
     private AudioSource audioSource;
 
@@ -76,6 +77,7 @@ public class PasswordButtonColorChanger : MonoBehaviour
                                 else
                                 {
                                     passwordTextBox.text += buttonNumber.ToString();
+                                    PlaySound(clickSound);
                                 }
                             }
                         }
