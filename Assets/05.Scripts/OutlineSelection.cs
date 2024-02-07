@@ -4,7 +4,7 @@ public class OutlineSelection : MonoBehaviour
 {
     [SerializeField] private AudioSource highlightSource;
     [SerializeField] private string[] selectableTags = { "SelectableDrawing", "SelectablePasswordScreen", "SelectableIdCard" };
-    [SerializeField] private float maxDistance = 2f;
+    [SerializeField] private float maxDistance;
 
     public static bool IsOutlineEnabled { get; private set; } = false;
     public static GameObject ClosestObject { get; private set; }
@@ -21,7 +21,7 @@ public class OutlineSelection : MonoBehaviour
     {
         GameObject closestObject = FindClosestObject(selectableTags);
 
-        if (closestObject != null)
+        if (closestObject != null && IsObjectInView(closestObject))
         {
             UpdateClosestObject(closestObject);
 
@@ -29,14 +29,13 @@ public class OutlineSelection : MonoBehaviour
             {
                 ProcessHighlight(closestObject);
             }
-
+           
             ProcessSelection();
         }
         else
         {
             ClearHighlightAndSelection();
         }
-
     }
 
     bool ShouldHighlight(GameObject obj)
@@ -78,7 +77,7 @@ public class OutlineSelection : MonoBehaviour
         {
             Outline outline = obj.AddComponent<Outline>();
             outline.OutlineColor = Color.cyan;
-            outline.OutlineWidth = 5.0f;
+            outline.OutlineWidth = 4.0f;
             outline.enabled = true;
             UpdateOutlineStatus(true);
         }

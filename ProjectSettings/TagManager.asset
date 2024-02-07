@@ -8,6 +8,8 @@ TagManager:
   - PasswordButton
   - SelectablePasswordScreen
   - SelectableIdCard
+  - Display
+  - OutlineObject
   layers:
   - Default
   - TransparentFX

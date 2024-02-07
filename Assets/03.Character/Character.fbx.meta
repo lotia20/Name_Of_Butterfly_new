@@ -3,7 +3,12 @@ guid: 4493d410bb2360f48b885bd6f0112f4f
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Adam_Arms_plastic
+    second: {fileID: 2100000, guid: 27ab3c60c82a58348a8e8b0cafd77356, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

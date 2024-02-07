@@ -8,13 +8,10 @@ public class DrawingPicker : MonoBehaviour
     public AudioClip backSound;   // 뒤로 갈 때 재생할 사운드
     public AudioClip resetSound;  // 위치 초기화할 때 재생할 사운드
 
-    public float xDistanceThreshold = 2f;
-    public float activationDistance = 2f;
-    float distanceToCamera = 0.4f;
+    public float distanceToCamera = 0.6f;
 
     private bool isObjectFacingFront = false;
     private bool isObjectFacingBack = false;
-    private bool hasPerformedBoxOpenEvent = false;
 
     private OutlineSelection outlineSelection;
     private AudioSource audioSource;
@@ -64,12 +61,7 @@ public class DrawingPicker : MonoBehaviour
                 GameObject closestObject = OutlineSelection.ClosestObject;
 
                 if (closestObject != null && closestObject.CompareTag("SelectableDrawing"))
-                {
-                    Camera mainCamera = Camera.main;
-                    Vector3 viewportPoint = mainCamera.WorldToViewportPoint(closestObject.transform.position);
-
-                    if (viewportPoint.x >= 0 && viewportPoint.x <= 1 && viewportPoint.y >= 0 && viewportPoint.y <= 1 && viewportPoint.z > 0)
-                    {
+                {                  
                         if (isObjectFacingFront)
                         {
                             RotateObject(closestObject);
@@ -91,25 +83,11 @@ public class DrawingPicker : MonoBehaviour
                             PlaySound(frontSound);
                         }
                     }
-
-                    // 로그 출력 - 나중에
-                    Debug.Log("ClosestObject found: " + closestObject.name + ". isObjectFacingFront: " + isObjectFacingFront + ", isObjectFacingBack: " + isObjectFacingBack);
                 }
-            }
+            
             else
             {
                 Debug.Log("Outline is not enabled.");
-            }
-        }
-
-        if (PasswordButtonColorChanger.isBoxOpen && !hasPerformedBoxOpenEvent)
-        {
-            GameObject closestObject = OutlineSelection.ClosestObject;
-            if (closestObject != null && closestObject.CompareTag("SelectableDrawing"))
-            {
-                MoveObjectToSpecificPosition(closestObject, new Vector3(-4.341f, 0.758f, -3.059f), closestObject.transform.rotation);
-
-                hasPerformedBoxOpenEvent = true;
             }
         }
     }
@@ -155,11 +133,5 @@ public class DrawingPicker : MonoBehaviour
             audioSource.clip = sound;
             audioSource.Play();
         }
-    }
-    void MoveObjectToSpecificPosition(GameObject obj, Vector3 newPosition, Quaternion originalRotation)
-    {
-        obj.transform.position = newPosition;
-        obj.transform.rotation = originalRotation;
-        SaveOriginalTransforms();
     }
 }

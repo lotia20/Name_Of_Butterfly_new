@@ -27,7 +27,7 @@ public class PasswordButtonColorChanger : MonoBehaviour
 
     void Update()
     {
-        if (PasswordEventCameraController.IsPasswordActive)
+        if (PasswordEventCameraController.IsPasswordActive && IDCardPickupEvent.IdCardPickedUp)
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -36,12 +36,9 @@ public class PasswordButtonColorChanger : MonoBehaviour
 
                 if (Physics.Raycast(ray, out hit) && hit.collider.gameObject.CompareTag("PasswordButton"))
                 {
-                    Debug.Log("Clicked on password button");
-
                     int buttonNumber;
                     if (int.TryParse(hit.collider.gameObject.name.Substring("Upper box button.".Length), out buttonNumber))
                     {
-                        // 클릭 시 색상 -> 논의 사항 ( white로 해놓음 )
                         ChangeColor(hit.collider.gameObject, Color.white, 1.0f, 0.2f);
                         if (passwordTextBox != null)
                         {
@@ -62,6 +59,8 @@ public class PasswordButtonColorChanger : MonoBehaviour
                                 {
                                     PlaySound(successSound);
                                     StartCoroutine(WaitForSecondsAndReset(2.0f));
+                                    DisableOutlineAndPasswordScripts();
+                                    
                                 }
                                 else
                                 {
@@ -70,11 +69,26 @@ public class PasswordButtonColorChanger : MonoBehaviour
                             }
                             else
                             {
-                                passwordTextBox.text += buttonNumber.ToString();
+                                if (passwordTextBox.text.Length > 15)
+                                {
+                                    StartCoroutine(ShowErrorAndReset());
+                                }
+                                else
+                                {
+                                    passwordTextBox.text += buttonNumber.ToString();
+                                }
                             }
                         }
                     }
                 }
+            }
+        }
+        else
+        {
+            passwordTextBox.text = "<color=red><size=0.006>Inactive</size></color>";
+            if (!Input.GetMouseButtonDown(0))
+            {
+                passwordTextBox.text = "";
             }
         }
     }
@@ -120,13 +134,13 @@ public class PasswordButtonColorChanger : MonoBehaviour
     {
         if (passwordTextBox != null)
         {
-            // "error!!"를 1초 동안 표시 -> 색상 논의사항
-            passwordTextBox.text = "<color=red><size=0.006>error!!</size></color>";
+            passwordTextBox.text = "<color=red><size=0.006>XXXX</size></color>";
             yield return new WaitForSeconds(1.0f);
 
             passwordTextBox.text = "";
         }
     }
+
 
     void PlaySound(AudioClip sound)
     {
@@ -134,6 +148,35 @@ public class PasswordButtonColorChanger : MonoBehaviour
         {
             audioSource.clip = sound;
             audioSource.Play();
+        }
+    }
+
+    private void DisableOutlineAndPasswordScripts()
+    {
+        GameObject hbdCardObject = GameObject.Find("HBDcard");
+        if (hbdCardObject != null)
+        {
+            Destroy(hbdCardObject);
+        }
+
+        GameObject outlineObject = GameObject.FindWithTag("OutlineObject");
+        if (outlineObject != null)
+        {
+            OutlineSelection outlineScript = outlineObject.GetComponent<OutlineSelection>();
+            if (outlineScript != null)
+            {
+                outlineScript.enabled = false;
+            }
+        }
+
+        GameObject passwordObject = GameObject.FindWithTag("SelectablePasswordScreen");
+        if (passwordObject != null)
+        {
+            PasswordEventCameraController passwordScript = passwordObject.GetComponent<PasswordEventCameraController>();
+            if (passwordScript != null)
+            {
+                passwordScript.enabled = false;
+            }
         }
     }
 }
