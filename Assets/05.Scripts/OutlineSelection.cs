@@ -10,7 +10,6 @@ public class OutlineSelection : MonoBehaviour
     public static GameObject ClosestObject { get; private set; }
 
     private Transform selection;
-    private bool isSoundPlaying = false;
 
     void Start()
     {
@@ -161,7 +160,6 @@ public class OutlineSelection : MonoBehaviour
         if (highlightSource != null && highlightSource.clip != null)
         {
             highlightSource.PlayOneShot(highlightSource.clip);
-            isSoundPlaying = true;
         }
     }
 }

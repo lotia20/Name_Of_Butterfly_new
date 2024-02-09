@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/01.Scenes/02.PlayScenes/0.Start.unity
     guid: fff38f96670990a42a348bdef576d642
+  - enabled: 1
+    path: Assets/01.Scenes/02.PlayScenes/1-1.Spacecraft.unity
+    guid: 06633979a2df39442a1f93f5146102aa
   m_configObjects: {}

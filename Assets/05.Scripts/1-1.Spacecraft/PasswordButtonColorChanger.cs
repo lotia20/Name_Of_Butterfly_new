@@ -7,7 +7,7 @@ public class PasswordButtonColorChanger : MonoBehaviour
     private MaterialPropertyBlock propertyBlock;
     private Color originalColor;
     private float originalIntensity;
-    private bool isChangingColor = false;
+    private bool hasIDCardInserted = false;
     public static bool isBoxOpen { get; private set; } = false;
 
     public TextMeshPro passwordTextBox;
@@ -28,6 +28,13 @@ public class PasswordButtonColorChanger : MonoBehaviour
 
     void Update()
     {
+        if (PasswordEventCameraController.IsPasswordActive && IDCardPickupEvent.IdCardPickedUp && !hasIDCardInserted)
+        {
+            ActivateSelectableIDCard();
+            // 모션 함수 
+            hasIDCardInserted = true;
+        }
+
         if (PasswordEventCameraController.IsPasswordActive && IDCardPickupEvent.IdCardPickedUp)
         {
             if (Input.GetMouseButtonDown(0))
@@ -95,9 +102,17 @@ public class PasswordButtonColorChanger : MonoBehaviour
         }
     }
 
+    void ActivateSelectableIDCard()
+    {
+        GameObject idCardObject = GameObject.FindGameObjectWithTag("SelectableIDCard");
+        if (idCardObject != null)
+        {
+            idCardObject.SetActive(true);
+        }
+    }
+
     void ChangeColor(GameObject obj, Color targetColor, float targetIntensity, float duration)
     {
-        isChangingColor = true;
 
         Renderer renderer = obj.GetComponent<Renderer>();
         renderer.GetPropertyBlock(propertyBlock);
@@ -113,7 +128,6 @@ public class PasswordButtonColorChanger : MonoBehaviour
     IEnumerator ResetColor(GameObject obj, Color targetColor, float targetIntensity, float duration)
     {
         yield return new WaitForSeconds(duration);
-        isChangingColor = false;
 
         Renderer renderer = obj.GetComponent<Renderer>();
         renderer.GetPropertyBlock(propertyBlock);

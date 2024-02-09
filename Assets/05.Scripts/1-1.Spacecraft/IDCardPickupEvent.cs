@@ -138,17 +138,22 @@ public class IDCardPickupEvent : MonoBehaviour
                 material.SetColor("_EmissionColor", Color.green);
                 yield return new WaitForSeconds(1.0f);
                 material.SetColor("_EmissionColor", originalColor);
-                DestroyAndResetArms();
+                DeactivateAndResetArms();
             }
         }
     }
-    void DestroyAndResetArms()
+    void DeactivateAndResetArms()
     {
         StartCoroutine(ShowMessageForSeconds(3f));
-        Destroy(OutlineSelection.ClosestObject);
+
+        if (OutlineSelection.ClosestObject != null)
+        {
+            OutlineSelection.ClosestObject.SetActive(false);
+        }
         ResetArmPositions();
         IdCardPickedUp = true;
     }
+
     IEnumerator ShowMessageForSeconds(float seconds)
     {
         messageImage.gameObject.SetActive(true);

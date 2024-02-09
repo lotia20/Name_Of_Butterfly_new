@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SecreteBoxOpen : MonoBehaviour
+public class SecretBoxOpen : MonoBehaviour
 {
     public Transform upperbox;
     [SerializeField] private float openAngle;
