@@ -55,7 +55,7 @@ MonoBehaviour:
   components:
   - {fileID: -3353726896170876553}
   - {fileID: 3805334424913507237}
-  - {fileID: 4125540805597896192}
+  - {fileID: 4925089936794784698}
   - {fileID: 2396358545816515350}
 --- !u!114 &2396358545816515350
 MonoBehaviour:
@@ -72,13 +72,13 @@ MonoBehaviour:
   active: 1
   color:
     m_OverrideState: 1
-    m_Value: {r: 0.6792453, g: 0.6792453, b: 0.6792453, a: 1}
+    m_Value: {r: 0.13438945, g: 0.157169, b: 0.18867922, a: 1}
   center:
     m_OverrideState: 1
     m_Value: {x: 0.5, y: 0.5}
   intensity:
     m_OverrideState: 1
-    m_Value: 0.042
+    m_Value: 0.134
   smoothness:
     m_OverrideState: 1
     m_Value: 1
@@ -103,19 +103,19 @@ MonoBehaviour:
     m_Value: 1
   threshold:
     m_OverrideState: 1
-    m_Value: 1.16
+    m_Value: 0.14
   intensity:
     m_OverrideState: 1
-    m_Value: 2.62
+    m_Value: 0.68
   scatter:
     m_OverrideState: 1
-    m_Value: 0.059
+    m_Value: 0.385
   clamp:
     m_OverrideState: 1
     m_Value: 65472
   tint:
     m_OverrideState: 1
-    m_Value: {r: 0, g: 0, b: 0, a: 1}
+    m_Value: {r: 0.759434, g: 0.9562606, b: 1, a: 1}
   highQualityFiltering:
     m_OverrideState: 1
     m_Value: 1
@@ -132,7 +132,7 @@ MonoBehaviour:
   dirtIntensity:
     m_OverrideState: 1
     m_Value: 0
---- !u!114 &4125540805597896192
+--- !u!114 &4925089936794784698
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -147,10 +147,10 @@ MonoBehaviour:
   active: 1
   lift:
     m_OverrideState: 1
-    m_Value: {x: 0.9200375, y: 0.9467672, z: 1, w: 0}
+    m_Value: {x: 0.5950681, y: 0.6661516, z: 1, w: 0}
   gamma:
     m_OverrideState: 1
-    m_Value: {x: 0.9980172, y: 1, z: 0.89098454, w: 0}
+    m_Value: {x: 1, y: 0.9738093, z: 0.6894088, w: 0}
   gain:
     m_OverrideState: 1
-    m_Value: {x: 0.9855461, y: 0.9626904, z: 1, w: -0.030895997}
+    m_Value: {x: 0.37552416, y: 0.53164285, z: 1, w: 0}
