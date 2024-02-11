@@ -34,12 +34,13 @@ public class WakeUp : MonoBehaviour
 
     void Start()
     {
+        player.GetComponent<PlayerController>().enabled = false;
         closedRotation = cover.transform.rotation;
         openRotation = Quaternion.Euler(0f, 0f, openAngle);
 
         lieRotation = player.transform.rotation;
-        standRotation = Quaternion.Euler(270f, 0f, 0f);
-        sitRotation = Quaternion.Euler(270f, 90f, 0f);
+        standRotation = Quaternion.Euler(0f, 0f, 0f);
+        sitRotation = Quaternion.Euler(0f, 90f, 0f);
 
         bowCameraRotation = Quaternion.Euler(bowAngle, 90f, 0f);
 
@@ -120,8 +121,8 @@ public class WakeUp : MonoBehaviour
 
         Debug.Log("Bow Head");
 
-        camera.transform.parent = null;
         cameraRotation = camera.transform.rotation;
+        camera.transform.parent = null;
 
         float elapsedTime = 0f;
 
@@ -148,6 +149,8 @@ public class WakeUp : MonoBehaviour
 
         player.transform.position = new Vector3(-1.438f, 0.733f, -0.031f);
 
+        player.GetComponent<PlayerController>().enabled = true;
+        
         yield return null;
     }
 }
