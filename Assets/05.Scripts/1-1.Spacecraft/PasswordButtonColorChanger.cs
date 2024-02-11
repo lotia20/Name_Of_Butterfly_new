@@ -7,7 +7,6 @@ public class PasswordButtonColorChanger : MonoBehaviour
     private MaterialPropertyBlock propertyBlock;
     private Color originalColor;
     private float originalIntensity;
-    private bool hasIDCardInserted = false;
     public static bool isBoxOpen { get; private set; } = false;
 
     public TextMeshPro passwordTextBox;
@@ -28,13 +27,6 @@ public class PasswordButtonColorChanger : MonoBehaviour
 
     void Update()
     {
-        if (PasswordEventCameraController.IsPasswordActive && IDCardPickupEvent.IdCardPickedUp && !hasIDCardInserted)
-        {
-            ActivateSelectableIDCard();
-            // 모션 함수 
-            hasIDCardInserted = true;
-        }
-
         if (PasswordEventCameraController.IsPasswordActive && IDCardPickupEvent.IdCardPickedUp)
         {
             if (Input.GetMouseButtonDown(0))
@@ -99,15 +91,6 @@ public class PasswordButtonColorChanger : MonoBehaviour
             {
                 passwordTextBox.text = "";
             }
-        }
-    }
-
-    void ActivateSelectableIDCard()
-    {
-        GameObject idCardObject = GameObject.FindGameObjectWithTag("SelectableIDCard");
-        if (idCardObject != null)
-        {
-            idCardObject.SetActive(true);
         }
     }
 
