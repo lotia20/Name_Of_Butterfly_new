@@ -4,27 +4,34 @@ using UnityEngine;
 
 public class WakeUp : MonoBehaviour
 {
+    //GameObject
     public GameObject cover;
     public GameObject player;
     public Camera camera;
     public GameObject ArmL;
     public GameObject ArmR;
+
+    //Angle & Speed
     [SerializeField] private float openAngle;
     [SerializeField] private float bowAngle;
     [SerializeField] private float openSpeed;
     [SerializeField] private float wakeUpSpeed;
     [SerializeField] private float handCheckSpeed;
    
+   //Cover Rotation
     private Quaternion closedRotation;
     private Quaternion openRotation; 
 
+    //Player Rotation
     private Quaternion lieRotation;
     private Quaternion standRotation;
     private Quaternion sitRotation;
 
+    //Camera Rotation
     private Quaternion cameraRotation;
     private Quaternion bowCameraRotation;
 
+    //ArmRotation
     private Quaternion leftArmRotation;
     private Quaternion rightArmRotation;
     private Quaternion raiseUpLeftArmRotation;
