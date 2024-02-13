@@ -276,7 +276,6 @@ MonoBehaviour:
   passwordTextBox: {fileID: 8677623767270776844}
   successSound: {fileID: 8300000, guid: 9b9631b6b1679b34ba92f51bfd1ef52e, type: 3}
   clickSound: {fileID: 8300000, guid: e90e98cd5cb73b644abe230d068cb175, type: 3}
-  passwordController: {fileID: 0}
 --- !u!4 &148081288
 Transform:
   m_ObjectHideFlags: 0
@@ -417,7 +416,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 161a4db3d2e2f49b7a185b23344b879b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 5
+  walkSpeed: 7
   runSpeed: 20
   crouchSpeed: 4
   jumpForce: 5
@@ -672,7 +671,7 @@ GameObject:
   - component: {fileID: 874779073}
   - component: {fileID: 874779072}
   - component: {fileID: 874779071}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: ObjectSelectionController
   m_TagString: OutlineObject
   m_Icon: {fileID: 0}
@@ -999,7 +998,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -1172,8 +1171,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UpperArmL: {fileID: 5947112713001117015}
   HandL: {fileID: 2085424665821734742}
-  UpperArmR: {fileID: 8023914715245089839}
-  HandR: {fileID: 7973800963863350567}
+  FingerL2: {fileID: 15389736535170844}
+  FingerL3: {fileID: 4511240369572212001}
+  FingerL4: {fileID: 3536044406185542567}
   player: {fileID: 237658127}
   messageImage: {fileID: 1538118273}
   pickupSound: {fileID: 1072238135}
@@ -23408,6 +23408,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3535406240328965812, guid: b890067b118837e4d97fafe73237b4ad,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4154806191704863377, guid: b890067b118837e4d97fafe73237b4ad,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4154806191704863377, guid: b890067b118837e4d97fafe73237b4ad,
         type: 3}
       propertyPath: m_TagString
@@ -23482,6 +23492,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: sf_IDcard
+      objectReference: {fileID: 0}
+    - target: {fileID: 9045352954772025994, guid: b890067b118837e4d97fafe73237b4ad,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

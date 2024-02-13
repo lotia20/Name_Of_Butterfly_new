@@ -4,23 +4,26 @@ using UnityEngine.UI;
 
 public class IDCardPickupEvent : MonoBehaviour
 {
-    float distanceToCamera = 0.8f;
+    float distanceToCamera = 0.43f;
     public GameObject UpperArmL;
     public GameObject HandL;
-    public GameObject UpperArmR;
-    public GameObject HandR;
+    public GameObject FingerL2;
+    public GameObject FingerL3;
+    public GameObject FingerL4;
     public GameObject player;
 
     public Image messageImage;
 
     public AudioSource pickupSound;
-
     public static bool IdCardPickedUp { get; private set; } = false;
 
     private Quaternion initialUpperArmLRotation;
     private Quaternion initialHandLRotation;
-    private Quaternion initialUpperArmRRotation;
-    private Quaternion initialHandRRotation;
+    private Quaternion initialFingerL2Rotation;
+    private Quaternion initialFingerL3Rotation;
+    private Quaternion initialFingerL4Rotation;
+
+    private OutlineSelection outlineSelectionScript;
 
     void Update()
     {
@@ -39,12 +42,14 @@ public class IDCardPickupEvent : MonoBehaviour
             }
         }
     }
+
     void StoreInitialArmRotations()
     {
         initialUpperArmLRotation = UpperArmL.transform.rotation;
         initialHandLRotation = HandL.transform.rotation;
-        initialUpperArmRRotation = UpperArmR.transform.rotation;
-        initialHandRRotation = HandR.transform.rotation;
+        initialFingerL2Rotation = FingerL2.transform.rotation;
+        initialFingerL3Rotation = FingerL3.transform.rotation;
+        initialFingerL4Rotation = FingerL4.transform.rotation;
     }
 
     void MoveObjectToFront(GameObject obj)
@@ -58,14 +63,19 @@ public class IDCardPickupEvent : MonoBehaviour
 
         obj.transform.rotation = targetRotation;
 
-        StartCoroutine(SequentialArmRotations());
+        StartCoroutine(SequentialArmRotations(obj));
     }
-    IEnumerator SequentialArmRotations()
+
+    IEnumerator SequentialArmRotations(GameObject obj)
     {
-        yield return StartCoroutine(RotateUpperArm(UpperArmL, Vector3.forward, 100f));
+        float objectHeight = obj.transform.position.y;
+        float rotationFactor = 74f;
+        float targetRotationAngle = objectHeight * rotationFactor;
+        yield return StartCoroutine(RotateUpperArm(UpperArmL, Vector3.forward, targetRotationAngle));
         yield return StartCoroutine(RotateUpperArm(UpperArmL, Vector3.right, 80f));
-        yield return StartCoroutine(RotateUpperArm(UpperArmL, Vector3.forward, 10f));
+        yield return StartCoroutine(RotateUpperArm(UpperArmL, Vector3.forward, 19.3f));
         yield return StartCoroutine(RotateHandZ(HandL));
+        yield return StartCoroutine(RotateFingers(FingerL2, FingerL3, FingerL4));
     }
 
     IEnumerator RotateUpperArm(GameObject arm, Vector3 rotationAxis, float rotationAngle)
@@ -98,6 +108,27 @@ public class IDCardPickupEvent : MonoBehaviour
             hand.transform.rotation = Quaternion.Slerp(startRotation, targetRotation, elapsedTime / rotationDuration);
             yield return null;
         }
+    }
+
+    IEnumerator RotateFingers(GameObject finger2, GameObject finger3, GameObject finger4)
+    {
+        float rotationDuration = 1.0f;
+        float elapsedTime = 0f;
+        Quaternion startRotation2 = finger2.transform.rotation;
+        Quaternion startRotation3 = finger3.transform.rotation;
+        Quaternion startRotation4 = finger4.transform.rotation;
+
+        Quaternion targetRotation = startRotation2 * Quaternion.Euler(0f, 0f, -60f); // Adjust the target rotation as needed
+
+        while (elapsedTime < rotationDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            finger2.transform.rotation = Quaternion.Slerp(startRotation2, targetRotation, elapsedTime / rotationDuration);
+            finger3.transform.rotation = Quaternion.Slerp(startRotation3, targetRotation, elapsedTime / rotationDuration);
+            finger4.transform.rotation = Quaternion.Slerp(startRotation4, targetRotation, elapsedTime / rotationDuration);
+            yield return null;
+        }
+
         StartCoroutine(ChangeEmissionColor());
         if (pickupSound != null)
         {
@@ -122,9 +153,11 @@ public class IDCardPickupEvent : MonoBehaviour
             }
         }
     }
+
     void DeactivateAndResetArms()
     {
-        StartCoroutine(ShowMessageForSeconds(3f));
+        //추후 넣을지 안넣을지 결정할거임
+        //StartCoroutine(ShowMessageForSeconds(3f));
 
         if (OutlineSelection.ClosestObject != null)
         {
@@ -140,12 +173,14 @@ public class IDCardPickupEvent : MonoBehaviour
         yield return new WaitForSeconds(seconds);
         messageImage.gameObject.SetActive(false);
     }
+
     void ResetArmPositions()
     {
         UpperArmL.transform.rotation = initialUpperArmLRotation;
         HandL.transform.rotation = initialHandLRotation;
-        UpperArmR.transform.rotation = initialUpperArmRRotation;
-        HandR.transform.rotation = initialHandRRotation;
+        FingerL2.transform.rotation = initialFingerL2Rotation;
+        FingerL3.transform.rotation = initialFingerL3Rotation;
+        FingerL4.transform.rotation = initialFingerL4Rotation;
         player.GetComponent<PlayerController>().enabled = true;
     }
 }

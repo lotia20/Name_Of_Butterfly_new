@@ -62,7 +62,7 @@ public class OutlineSelection : MonoBehaviour
         }
     }
 
-    void ClearHighlightAndSelection()
+    public void ClearHighlightAndSelection()
     {
         ClearOutlineComponent(selection);
         selection = null;
@@ -73,6 +73,7 @@ public class OutlineSelection : MonoBehaviour
         if (obj.TryGetComponent(out Outline outlineComponent))
         {
             outlineComponent.enabled = true;
+            outlineComponent.OutlineMode = Outline.Mode.OutlineVisible;
             UpdateOutlineStatus(true);
         }
         else
@@ -80,6 +81,7 @@ public class OutlineSelection : MonoBehaviour
             Outline outline = obj.AddComponent<Outline>();
             outline.OutlineColor = Color.cyan;
             outline.OutlineWidth = 4.0f;
+            outline.OutlineMode = Outline.Mode.OutlineVisible;
             outline.enabled = true;
             UpdateOutlineStatus(true);
         }
