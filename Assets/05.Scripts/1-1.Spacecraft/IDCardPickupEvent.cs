@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class IDCardPickupEvent : MonoBehaviour
 {
-    float distanceToCamera = 0.41f;
+    float distanceToCamera = 0.43f;
     public GameObject UpperArmL;
     public GameObject HandL;
     public GameObject FingerL2;
@@ -69,7 +69,7 @@ public class IDCardPickupEvent : MonoBehaviour
     IEnumerator SequentialArmRotations(GameObject obj)
     {
         float objectHeight = obj.transform.position.y;
-        float rotationFactor = 75f;
+        float rotationFactor = 74f;
         float targetRotationAngle = objectHeight * rotationFactor;
         yield return StartCoroutine(RotateUpperArm(UpperArmL, Vector3.forward, targetRotationAngle));
         yield return StartCoroutine(RotateUpperArm(UpperArmL, Vector3.right, 80f));

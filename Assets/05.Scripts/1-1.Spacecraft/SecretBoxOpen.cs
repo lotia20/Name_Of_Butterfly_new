@@ -37,6 +37,11 @@ public class SecretBoxOpen : MonoBehaviour
     }
     IEnumerator OpenBox()
     {
+        GameObject hbdCardObject = GameObject.Find("HBDcard");
+        if (hbdCardObject != null)
+        {
+            Destroy(hbdCardObject);
+        }
         Debug.Log("open");
         float elapsedTime = 0f;
         while (elapsedTime < openSpeed)

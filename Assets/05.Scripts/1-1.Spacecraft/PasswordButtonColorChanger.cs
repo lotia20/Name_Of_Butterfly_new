@@ -12,7 +12,6 @@ public class PasswordButtonColorChanger : MonoBehaviour
     public TextMeshPro passwordTextBox;
     public AudioClip successSound;
     public AudioClip clickSound;
-    public GameObject passwordController;
 
     private AudioSource audioSource;
 
@@ -60,7 +59,7 @@ public class PasswordButtonColorChanger : MonoBehaviour
                                 {
                                     PlaySound(successSound);
                                     StartCoroutine(WaitForSecondsAndReset(2.0f));
-                                    DisableOutlineAndPasswordScripts();
+                                    DisableOutline();
                                     
                                 }
                                 else
@@ -151,14 +150,8 @@ public class PasswordButtonColorChanger : MonoBehaviour
         }
     }
 
-    private void DisableOutlineAndPasswordScripts()
+    private void DisableOutline()
     {
-        GameObject hbdCardObject = GameObject.Find("HBDcard");
-        if (hbdCardObject != null)
-        {
-            Destroy(hbdCardObject);
-        }
-
         GameObject outlineObject = GameObject.FindWithTag("OutlineObject");
         if (outlineObject != null)
         {

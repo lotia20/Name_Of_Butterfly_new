@@ -276,7 +276,6 @@ MonoBehaviour:
   passwordTextBox: {fileID: 8677623767270776844}
   successSound: {fileID: 8300000, guid: 9b9631b6b1679b34ba92f51bfd1ef52e, type: 3}
   clickSound: {fileID: 8300000, guid: e90e98cd5cb73b644abe230d068cb175, type: 3}
-  passwordController: {fileID: 0}
 --- !u!4 &148081288
 Transform:
   m_ObjectHideFlags: 0
@@ -417,7 +416,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 161a4db3d2e2f49b7a185b23344b879b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 5
+  walkSpeed: 7
   runSpeed: 20
   crouchSpeed: 4
   jumpForce: 5
