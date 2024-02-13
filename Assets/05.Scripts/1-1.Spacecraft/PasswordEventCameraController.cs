@@ -1,5 +1,5 @@
-using System.Collections;
 using UnityEngine;
+using System.Collections;
 
 public class PasswordEventCameraController : MonoBehaviour
 {
@@ -11,52 +11,47 @@ public class PasswordEventCameraController : MonoBehaviour
     public static Quaternion originalCameraRotation { get; private set; }
 
     private GameObject idCardObject;
+    public GameObject player;
 
     private void Start()
     {
         idCardObject = GameObject.FindGameObjectWithTag("IdCard");
         if (idCardObject != null)
         {
-            idCardObject.SetActive(false); // 시작 시 비활성화 상태로 설정
+            idCardObject.SetActive(false); 
         }
     }
+
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        GameObject closestObject = OutlineSelection.ClosestObject;
+        if (Input.GetKeyDown(KeyCode.E) && closestObject != null && closestObject.CompareTag("SelectablePasswordScreen"))
         {
             if (!IsPasswordActive && IDCardPickupEvent.IdCardPickedUp && !hasIDCardInserted)
             {
-                StartCoroutine(ActivateIDCardSequence(idCardObject));
-            }
-            if (!IsPasswordActive)
-            {
-                IsPasswordActive = true;
-                originalCameraPosition = Camera.main.transform.position;
-                originalCameraRotation = Camera.main.transform.rotation;
-                GameObject closestObject = OutlineSelection.ClosestObject;
-
-                if (closestObject != null && closestObject.CompareTag("SelectablePasswordScreen"))
-                {
-                    MoveCameraAboveObject(closestObject, 0.3f);
-                }
-                else
-                {
-                    Camera.main.transform.position = originalCameraPosition;
-                    Camera.main.transform.rotation = originalCameraRotation;
-                    IsPasswordActive = false;
-                }
+                StartCoroutine(ActivateIDCardSequence(idCardObject));               
             }
             else
             {
-                Camera.main.transform.position = originalCameraPosition;
-                Camera.main.transform.rotation = originalCameraRotation;
-                IsPasswordActive = false;
+                HandlePasswordActivation();
             }
         }
         if (PasswordButtonColorChanger.isBoxOpen)
         {
             IsPasswordActive = false;
+            player.GetComponent<PlayerController>().enabled = true;
         }
+    }
+    IEnumerator ActivateIDCardSequence(GameObject idCardObject)
+    {
+        ActivateIDCard();
+        MoveCameraToDesiredPosition();
+        yield return StartCoroutine(InsertIdCard(idCardObject));
+        yield return new WaitForSeconds(2f);
+        ResetCameraPositionAndRotation();
+        HandlePasswordActivation();
+        DeactivateIDCard();
+        hasIDCardInserted = true;
     }
 
     void ActivateIDCard()
@@ -64,8 +59,10 @@ public class PasswordEventCameraController : MonoBehaviour
         if (idCardObject != null)
         {
             idCardObject.SetActive(true);
+            player.GetComponent<PlayerController>().enabled = false;
         }
     }
+
     void DeactivateIDCard()
     {
         if (idCardObject != null)
@@ -73,36 +70,71 @@ public class PasswordEventCameraController : MonoBehaviour
             idCardObject.SetActive(false);
         }
     }
-    IEnumerator ActivateIDCardSequence(GameObject idCardObject)
+    void MoveCameraToDesiredPosition()
     {
-        // ID 카드 오브젝트 활성화
-        ActivateIDCard();
+        SaveOriginalCameraTransform();
+        Vector3 desiredPosition = new Vector3(-4.682329f, 1.3411042f, -2.640926f);
+        Quaternion desiredRotation = Quaternion.Euler(40f, -108.8f, 0f); 
 
-        // ID 카드 삽입
-        InsertIdCard(idCardObject);
+        Camera.main.transform.position = desiredPosition;
+        Camera.main.transform.rotation = desiredRotation;
+    }
+    IEnumerator InsertIdCard(GameObject obj)
+    {
+        float duration = 2.0f;
+        Vector3 targetPosition = obj.transform.position - new Vector3(0.097f, 0f, 0.155f); 
 
-        // 2초 대기
-        yield return new WaitForSeconds(2f);
+        Vector3 startPosition = obj.transform.position;
+        float startTime = Time.time;
 
-        // ID 카드 오브젝트 비활성화
-        DeactivateIDCard();
+        while (Time.time - startTime < duration)
+        {
+            float t = (Time.time - startTime) / duration;
+            obj.transform.position = Vector3.Lerp(startPosition, targetPosition, t);
+            yield return null;
+        }
 
-        // ID 카드 삽입 플래그 설정
-        hasIDCardInserted = true;
+        obj.transform.position = targetPosition;
     }
 
-    void InsertIdCard(GameObject obj)
+    void HandlePasswordActivation()
+    { 
+        if (!IsPasswordActive)
+        {
+            IsPasswordActive = true;
+            SaveOriginalCameraTransform();
+            GameObject closestObject = OutlineSelection.ClosestObject;
+
+            if (closestObject != null && closestObject.CompareTag("SelectablePasswordScreen"))
+            {
+                MoveCameraAboveObject(closestObject, 0.3f);
+                player.GetComponent<PlayerController>().enabled = false;
+            }
+            else
+            {
+                ResetCameraPositionAndRotation();
+            }
+        }
+        else
+        {
+            ResetCameraPositionAndRotation();
+            player.GetComponent<PlayerController>().enabled = true;
+        }
+    }
+    void SaveOriginalCameraTransform()
     {
-        Vector3 targetPosition = obj.transform.position + new Vector3(-0.12f, 0f, 0f);
-
-        float speed = 0.02f; 
-        float step = speed * Time.deltaTime;
-
-        obj.transform.position = Vector3.MoveTowards(obj.transform.position, targetPosition, step);
+        originalCameraPosition = Camera.main.transform.position;
+        originalCameraRotation = Camera.main.transform.rotation;
     }
 
 
-    // Move the camera above the object
+    void ResetCameraPositionAndRotation()
+    {
+        Camera.main.transform.position = originalCameraPosition;
+        Camera.main.transform.rotation = originalCameraRotation;
+        IsPasswordActive = false;
+    }
+
     void MoveCameraAboveObject(GameObject obj, float distanceFactor)
     {
         Vector3 targetPosition = obj.transform.position + Vector3.up * distanceToCamera * distanceFactor;
@@ -110,8 +142,7 @@ public class PasswordEventCameraController : MonoBehaviour
         Camera.main.transform.LookAt(obj.transform.position, Vector3.up);
 
         Vector3 currentRotation = Camera.main.transform.rotation.eulerAngles;
-        Camera.main.transform.rotation = Quaternion.Euler(currentRotation.x, currentRotation.y, -(obj.transform.rotation.z + 210f)); // 또는 원하는 각도로 수정
+        Camera.main.transform.rotation = Quaternion.Euler(currentRotation.x, currentRotation.y, -(obj.transform.rotation.z + 210f));
     }
-
 }
 

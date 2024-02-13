@@ -9,6 +9,7 @@ public class IDCardPickupEvent : MonoBehaviour
     public GameObject HandL;
     public GameObject UpperArmR;
     public GameObject HandR;
+    public GameObject player;
 
     public Image messageImage;
 
@@ -31,6 +32,7 @@ public class IDCardPickupEvent : MonoBehaviour
 
                 if (closestObject != null && closestObject.CompareTag("SelectableIdCard"))
                 {
+                    player.GetComponent<PlayerController>().enabled = false;
                     StoreInitialArmRotations();
                     MoveObjectToFront(closestObject);
                 }
@@ -56,54 +58,32 @@ public class IDCardPickupEvent : MonoBehaviour
 
         obj.transform.rotation = targetRotation;
 
-        StartCoroutine(RotateUpperArmY(UpperArmL));
-        StartCoroutine(RotateUpperArmY(UpperArmR, true)); // true: 오른쪽 방향 회전
+        StartCoroutine(SequentialArmRotations());
+    }
+    IEnumerator SequentialArmRotations()
+    {
+        yield return StartCoroutine(RotateUpperArm(UpperArmL, Vector3.forward, 100f));
+        yield return StartCoroutine(RotateUpperArm(UpperArmL, Vector3.right, 80f));
+        yield return StartCoroutine(RotateUpperArm(UpperArmL, Vector3.forward, 10f));
+        yield return StartCoroutine(RotateHandZ(HandL));
     }
 
-    IEnumerator RotateUpperArmY(GameObject upperArm, bool reverse = false)
+    IEnumerator RotateUpperArm(GameObject arm, Vector3 rotationAxis, float rotationAngle)
     {
         float rotationDuration = 1.0f;
         float elapsedTime = 0f;
-        Quaternion startRotation = upperArm.transform.rotation;
+        Quaternion startRotation = arm.transform.rotation;
 
-        float yRotation = reverse ? -80f : 80f;
-        Quaternion targetRotation = startRotation * Quaternion.Euler(0f, yRotation, 0f);
+        Quaternion targetRotation = startRotation * Quaternion.Euler(rotationAxis *  rotationAngle);
 
         while (elapsedTime < rotationDuration)
         {
             elapsedTime += Time.deltaTime;
-            upperArm.transform.rotation = Quaternion.Slerp(startRotation, targetRotation, elapsedTime / rotationDuration);
+            arm.transform.rotation = Quaternion.Slerp(startRotation, targetRotation, elapsedTime / rotationDuration);
             yield return null;
         }
-
-        StartCoroutine(RotateUpperArmZ(upperArm, reverse));
     }
 
-    IEnumerator RotateUpperArmZ(GameObject upperArm, bool reverse = false)
-    {
-        float rotationDuration = 1.0f;
-        float elapsedTime = 0f;
-        Quaternion startRotation = upperArm.transform.rotation;
-
-        float zRotation = reverse ? -5f : 5f;
-        Quaternion targetRotation = startRotation * Quaternion.Euler(0f, 0f, zRotation);
-
-        while (elapsedTime < rotationDuration)
-        {
-            elapsedTime += Time.deltaTime;
-            upperArm.transform.rotation = Quaternion.Slerp(startRotation, targetRotation, elapsedTime / rotationDuration);
-            yield return null;
-        }
-
-        if (reverse)
-        {
-            StartCoroutine(RotateHandZ(HandR));
-        }
-        else
-        {
-            StartCoroutine(RotateHandZ(HandL));
-        }
-    }
     IEnumerator RotateHandZ(GameObject hand)
     {
         float rotationDuration = 1.0f;
@@ -166,5 +146,6 @@ public class IDCardPickupEvent : MonoBehaviour
         HandL.transform.rotation = initialHandLRotation;
         UpperArmR.transform.rotation = initialUpperArmRRotation;
         HandR.transform.rotation = initialHandRRotation;
+        player.GetComponent<PlayerController>().enabled = true;
     }
 }

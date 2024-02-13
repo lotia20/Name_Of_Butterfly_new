@@ -7,6 +7,7 @@ public class DrawingPicker : MonoBehaviour
     public AudioClip frontSound;  // 정면일 때 재생할 사운드
     public AudioClip backSound;   // 뒤로 갈 때 재생할 사운드
     public AudioClip resetSound;  // 위치 초기화할 때 재생할 사운드
+    public GameObject player;
 
     public float distanceToCamera = 0.6f;
 
@@ -75,9 +76,11 @@ public class DrawingPicker : MonoBehaviour
                             ResetObjectPosition(closestObject);
                             isObjectFacingBack = false;
                             PlaySound(resetSound);
+                            player.GetComponent<PlayerController>().enabled = true;
                         }
                         else
                         {
+                            player.GetComponent<PlayerController>().enabled = false;
                             LookAtObjectFront(closestObject);
                             isObjectFacingFront = true;
                             PlaySound(frontSound);

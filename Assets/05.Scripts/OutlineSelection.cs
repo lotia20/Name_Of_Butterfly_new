@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class OutlineSelection : MonoBehaviour
@@ -10,6 +11,8 @@ public class OutlineSelection : MonoBehaviour
     public static GameObject ClosestObject { get; private set; }
 
     private Transform selection;
+    private static Dictionary<GameObject, bool> objectSoundPlayedMap = new Dictionary<GameObject, bool>();
+
 
     void Start()
     {
@@ -47,7 +50,7 @@ public class OutlineSelection : MonoBehaviour
         ClearOutlineComponent(selection);
         AddOrUpdateOutlineComponent(obj);
         selection = obj.transform;
-        PlaySelectionSound();
+        PlaySelectionSound(obj);
     }
 
 
@@ -155,11 +158,15 @@ public class OutlineSelection : MonoBehaviour
         return selectedObjects.ToArray();
     }
 
-    void PlaySelectionSound()
+    void PlaySelectionSound(GameObject obj)
     {
-        if (highlightSource != null && highlightSource.clip != null)
+        if (!objectSoundPlayedMap.ContainsKey(obj) || !objectSoundPlayedMap[obj])
         {
-            highlightSource.PlayOneShot(highlightSource.clip);
+            if (highlightSource != null && highlightSource.clip != null)
+            {
+                highlightSource.PlayOneShot(highlightSource.clip);
+                objectSoundPlayedMap[obj] = true;
+            }
         }
     }
 }

@@ -7,6 +7,7 @@ public class SecretBoxOpen : MonoBehaviour
     public Transform upperbox;
     [SerializeField] private float openAngle;
     [SerializeField] private float openSpeed;
+    public GameObject player;
 
     private Quaternion closedRotation;
     private Quaternion openRotation;
@@ -27,6 +28,10 @@ public class SecretBoxOpen : MonoBehaviour
             {
                 RestoreCameraPositionAndRotation();
                 hasRestoredCamera = true;
+            }
+            if (!player.GetComponent<PlayerController>().enabled)
+            {
+                player.GetComponent<PlayerController>().enabled = true;
             }
         }
     }

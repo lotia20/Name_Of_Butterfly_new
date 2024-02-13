@@ -12,6 +12,7 @@ public class PasswordButtonColorChanger : MonoBehaviour
     public TextMeshPro passwordTextBox;
     public AudioClip successSound;
     public AudioClip clickSound;
+    public GameObject passwordController;
 
     private AudioSource audioSource;
 
