@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class IDCardPickupEvent : MonoBehaviour
 {
-    float distanceToCamera = 0.43f;
+    float distanceToCamera = 0.45f;
     public GameObject UpperArmL;
     public GameObject HandL;
     public GameObject FingerL2;
@@ -73,7 +73,7 @@ public class IDCardPickupEvent : MonoBehaviour
         float targetRotationAngle = objectHeight * rotationFactor;
         yield return StartCoroutine(RotateUpperArm(UpperArmL, Vector3.forward, targetRotationAngle));
         yield return StartCoroutine(RotateUpperArm(UpperArmL, Vector3.right, 80f));
-        yield return StartCoroutine(RotateUpperArm(UpperArmL, Vector3.forward, 19.3f));
+        yield return StartCoroutine(RotateUpperArm(UpperArmL, Vector3.forward, 19.2f));
         yield return StartCoroutine(RotateHandZ(HandL));
         yield return StartCoroutine(RotateFingers(FingerL2, FingerL3, FingerL4));
     }
