@@ -177,13 +177,16 @@ public class PlayerController : MonoBehaviour
     
     private void CameraRotation()
     {
-        float xRotation = Input.GetAxisRaw("Mouse Y"); 
-        float cameraRotationX = xRotation * lookSensitivity;
+        if(CleanController.isCleaning == false)
+        {
+            float xRotation = Input.GetAxisRaw("Mouse Y"); 
+            float cameraRotationX = xRotation * lookSensitivity;
         
-        currentCameraRotationX -= cameraRotationX;
-        currentCameraRotationX = Mathf.Clamp(currentCameraRotationX, -cameraRotationLimit, cameraRotationLimit);
+            currentCameraRotationX -= cameraRotationX;
+            currentCameraRotationX = Mathf.Clamp(currentCameraRotationX, -cameraRotationLimit, cameraRotationLimit);
 
-        camera.transform.localEulerAngles = new Vector3(currentCameraRotationX, 0f, 0f);
+            camera.transform.localEulerAngles = new Vector3(currentCameraRotationX, 0f, 0f);
+        }
     }
 
     private void PlayerRotation()
