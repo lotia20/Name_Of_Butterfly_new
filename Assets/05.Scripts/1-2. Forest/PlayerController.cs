@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour
         TryRun();
         TryCrouch();
         Move();
-        CameraRotation();
+        CameraControl();
         PlayerRotation();
 
         Zoom();
@@ -175,18 +175,30 @@ public class PlayerController : MonoBehaviour
         rigidbody.MovePosition(transform.position + velocity * Time.deltaTime);
     }
     
+    private void CameraControl()
+    {
+        if(CleanController.isCleaning == true)
+        {
+            if(Input.GetMouseButton(0))
+            {
+                CameraRotation();
+            }
+        }
+        else
+        {
+            CameraRotation();
+        }
+    }
+
     private void CameraRotation()
     {
-        if(CleanController.isCleaning == false)
-        {
-            float xRotation = Input.GetAxisRaw("Mouse Y"); 
-            float cameraRotationX = xRotation * lookSensitivity;
+        float xRotation = Input.GetAxisRaw("Mouse Y"); 
+        float cameraRotationX = xRotation * lookSensitivity;
         
-            currentCameraRotationX -= cameraRotationX;
-            currentCameraRotationX = Mathf.Clamp(currentCameraRotationX, -cameraRotationLimit, cameraRotationLimit);
+        currentCameraRotationX -= cameraRotationX;
+        currentCameraRotationX = Mathf.Clamp(currentCameraRotationX, -cameraRotationLimit, cameraRotationLimit);
 
-            camera.transform.localEulerAngles = new Vector3(currentCameraRotationX, 0f, 0f);
-        }
+        camera.transform.localEulerAngles = new Vector3(currentCameraRotationX, 0f, 0f);
     }
 
     private void PlayerRotation()
