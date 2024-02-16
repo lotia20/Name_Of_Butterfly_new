@@ -37,6 +37,10 @@ public class WakeUp : MonoBehaviour
     private Quaternion raiseUpLeftArmRotation;
     private Quaternion raiseUpRightArmRotation;
 
+    //Audio
+    public AudioClip wakeUpSound;
+    public AudioClip clothSound;
+    public AudioClip clothMovingSound;
     private AudioSource audioSource;
 
     void Start()
@@ -54,6 +58,7 @@ public class WakeUp : MonoBehaviour
         raiseUpLeftArmRotation = Quaternion.Euler(36f, 0f, 173f);
         raiseUpRightArmRotation = Quaternion.Euler(-36f, 0f, 173f);
         audioSource = gameObject.AddComponent<AudioSource>();
+        
         StartCoroutine(WakeUpSequence());
     }
 
@@ -71,7 +76,14 @@ public class WakeUp : MonoBehaviour
     {
         Debug.Log("open");
         float elapsedTime = 0f;
-        audioSource.Play();
+
+        PlaySound(clothSound);
+
+        yield return new WaitForSeconds(1f);
+        
+
+        PlaySound(wakeUpSound);
+
         while(elapsedTime < openSpeed)
         {
             cover.transform.rotation = Quaternion.Lerp(closedRotation, openRotation, elapsedTime / openSpeed);
@@ -81,12 +93,13 @@ public class WakeUp : MonoBehaviour
         }
 
         cover.transform.rotation = openRotation;
-        audioSource.Stop();
     }
     IEnumerator StandUp()
     {
         Debug.Log("Stand up");
         float elapsedTime = 0f;
+
+        PlaySound(clothMovingSound);
 
         while(elapsedTime < wakeUpSpeed)
         {
@@ -115,6 +128,7 @@ public class WakeUp : MonoBehaviour
         player.transform.rotation = sitRotation;
         leftArmRotation = ArmL.transform.rotation;
         rightArmRotation = ArmR.transform.rotation;
+        audioSource.Stop();
     }
 
     IEnumerator CheckHand()
@@ -127,7 +141,8 @@ public class WakeUp : MonoBehaviour
         ArmR.transform.rotation = raiseUpRightArmRotation;
 
         Debug.Log("Bow Head");
-
+        PlaySound(clothMovingSound);
+        
         cameraRotation = camera.transform.rotation;
         camera.transform.parent = null;
 
@@ -141,6 +156,8 @@ public class WakeUp : MonoBehaviour
             yield return null;
         }
         camera.transform.rotation = bowCameraRotation;
+
+        audioSource.Stop();
 
         yield return new WaitForSeconds(1);
 
@@ -159,5 +176,14 @@ public class WakeUp : MonoBehaviour
         player.GetComponent<PlayerController>().enabled = true;
         
         yield return null;
+    }
+
+    void PlaySound(AudioClip sound)
+    {
+        if (sound != null && audioSource != null)
+        {
+            audioSource.clip = sound;
+            audioSource.Play();
+        }
     }
 }

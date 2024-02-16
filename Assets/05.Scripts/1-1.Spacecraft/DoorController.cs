@@ -13,6 +13,9 @@ public class DoorController : MonoBehaviour
     Vector3 doorDClosePosition;
     
     [SerializeField] private float openSpeed;
+
+    public AudioClip doorOpenSound;
+    private AudioSource doorAudioSource;
     
     void Start()
     {
@@ -20,6 +23,7 @@ public class DoorController : MonoBehaviour
         doorUClosePosition = doorU.transform.position;
         doorDClosePosition = doorD.transform.position;
         
+        doorAudioSource = gameObject.AddComponent<AudioSource>();
     }
 
     void Update()
@@ -33,10 +37,12 @@ public class DoorController : MonoBehaviour
 
     void DoorOpen()
     {
+        PlaySound(doorOpenSound);
         if(doorU.transform.position.y <= 3.0f )
             doorU.transform.Translate(Vector3.up * Time.deltaTime * openSpeed);
         if(doorD.transform.position.y >= -2.5f)
             doorD.transform.Translate(Vector3.down * Time.deltaTime * openSpeed);
+        doorAudioSource.Stop();
     }
     
     void DoorClose()
@@ -58,5 +64,14 @@ public class DoorController : MonoBehaviour
             elapsedTime += Time.deltaTime;
         } 
         yield return null;
+    }
+
+     void PlaySound(AudioClip sound)
+    {
+        if (sound != null && doorAudioSource != null)
+        {
+            doorAudioSource.clip = sound;
+            doorAudioSource.Play();
+        }
     }
 }
