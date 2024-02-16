@@ -32,6 +32,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _CleanNormal:
+        m_Texture: {fileID: 2800000, guid: 8fd0b7fa942eba6438f0ce62cf3db2b8, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _CleanRockTexture:
         m_Texture: {fileID: 2800000, guid: 6f33d2aa50943407b9895208de162eed, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -48,6 +52,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _DirtNormal:
+        m_Texture: {fileID: 2800000, guid: 9431b96224dd3f74a894a1ca9e39a45a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _DirtRockTexture:
         m_Texture: {fileID: 2800000, guid: b0b4c82f76e254228828d46c72fa6279, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -61,7 +69,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskTexture:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: a79db2819fd2c4f439a3541b4ed76769, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
