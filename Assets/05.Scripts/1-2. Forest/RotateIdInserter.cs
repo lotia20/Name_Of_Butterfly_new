@@ -6,19 +6,30 @@ using UnityEngine.Events;
 public class RotateIdInserter : MonoBehaviour
 {
     public static bool IsRockRotated { get; private set; } = false;
-
-    public UnityEvent RockRotated = new UnityEvent();
-
     //추후 enable 넣기 
     //public CleaningScript cleaningScript;
     public bool cleanComplete = true;
-    [SerializeField]private float interactDistance;
+    [SerializeField] private float interactDistance;
     public GameObject idInserter;
     public GameObject player;
+    public CampingCarHighlighter campingCarHighlighter;
 
-    public static Vector3 originalCameraPosition { get; private set; }
-    public static Quaternion originalCameraRotation { get; private set; }
+    private GameObject idCardObject;
+    private bool IsDoorOpened = false;
 
+    private Vector3 originalCameraPosition;
+    private Quaternion originalCameraRotation;
+
+
+    private void Start()
+    {
+        campingCarHighlighter = GetComponent<CampingCarHighlighter>();
+        idCardObject = GameObject.FindGameObjectWithTag("SelectableIdCard");
+        if (idCardObject != null)
+        {
+            idCardObject.SetActive(false);
+        }
+    }
 
     private void Update()
     {
@@ -27,8 +38,16 @@ public class RotateIdInserter : MonoBehaviour
             player.GetComponent<PlayerController>().enabled = false;
             StartCoroutine(SequentialRockRotation(idInserter));
         }
+        if (IsRockRotated)
+        {
+            campingCarHighlighter.UpdateOutline(idInserter);
+            if (CanInteract() && Input.GetKeyDown(KeyCode.E) && !IsDoorOpened)
+            {
+                player.GetComponent<PlayerController>().enabled = false;
+                StartCoroutine(ActivateIDCardSequence(idCardObject));
+            }
+        }
     }
-
     private bool CanInteract()
     {
         if (!cleanComplete || idInserter == null || player == null)
@@ -41,15 +60,83 @@ public class RotateIdInserter : MonoBehaviour
         float distanceToPlayer = Vector3.Distance(idInserter.transform.position, player.transform.position);
         return inCameraView && distanceToPlayer <= interactDistance;
     }
-
     IEnumerator SequentialRockRotation(GameObject idInserter)
     {
         yield return StartCoroutine(MoveCameraToLookAtObject(idInserter.transform));
         yield return StartCoroutine(RotateRock(idInserter));
         yield return StartCoroutine(ResetCameraPositionAndRotation());
         player.GetComponent<PlayerController>().enabled = true;
+        IsRockRotated = true;
+    }
+    IEnumerator ActivateIDCardSequence(GameObject idCardObject)
+    {
+        Vector3 targetPosition = new Vector3(-453.146f, 3.087f, 103.19f);
+        Quaternion targetRotation = Quaternion.Euler(5.268f, 213.531f, -4.972f);
+        yield return StartCoroutine(MoveCameraToSide(targetPosition, targetRotation));
+        ActivateIDCard();
+        yield return StartCoroutine(InsertIDCard(idCardObject));
+        yield return new WaitForSeconds(3f);
+        RestoreOriginalCameraTransform();
+        DeactivateIDCard();
+        yield return StartCoroutine(ShakeAndDisappearRock());
+        player.GetComponent<PlayerController>().enabled = true;
+        IsDoorOpened = true;
+    }
+    void ActivateIDCard()
+    {
+        if (idCardObject != null)
+        {
+            idCardObject.SetActive(true);
+        }
+    }
+    void DeactivateIDCard()
+    {
+        if (idCardObject != null)
+        {
+            idCardObject.SetActive(false);
+        }
     }
 
+    IEnumerator InsertIDCard(GameObject idCardObject)
+    {
+        Vector3 initialPosition = idCardObject.transform.position;
+        Vector3 targetPosition = new Vector3(-453.5987f, 2.926783f, 102.4073f);
+        float elapsedTime = 0f;
+        float moveSpeed = 0.4f;
+
+        while (elapsedTime < 1f)
+        {
+            elapsedTime += Time.deltaTime * moveSpeed;
+            idCardObject.transform.position = Vector3.Lerp(initialPosition, targetPosition, elapsedTime);
+            yield return null;
+        }
+    }
+    IEnumerator ShakeAndDisappearRock()
+    {
+        GameObject shakingRock = GameObject.FindGameObjectWithTag("ShakingRock");
+        yield return StartCoroutine(MoveCameraToLookAtObject(shakingRock.transform));
+        StartCoroutine(ShakeAndDisappearRock(shakingRock));
+        yield return new WaitForSeconds(5f);
+        yield return StartCoroutine(ResetCameraPositionAndRotation());
+    }
+    IEnumerator MoveCameraToSide(Vector3 targetPosition, Quaternion targetRotation)
+    {
+        SaveOriginalCameraTransform();
+        float duration = 2.0f;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = elapsedTime / duration;
+            Camera.main.transform.position = Vector3.Lerp(originalCameraPosition, targetPosition, t);
+            Camera.main.transform.rotation = Quaternion.Slerp(originalCameraRotation, targetRotation, t);
+            yield return null;
+        }
+
+        Camera.main.transform.position = targetPosition;
+        Camera.main.transform.rotation = targetRotation;
+    }
     IEnumerator RotateRock(GameObject obj)
     {
         float rotationDuration = 4.0f;
@@ -66,6 +153,40 @@ public class RotateIdInserter : MonoBehaviour
             yield return null;
         }
         obj.transform.rotation = targetRotation;
+    }
+
+    IEnumerator ShakeAndDisappearRock(GameObject rock)
+    {
+        float shakeSpeed = 20f; // 흔들림 속도
+        float disappearSpeed = 0.2f; // 사라짐 속도
+        float shakeRange = 1f; // 흔들림 범위
+
+        Vector3 startPosition = rock.transform.position;
+
+        while (rock.activeSelf && rock.transform.localScale.y > 0)
+        {
+            // 흔들림 효과 적용
+            float shakeOffsetX = UnityEngine.Random.Range(-shakeRange, shakeRange);
+            float shakeOffsetZ = UnityEngine.Random.Range(-shakeRange, shakeRange);
+            Vector3 shakeOffset = new Vector3(shakeOffsetX, 0, shakeOffsetZ);
+            rock.transform.position = startPosition + shakeOffset;
+
+            // Y축으로 감소
+            Vector3 newPosition = rock.transform.position;
+            newPosition.y -= disappearSpeed * Time.deltaTime;
+            rock.transform.position = newPosition;
+
+            yield return new WaitForSeconds(shakeSpeed * Time.deltaTime);
+        }
+
+        // GameObject를 비활성화하여 사라지게 함
+        rock.SetActive(false);
+    }
+
+
+    void RestoreOriginalCameraTransform()
+    {
+        StartCoroutine(MoveCameraToSide(originalCameraPosition, originalCameraRotation));
     }
 
     IEnumerator MoveCameraToLookAtObject(Transform obj)
@@ -108,12 +229,6 @@ public class RotateIdInserter : MonoBehaviour
 
         Camera.main.transform.position = originalCameraPosition;
         Camera.main.transform.rotation = originalCameraRotation;
-    }
-
-    public void OnRockRotated()
-    {
-        IsRockRotated = true;
-        RockRotated.Invoke();
     }
 }
 

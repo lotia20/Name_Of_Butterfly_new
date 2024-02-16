@@ -11,6 +11,8 @@ TagManager:
   - Display
   - OutlineObject
   - IdCard
+  - Selectable
+  - ShakingRock
   layers:
   - Default
   - TransparentFX

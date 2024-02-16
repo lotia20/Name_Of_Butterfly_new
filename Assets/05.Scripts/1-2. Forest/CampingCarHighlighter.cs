@@ -8,14 +8,20 @@ public class CampingCarHighlighter : MonoBehaviour
     [SerializeField] private float maxOutlineWidth = 7f;
     [SerializeField] private float pulseSpeed = 7f;
 
-    private Outline outline;
     private bool increasingWidth = true;
 
-    private void OnEnable()
+    private void Start()
     {
-        outline = GetComponent<Outline>();
-        outline.OutlineWidth = startWidth;
-        outline.enabled = false;
+        GameObject[] selectableObjects = GameObject.FindGameObjectsWithTag("Selectable");
+        foreach (GameObject obj in selectableObjects)
+        {
+            Outline outline = obj.GetComponent<Outline>();
+            if (outline != null)
+            {
+                outline.OutlineWidth = startWidth;
+                outline.enabled = false;
+            }
+        }
     }
 
     public void UpdateOutline(GameObject targetObject)
@@ -26,12 +32,20 @@ public class CampingCarHighlighter : MonoBehaviour
 
             if (CanInteract(targetObject))
             {
-                outline.enabled = true;
-                AlterOutlineWidth();
+                Outline outline = targetObject.GetComponent<Outline>();
+                if (outline != null)
+                {
+                    outline.enabled = true;
+                    AlterOutlineWidth(outline);
+                }
             }
             else
             {
-                outline.enabled = false;
+                Outline outline = targetObject.GetComponent<Outline>();
+                if (outline != null)
+                {
+                    outline.enabled = false;
+                }
             }
         }
     }
@@ -44,7 +58,7 @@ public class CampingCarHighlighter : MonoBehaviour
         return inCameraView && distanceToPlayer <= distanceThreshold;
     }
 
-    private void AlterOutlineWidth()
+    private void AlterOutlineWidth(Outline outline)
     {
         float currentWidth = outline.OutlineWidth;
 
