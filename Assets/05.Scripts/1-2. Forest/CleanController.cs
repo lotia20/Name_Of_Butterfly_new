@@ -1,15 +1,13 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CleanController : MonoBehaviour
 {
     [SerializeField] private Camera _camera;
-
     [SerializeField] private Texture2D dirtMaskBase;
     [SerializeField] private Texture2D brush;
-
     [SerializeField] private Material material;
+    [SerializeField] private ParticleSystem washParticles; // Particle System 추가
 
     private Texture2D templateDirtMask;
     public static bool isCleaning{ get; private set; } = false;
@@ -24,12 +22,16 @@ public class CleanController : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             isCleaning = true;
+            // 청소 중일 때 Particle System 활성화
+            washParticles.Play();
         }
-        if(Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0))
         {
             isCleaning = false;
+            // 청소 중이 아닐 때 Particle System 비활성화
+            washParticles.Stop();
         }
-        if(isCleaning)
+        if (isCleaning)
         {
             Clean();
         }
