@@ -94,6 +94,7 @@ public class RotateIdInserter : MonoBehaviour
         yield return StartCoroutine(MoveCameraToSide(targetPosition, targetRotation));
         ActivateIDCard();
         yield return StartCoroutine(InsertIDCard(idCardObject));
+        PlaySound(idCardObject);
         yield return new WaitForSeconds(3f);
         DeactivateIDCard();
         stoneParticle.SetActive(true);

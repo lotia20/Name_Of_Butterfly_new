@@ -118,7 +118,7 @@ public class IDCardPickupEvent : MonoBehaviour
         Quaternion startRotation3 = finger3.transform.rotation;
         Quaternion startRotation4 = finger4.transform.rotation;
 
-        Quaternion targetRotation = startRotation2 * Quaternion.Euler(0f, 0f, -60f); // Adjust the target rotation as needed
+        Quaternion targetRotation = startRotation2 * Quaternion.Euler(0f, 0f, -60f); 
 
         while (elapsedTime < rotationDuration)
         {

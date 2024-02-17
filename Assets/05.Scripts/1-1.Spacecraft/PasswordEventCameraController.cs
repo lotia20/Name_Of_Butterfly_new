@@ -12,6 +12,7 @@ public class PasswordEventCameraController : MonoBehaviour
 
     private GameObject idCardObject;
     public GameObject player;
+    private AudioSource audioSource;
 
     private void Start()
     {
@@ -47,7 +48,8 @@ public class PasswordEventCameraController : MonoBehaviour
         ActivateIDCard();
         MoveCameraToDesiredPosition();
         yield return StartCoroutine(InsertIdCard(idCardObject));
-        yield return new WaitForSeconds(2f);
+        PlaySound(idCardObject);
+        yield return new WaitForSeconds(3f);
         ResetCameraPositionAndRotation();
         HandlePasswordActivation();
         DeactivateIDCard();
@@ -143,6 +145,11 @@ public class PasswordEventCameraController : MonoBehaviour
 
         Vector3 currentRotation = Camera.main.transform.rotation.eulerAngles;
         Camera.main.transform.rotation = Quaternion.Euler(currentRotation.x, currentRotation.y, -(obj.transform.rotation.z + 210f));
+    }
+    void PlaySound(GameObject obj)
+    {
+        audioSource = obj.GetComponent<AudioSource>();
+        audioSource.Play();
     }
 }
 

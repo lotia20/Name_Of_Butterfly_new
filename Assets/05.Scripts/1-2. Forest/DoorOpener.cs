@@ -1,5 +1,6 @@
 using System.Security.Cryptography;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DoorOpener : MonoBehaviour
 {
@@ -12,12 +13,15 @@ public class DoorOpener : MonoBehaviour
     public GameObject DownDoor;
     public float interactionDistance = 2f;
 
+    private bool isDoorOpen = false;
+
     void Update()
     {
         if (RotateIdInserter.IsDoorOpened && IsPlayerNearDoor())
         {
             OpenDoor();
             TurnOnDoorLight();
+            isDoorOpen = true;
         }
     }
 
@@ -46,5 +50,13 @@ public class DoorOpener : MonoBehaviour
             doorLightRenderer.material.SetColor("_EmissionColor", emissionColor);
         }
     }
-
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player") && isDoorOpen)
+        {
+            int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+            int nextSceneIndex = currentSceneIndex + 1;
+            SceneManager.LoadScene(nextSceneIndex);
+        }
+    }
 }
