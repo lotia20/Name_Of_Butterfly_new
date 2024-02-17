@@ -4,9 +4,8 @@ using UnityEngine;
 public class DrawingPicker : MonoBehaviour
 {
 
-    public AudioClip frontSound;  // 정면일 때 재생할 사운드
-    public AudioClip backSound;   // 뒤로 갈 때 재생할 사운드
-    public AudioClip resetSound;  // 위치 초기화할 때 재생할 사운드
+    [SerializeField] private AudioClip pickUpSound;  
+
     public GameObject player;
 
     public float distanceToCamera = 0.6f;
@@ -31,13 +30,6 @@ public class DrawingPicker : MonoBehaviour
             outlineSelection = gameObject.AddComponent<OutlineSelection>();
         }
         SaveOriginalTransforms();
-
-        audioSource = GetComponent<AudioSource>();
-
-        if (audioSource == null)
-        {
-            audioSource = gameObject.AddComponent<AudioSource>();
-        }
     }
 
     void SaveOriginalTransforms()
@@ -60,22 +52,22 @@ public class DrawingPicker : MonoBehaviour
             if (OutlineSelection.IsOutlineEnabled && !PasswordEventCameraController.IsPasswordActive)
             {
                 GameObject closestObject = OutlineSelection.ClosestObject;
-
+               
                 if (closestObject != null && closestObject.CompareTag("SelectableDrawing"))
-                {                  
-                        if (isObjectFacingFront)
+                {
+                    if (isObjectFacingFront)
                         {
                             RotateObject(closestObject);
                             isObjectFacingFront = false;
                             isObjectFacingBack = true;
-                            PlaySound(backSound);
+                            PlaySound(closestObject, pickUpSound);
 
                         }
                         else if (isObjectFacingBack)
                         {
                             ResetObjectPosition(closestObject);
                             isObjectFacingBack = false;
-                            PlaySound(resetSound);
+                            PlaySound(closestObject, pickUpSound);
                             player.GetComponent<PlayerController>().enabled = true;
                         }
                         else
@@ -83,7 +75,7 @@ public class DrawingPicker : MonoBehaviour
                             player.GetComponent<PlayerController>().enabled = false;
                             LookAtObjectFront(closestObject);
                             isObjectFacingFront = true;
-                            PlaySound(frontSound);
+                            PlaySound(closestObject, pickUpSound);
                         }
                     }
                 }
@@ -129,11 +121,11 @@ public class DrawingPicker : MonoBehaviour
 
         Debug.Log(obj.transform.rotation.eulerAngles);
     }
-    void PlaySound(AudioClip sound)
+    void PlaySound(GameObject obj, AudioClip sound)
     {
+        audioSource = obj.GetComponent<AudioSource>();
         if (sound != null && audioSource != null)
         {
-            audioSource.clip = sound;
             audioSource.Play();
         }
     }

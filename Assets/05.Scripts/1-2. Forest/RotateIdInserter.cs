@@ -17,10 +17,11 @@ public class RotateIdInserter : MonoBehaviour
     public GameObject gun;
     public GameObject stoneParticle;
     public GameObject sandParticle;
-    public CampingCarHighlighter campingCarHighlighter;
+    public ObjectHighlighter objectHighlighter;
 
     private CameraShaker cameraShaker;
-    private GameObject idCardObject;
+    private GameObject idCardObject; 
+    private AudioSource audioSource;
     public static bool IsDoorOpened { get; private set; } = false;
 
     private Vector3 originalCameraPosition;
@@ -30,7 +31,7 @@ public class RotateIdInserter : MonoBehaviour
     private void Start()
     {
         cameraShaker = Camera.main.GetComponent<CameraShaker>();
-        campingCarHighlighter = GetComponent<CampingCarHighlighter>();
+        objectHighlighter = GetComponent<ObjectHighlighter>();
         idCardObject = GameObject.FindGameObjectWithTag("SelectableIdCard");
         if (idCardObject != null)
         {
@@ -55,7 +56,7 @@ public class RotateIdInserter : MonoBehaviour
         }
         if (IsRockRotated)
         {
-            campingCarHighlighter.UpdateOutline(idInserter);
+            objectHighlighter.UpdateOutline(idInserter);
             if (CanInteract() && Input.GetKeyDown(KeyCode.E) && !IsDoorOpened)
             {
                 player.GetComponent<PlayerController>().enabled = false;
@@ -96,6 +97,7 @@ public class RotateIdInserter : MonoBehaviour
         DeactivateIDCard();
         stoneParticle.SetActive(true);
         sandParticle.SetActive(true);
+        //»ç¿îµå
         yield return StartCoroutine(ResetCameraPositionAndRotation());
         yield return StartCoroutine(ShakeAndDisappearRock());
         player.GetComponent<PlayerController>().enabled = true;
@@ -137,11 +139,13 @@ public class RotateIdInserter : MonoBehaviour
     {
         GameObject shakingRock = GameObject.FindGameObjectWithTag("ShakingRock");
         StartCoroutine(ShakeAndDisappearRock(shakingRock));
+        PlaySound(shakingRock);
         StartCoroutine(cameraShaker.Shake(3f));
         yield return StartCoroutine(MoveCameraToLookAtObject(DoorRock.transform));
         StartCoroutine(cameraShaker.Shake(4f));
         yield return new WaitForSeconds(7f);
         yield return StartCoroutine(ResetCameraPositionAndRotation());
+        StopSound(shakingRock);
     }
     IEnumerator MoveCameraToSide(Vector3 targetPosition, Quaternion targetRotation)
     {
@@ -245,5 +249,15 @@ public class RotateIdInserter : MonoBehaviour
 
         Camera.main.transform.position = originalCameraPosition;
         Camera.main.transform.rotation = originalCameraRotation;
+    }
+    void PlaySound(GameObject obj)
+    {
+        audioSource = obj.GetComponent<AudioSource>();
+        audioSource.Play();
+    }
+    void StopSound(GameObject obj)
+    {
+        audioSource = obj.GetComponent<AudioSource>();
+        audioSource.Stop(); 
     }
 }

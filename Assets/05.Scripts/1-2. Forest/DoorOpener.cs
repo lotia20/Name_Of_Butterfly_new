@@ -41,7 +41,7 @@ public class DoorOpener : MonoBehaviour
         {
             doorLightRenderer.material.SetColor("_EmissionColor", Color.cyan);
 
-            float intensity = 15f;
+            float intensity = 25f;
             Color emissionColor = Color.cyan * intensity;
             doorLightRenderer.material.SetColor("_EmissionColor", emissionColor);
         }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CampingCarHighlighter : MonoBehaviour
+public class ObjectHighlighter : MonoBehaviour
 {
     [SerializeField] private Transform player;
     [SerializeField] private float distanceThreshold = 30f;
