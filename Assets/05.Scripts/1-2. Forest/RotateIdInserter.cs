@@ -12,8 +12,11 @@ public class RotateIdInserter : MonoBehaviour
     [SerializeField] private float interactDistance;
     public GameObject idInserter;
     public GameObject player;
+    public GameObject playerMesh;
     public GameObject DoorRock;
     public GameObject gun;
+    public GameObject stoneParticle;
+    public GameObject sandParticle;
     public CampingCarHighlighter campingCarHighlighter;
 
     private CameraShaker cameraShaker;
@@ -33,6 +36,14 @@ public class RotateIdInserter : MonoBehaviour
         {
             idCardObject.SetActive(false);
         }
+        if (sandParticle != null)
+        {
+            sandParticle.SetActive(false);
+        }
+        if (stoneParticle != null)
+        {
+            stoneParticle.SetActive(false);
+        }
     }
 
     private void Update()
@@ -48,6 +59,7 @@ public class RotateIdInserter : MonoBehaviour
             if (CanInteract() && Input.GetKeyDown(KeyCode.E) && !IsDoorOpened)
             {
                 player.GetComponent<PlayerController>().enabled = false;
+                playerMesh.SetActive(false);
                 StartCoroutine(ActivateIDCardSequence(idCardObject));
             }
         }
@@ -82,11 +94,15 @@ public class RotateIdInserter : MonoBehaviour
         yield return StartCoroutine(InsertIDCard(idCardObject));
         yield return new WaitForSeconds(3f);
         DeactivateIDCard();
+        stoneParticle.SetActive(true);
+        sandParticle.SetActive(true);
         yield return StartCoroutine(ResetCameraPositionAndRotation());
         yield return StartCoroutine(ShakeAndDisappearRock());
         player.GetComponent<PlayerController>().enabled = true;
         IsDoorOpened = true;
         gun.SetActive(true);
+        stoneParticle.SetActive(false);
+        playerMesh.SetActive(true);
     }
     void ActivateIDCard()
     {
@@ -176,7 +192,7 @@ public class RotateIdInserter : MonoBehaviour
             rock.transform.position += shakeOffset;
 
             Vector3 newPosition = rock.transform.position;
-            newPosition.y -= 20 * Time.deltaTime; // 시간에 따라 Y 위치를 서서히 감소
+            newPosition.y -= 20 * Time.deltaTime;
             rock.transform.position = newPosition;
 
             yield return new WaitForSeconds(shakeSpeed * Time.deltaTime);
