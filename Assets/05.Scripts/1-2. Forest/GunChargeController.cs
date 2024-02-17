@@ -21,8 +21,13 @@ public class GunChargeController : MonoBehaviour
 
     [SerializeField] private float gaugeChargeDelay = 0.5f;
 
+    public AudioClip chargingSound;
+    public AudioClip chargedSound;
+    private AudioSource audioSource;
+
     void Start()
     {
+        audioSource = gameObject.GetComponent<AudioSource>();
         InitilalizeGauges();
     }
 
@@ -86,6 +91,7 @@ public class GunChargeController : MonoBehaviour
 
     IEnumerator ActivateGauges()
     {
+        PlaySound(chargingSound);
         for(int  i = gaugeIndex; i <= 10; i++)
         {
             gauges[i].SetActive(true);
@@ -94,7 +100,8 @@ public class GunChargeController : MonoBehaviour
             yield return new WaitForSeconds(gaugeChargeDelay);
         }
         gaugeIndex = 10;
-
+        
+        audioSource.Stop();
         ResetCamera();
     }
 
@@ -111,6 +118,7 @@ public class GunChargeController : MonoBehaviour
 
     void ResetCamera()
     {
+        PlaySound(chargedSound);
         camera.transform.parent = player.transform;
         camera.transform.rotation = originRotation;
         camera.transform.position = originPosition;
@@ -133,6 +141,15 @@ public class GunChargeController : MonoBehaviour
         {
             isColliding = false;
             Debug.Log("Trigger Exit");
+        }
+    }
+
+    void PlaySound(AudioClip sound)
+    {
+        if (sound != null && audioSource != null)
+        {
+            audioSource.clip = sound;
+            audioSource.Play();
         }
     }
 }
