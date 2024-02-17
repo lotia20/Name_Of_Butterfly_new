@@ -9,6 +9,8 @@ public class GunActiveController : MonoBehaviour
     public GameObject fullGauge;
 
     public AudioClip gunPowerOnSound;
+    public AudioClip vibrationSound;
+    public AudioClip doorOpenSound;
     private AudioSource gunAudioSource;
 
     public static bool isGunActivate{ get; private set; } = false;
@@ -51,8 +53,33 @@ public class GunActiveController : MonoBehaviour
             fullGauge.SetActive(true);
             isGunActivate = true;
             yield return new WaitForSeconds(sound.length); 
-            Debug.Log("gunAudioSource Stop");
-            gunAudioSource.Stop(); 
+            gunAudioSource.Stop();
+
+            StartCoroutine(PlayVibrationSound());
+        }
+    }
+
+    IEnumerator PlayVibrationSound()
+    {
+        if (vibrationSound != null && gunAudioSource != null)
+        {
+            gunAudioSource.clip = vibrationSound;
+            gunAudioSource.Play();
+            yield return new WaitForSeconds(vibrationSound.length);
+            gunAudioSource.Stop();
+
+            StartCoroutine(PlayDoorOpenSound());
+        }
+    }
+
+        IEnumerator PlayDoorOpenSound()
+    {
+        if (doorOpenSound != null && gunAudioSource != null)
+        {
+            gunAudioSource.clip = doorOpenSound;
+            gunAudioSource.Play();
+            yield return new WaitForSeconds(doorOpenSound.length);
+            gunAudioSource.Stop();
         }
     }
 

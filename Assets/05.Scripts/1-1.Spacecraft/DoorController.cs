@@ -14,8 +14,8 @@ public class DoorController : MonoBehaviour
     
     [SerializeField] private float openSpeed;
 
-    public AudioClip doorOpenSound;
-    private AudioSource doorAudioSource;
+    // public AudioClip doorOpenSound;
+    // private AudioSource doorAudioSource;
     public static bool doorOpen{ get; private set; } = false;
     
     void Start()
@@ -24,14 +24,14 @@ public class DoorController : MonoBehaviour
         doorUClosePosition = doorU.transform.position;
         doorDClosePosition = doorD.transform.position;
         
-        doorAudioSource = gameObject.AddComponent<AudioSource>();
+        // doorAudioSource = gameObject.GetComponent<AudioSource>();
     }
 
     void Update()
     {
-         if(CamShake.isShaking)
+         if(GunActiveController.isGunActivate)
          {
-            StartCoroutine(OpenDoorAfterDelay(5f));
+            StartCoroutine(OpenDoorAfterDelay(10f));
             StartCoroutine(EmitDoorLight());
          }
     }
@@ -39,8 +39,8 @@ public class DoorController : MonoBehaviour
     IEnumerator OpenDoorAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
-        PlaySound(doorOpenSound);
         DoorOpen();
+        // doorAudioSource.PlayOneShot(doorOpenSound);
     }
 
     void DoorOpen()
@@ -50,7 +50,7 @@ public class DoorController : MonoBehaviour
             doorU.transform.Translate(Vector3.up * Time.deltaTime * openSpeed);
         if(doorD.transform.position.y >= -2.5f)
             doorD.transform.Translate(Vector3.down * Time.deltaTime * openSpeed);
-        doorAudioSource.Stop();
+        // doorAudioSource.Stop();
     }
     
     void DoorClose()
@@ -74,12 +74,12 @@ public class DoorController : MonoBehaviour
         yield return null;
     }
 
-     void PlaySound(AudioClip sound)
-    {
-        if (sound != null && doorAudioSource != null)
-        {
-            doorAudioSource.clip = sound;
-            doorAudioSource.Play();
-        }
-    }
+    // void PlaySound(AudioClip sound)
+    // {
+    //     if (sound != null && doorAudioSource != null)
+    //     {
+    //         doorAudioSource.clip = sound;
+    //         doorAudioSource.Play();
+    //     }
+    // }
 }
