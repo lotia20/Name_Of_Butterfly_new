@@ -14,6 +14,9 @@ public class MiddleDoorOpener : MonoBehaviour
     public GameObject DownDoor;
     public float interactionDistance = 10f;
 
+    private AudioSource audioSource;
+    private bool soundPlayed = false; 
+
     public static bool isDoorOpen { get; private set; } = false;
 
     void Update()
@@ -35,6 +38,11 @@ public class MiddleDoorOpener : MonoBehaviour
 
     void OpenDoor()
     {
+        if (!soundPlayed)
+        {
+            PlaySound(door);
+            soundPlayed = true;
+        }
         if (UpDoor.transform.position.y <= 10f)
             UpDoor.transform.Translate(Vector3.up * Time.deltaTime * openSpeed, Space.World);
         if (DownDoor.transform.position.y >= -1f)
@@ -57,7 +65,7 @@ public class MiddleDoorOpener : MonoBehaviour
             {
 
                 float t = elapsedTime / 7f;
-                float intensity = Mathf.Lerp(currentIntensity, targetIntensity, Mathf.Sqrt(t)); 
+                float intensity = Mathf.Lerp(currentIntensity, targetIntensity, Mathf.Sqrt(t));
                 Color newColor = targetColor * intensity;
 
                 objRenderer.material.SetColor("_EmissionColor", newColor);
@@ -67,9 +75,11 @@ public class MiddleDoorOpener : MonoBehaviour
             }
 
             objRenderer.material.SetColor("_EmissionColor", targetColor * targetIntensity);
-        }     
+        }
+    }
+    void PlaySound(GameObject obj)
+    {
+        audioSource = obj.GetComponent<AudioSource>();
+        audioSource.Play();
     }
 }
-
-
-
