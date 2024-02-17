@@ -9,7 +9,6 @@ public class GunActiveController : MonoBehaviour
     public GameObject fullGauge;
 
     public AudioClip gunPowerOnSound;
-    public AudioClip vibrationSound;
     private AudioSource gunAudioSource;
 
     public static bool isGunActivate{ get; private set; } = false;
@@ -31,31 +30,29 @@ public class GunActiveController : MonoBehaviour
             Debug.Log("gun Activate");
             GunActivate(); 
         }
-        if(CamShake.isShaking)
-        {
-            PlaySound(vibrationSound);
-            Debug.Log("Play vibration Sound");
-        }
     }
 
     void GunActivate()
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            PlaySound(gunPowerOnSound);
-            activateGun.SetActive(true);
-            deactivateGun.SetActive(false);
-            fullGauge.SetActive(true);
-            isGunActivate = true;
+            StartCoroutine(PlaySoundAndActivateGun(gunPowerOnSound));
         }
     }
 
-    void PlaySound(AudioClip sound)
+    IEnumerator PlaySoundAndActivateGun(AudioClip sound)
     {
         if (sound != null && gunAudioSource != null)
         {
             gunAudioSource.clip = sound;
             gunAudioSource.Play();
+            activateGun.SetActive(true);
+            deactivateGun.SetActive(false);
+            fullGauge.SetActive(true);
+            isGunActivate = true;
+            yield return new WaitForSeconds(sound.length); 
+            Debug.Log("gunAudioSource Stop");
+            gunAudioSource.Stop(); 
         }
     }
 

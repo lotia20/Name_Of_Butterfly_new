@@ -16,6 +16,7 @@ public class DoorController : MonoBehaviour
 
     public AudioClip doorOpenSound;
     private AudioSource doorAudioSource;
+    public static bool doorOpen{ get; private set; } = false;
     
     void Start()
     {
@@ -28,16 +29,23 @@ public class DoorController : MonoBehaviour
 
     void Update()
     {
-         if(GunActiveController.isGunActivate)
+         if(CamShake.isShaking)
          {
-            DoorOpen();
+            StartCoroutine(OpenDoorAfterDelay(5f));
             StartCoroutine(EmitDoorLight());
          }
     }
 
+    IEnumerator OpenDoorAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        PlaySound(doorOpenSound);
+        DoorOpen();
+    }
+
     void DoorOpen()
     {
-        PlaySound(doorOpenSound);
+        doorOpen = true;
         if(doorU.transform.position.y <= 3.0f )
             doorU.transform.Translate(Vector3.up * Time.deltaTime * openSpeed);
         if(doorD.transform.position.y >= -2.5f)

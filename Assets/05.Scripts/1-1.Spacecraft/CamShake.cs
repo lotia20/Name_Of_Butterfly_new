@@ -7,23 +7,10 @@ public class CamShake : MonoBehaviour
     [SerializeField] private Vector3 offset = Vector3.zero; // 흔들림 축
     [SerializeField] private float shakeDuration = 5f; // 지속 시간
     public static bool isShaking{ get; private set; } = false;
-    private Quaternion originalRot;
 
-    private void Start()
+    public IEnumerator ShakeAfterDelay(float delay)
     {
-        originalRot = transform.rotation;
-    }
-
-    private void Update()
-    {
-        if (GunActiveController.isGunActivate)
-        {
-            StartCoroutine(ShakeAfterDelay(2f));
-        }
-    }  
-
-    private IEnumerator ShakeAfterDelay(float delay)
-    {
+        Debug.Log("Shaking");
         yield return new WaitForSeconds(delay);
         yield return StartCoroutine(Shake());
     }
@@ -33,9 +20,10 @@ public class CamShake : MonoBehaviour
         isShaking = true;
         Vector3 originEuler = transform.eulerAngles;
 
+        float timer = 0f;
         float elapsedTime = 0f;
 
-        while (elapsedTime < shakeDuration)
+        while (elapsedTime < shakeDuration && timer < 5f)
         {
             float rotX = Random.Range(-offset.x, offset.x);
             float rotY = Random.Range(-offset.y, offset.y);
@@ -51,22 +39,9 @@ public class CamShake : MonoBehaviour
                 yield return null;
             }
             elapsedTime += Time.deltaTime;
-            Debug.Log(elapsedTime);
+            timer += Time.deltaTime;
             yield return null;
         }
-        Debug.Log("Shaking is done");
-        StartCoroutine(Reset());
-        yield return null;
-    }
-
-    public IEnumerator Reset()
-    {
-        while(Quaternion.Angle(transform.rotation, originalRot) > 0f)
-        {
-            isShaking = false;
-            Debug.Log("Reset");
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, originalRot, force * Time.deltaTime);
-            yield return null;
-        }
+        isShaking = false;
     }
 }
