@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ObjectHighlighter : MonoBehaviour
@@ -22,6 +24,11 @@ public class ObjectHighlighter : MonoBehaviour
                 outline.enabled = false;
             }
         }
+    }
+
+    void Update()
+    {
+        //UpdateOutline(campingCar);
     }
 
     public void UpdateOutline(GameObject targetObject)

@@ -17,7 +17,7 @@ public class RotateIdInserter : MonoBehaviour
     public GameObject gun;
     public GameObject stoneParticle;
     public GameObject sandParticle;
-    public ObjectHighlighter objectHighlighter;
+    //private ObjectHighlighter objectHighlighter;
 
     private CameraShaker cameraShaker;
     private GameObject idCardObject; 
@@ -31,7 +31,7 @@ public class RotateIdInserter : MonoBehaviour
     private void Start()
     {
         cameraShaker = Camera.main.GetComponent<CameraShaker>();
-        objectHighlighter = GetComponent<ObjectHighlighter>();
+        //objectHighlighter = GetComponent<ObjectHighlighter>();
         idCardObject = GameObject.FindGameObjectWithTag("SelectableIdCard");
         if (idCardObject != null)
         {
@@ -56,7 +56,7 @@ public class RotateIdInserter : MonoBehaviour
         }
         if (IsRockRotated)
         {
-            objectHighlighter.UpdateOutline(idInserter);
+            //objectHighlighter.UpdateOutline(idInserter);
             if (CanInteract() && Input.GetKeyDown(KeyCode.E) && !IsDoorOpened)
             {
                 player.GetComponent<PlayerController>().enabled = false;
@@ -80,6 +80,7 @@ public class RotateIdInserter : MonoBehaviour
     IEnumerator SequentialRockRotation(GameObject idInserter)
     {
         yield return StartCoroutine(MoveCameraToLookAtObject(idInserter.transform));
+        PlaySound(idInserter);
         yield return StartCoroutine(RotateRock(idInserter));
         yield return StartCoroutine(ResetCameraPositionAndRotation());
         player.GetComponent<PlayerController>().enabled = true;
@@ -97,7 +98,6 @@ public class RotateIdInserter : MonoBehaviour
         DeactivateIDCard();
         stoneParticle.SetActive(true);
         sandParticle.SetActive(true);
-        //»ç¿îµå
         yield return StartCoroutine(ResetCameraPositionAndRotation());
         yield return StartCoroutine(ShakeAndDisappearRock());
         player.GetComponent<PlayerController>().enabled = true;
