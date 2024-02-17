@@ -147,19 +147,21 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator CrouchCoroutine()
     {
+        float posX = camera.transform.localPosition.x;
         float posY = camera.transform.localPosition.y;
+        float posZ = camera.transform.localPosition.z;
         int count = 0;
 
         while(posY != applyCrouchPosY)
         {
             count++;
             posY = Mathf.Lerp(posY, applyCrouchPosY, 0.2f);
-            camera.transform.localPosition = new Vector3(0, posY, 0);
+            camera.transform.localPosition = new Vector3(posX, posY, posZ);
             if(count > 15)
                 break;
             yield return null;
         }
-        camera.transform.localPosition = new Vector3(0, applyCrouchPosY, 0);
+        camera.transform.localPosition = new Vector3(posX, applyCrouchPosY, posZ);
     }
 
 
