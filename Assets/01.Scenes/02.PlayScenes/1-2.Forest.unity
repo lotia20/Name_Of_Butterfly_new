@@ -6917,7 +6917,11 @@ PrefabInstance:
         type: 3}
       insertIndex: 1
       addedObject: {fileID: 1963546599665960299}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: -4556251874479090763, guid: 647dd69c4afd39b478a35c6d25850481,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1909461830}
   m_SourcePrefab: {fileID: 100100000, guid: 647dd69c4afd39b478a35c6d25850481, type: 3}
 --- !u!1001 &653396076
 PrefabInstance:
@@ -20831,6 +20835,33 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: af7712f337bdf1f42a74310e69e9feec, type: 3}
+--- !u!1 &1909461825 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -4556251874479090763, guid: 647dd69c4afd39b478a35c6d25850481,
+    type: 3}
+  m_PrefabInstance: {fileID: 632613588}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1909461830
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1909461825}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 7.08167, y: 2.6961308, z: 0.43151963}
+  m_Center: {x: -0.03553438, y: 0.60155404, z: -0.04080589}
 --- !u!64 &1918986097
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -36546,6 +36577,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 6966963225876611226}
+    - targetCorrespondingSourceObject: {fileID: 8570804339229874344, guid: 7e3c8b67931ccde48aee23927e86592d,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6966963225876611227}
   m_SourcePrefab: {fileID: 100100000, guid: 7e3c8b67931ccde48aee23927e86592d, type: 3}
 --- !u!23 &2736200424511414796
 MeshRenderer:
@@ -53306,6 +53341,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6966963225876611227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6966963225876611220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d74635bea770f7a4389062080b088bde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  door: {fileID: 1909461825}
 --- !u!114 &7234485629389422232
 MonoBehaviour:
   m_ObjectHideFlags: 0

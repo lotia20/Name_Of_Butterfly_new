@@ -315,8 +315,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 488b96a3fc484104fa9eed809577623b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panelCanvasGroup: {fileID: 19299081}
-  minAlpha: 0.3
+  panel1CanvasGroup: {fileID: 19299081}
+  panel2CanvasGroup: {fileID: 904214626}
+  minAlpha: 0.5
   maxAlpha: 1
   transparencyDuration: 1
   delayBetweenTransparencies: 1

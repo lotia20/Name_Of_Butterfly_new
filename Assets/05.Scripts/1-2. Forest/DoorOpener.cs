@@ -13,9 +13,9 @@ public class DoorOpener : MonoBehaviour
     public GameObject DownDoor;
     public float interactionDistance = 2f;
 
-    private bool isDoorOpen = false;
+    public static bool isDoorOpen { get; private set; } = false;
 
-    void Update()
+void Update()
     {
         if (RotateIdInserter.IsDoorOpened && IsPlayerNearDoor())
         {
@@ -48,15 +48,6 @@ public class DoorOpener : MonoBehaviour
             float intensity = 25f;
             Color emissionColor = Color.cyan * intensity;
             doorLightRenderer.material.SetColor("_EmissionColor", emissionColor);
-        }
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player") && isDoorOpen)
-        {
-            int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-            int nextSceneIndex = currentSceneIndex + 1;
-            SceneManager.LoadScene(nextSceneIndex);
         }
     }
 }

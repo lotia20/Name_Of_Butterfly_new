@@ -1,17 +1,19 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SideFadeEffect : MonoBehaviour
 {
-    public CanvasGroup panelCanvasGroup;
+    public CanvasGroup panel1CanvasGroup;
+    public CanvasGroup panel2CanvasGroup;
     public float minAlpha = 0.3f;
     public float maxAlpha = 1.0f;
     public float transparencyDuration = 1.0f;
-    public float delayBetweenTransparencies = 1.0f;
+    public float delayBetweenTransparencies = 0.5f;
 
-    private bool isFading = false;
-    private float startTime;
+    private bool isFadingPanel1 = false;
+    private bool isFadingPanel2 = false;
+    private float startTimePanel1;
+    private float startTimePanel2;
 
     private void Start()
     {
@@ -20,37 +22,56 @@ public class SideFadeEffect : MonoBehaviour
 
     private void ToggleTransparency()
     {
-        if (!isFading)
+        if (!isFadingPanel1 && !isFadingPanel2)
         {
-            // Fade Out
-            StartCoroutine(FadeCanvasGroup(minAlpha));
+            StartCoroutine(FadeCanvasGroup(panel1CanvasGroup, minAlpha, true));
 
-            // Fade In
+            StartCoroutine(FadeCanvasGroup(panel2CanvasGroup, minAlpha, false));
+
             Invoke("FadeIn", delayBetweenTransparencies);
         }
     }
 
     private void FadeIn()
     {
-        if (!isFading)
+        if (!isFadingPanel1 && !isFadingPanel2)
         {
-            StartCoroutine(FadeCanvasGroup(maxAlpha));
+            StartCoroutine(FadeCanvasGroup(panel1CanvasGroup, maxAlpha, true));
+
+            StartCoroutine(FadeCanvasGroup(panel2CanvasGroup, maxAlpha, false));
         }
     }
 
-    private IEnumerator FadeCanvasGroup(float targetAlpha)
+    private IEnumerator FadeCanvasGroup(CanvasGroup canvasGroup, float targetAlpha, bool isPanel1)
     {
-        isFading = true;
-        float startAlpha = panelCanvasGroup.alpha;
-        startTime = Time.time;
-
-        while (Time.time < startTime + transparencyDuration)
+        if (isPanel1)
         {
-            panelCanvasGroup.alpha = Mathf.Lerp(startAlpha, targetAlpha, (Time.time - startTime) / transparencyDuration);
+            isFadingPanel1 = true;
+            startTimePanel1 = Time.time;
+        }
+        else
+        {
+            isFadingPanel2 = true;
+            startTimePanel2 = Time.time;
+        }
+
+        float startAlpha = canvasGroup.alpha;
+
+        while (Time.time < (isPanel1 ? startTimePanel1 : startTimePanel2) + transparencyDuration)
+        {
+            canvasGroup.alpha = Mathf.Lerp(startAlpha, targetAlpha, (Time.time - (isPanel1 ? startTimePanel1 : startTimePanel2)) / transparencyDuration);
             yield return null;
         }
 
-        panelCanvasGroup.alpha = targetAlpha;
-        isFading = false;
+        canvasGroup.alpha = targetAlpha;
+
+        if (isPanel1)
+        {
+            isFadingPanel1 = false;
+        }
+        else
+        {
+            isFadingPanel2 = false;
+        }
     }
 }

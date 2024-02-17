@@ -3256,6 +3256,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3963679131618612261, guid: 7e3c8b67931ccde48aee23927e86592d,
+        type: 3}
+      propertyPath: runSpeed
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 3963679131618612261, guid: 7e3c8b67931ccde48aee23927e86592d,
+        type: 3}
+      propertyPath: walkSpeed
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 6837012748916749546, guid: 7e3c8b67931ccde48aee23927e86592d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3314,7 +3324,15 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8570804339229874344, guid: 7e3c8b67931ccde48aee23927e86592d,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 911497194}
+    - targetCorrespondingSourceObject: {fileID: 8570804339229874344, guid: 7e3c8b67931ccde48aee23927e86592d,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 911497193}
   m_SourcePrefab: {fileID: 100100000, guid: 7e3c8b67931ccde48aee23927e86592d, type: 3}
 --- !u!1 &335091348
 GameObject:
@@ -5380,6 +5398,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 619148438}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &636524831 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6837012748916749546, guid: 7e3c8b67931ccde48aee23927e86592d,
+    type: 3}
+  m_PrefabInstance: {fileID: 335054132}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &653198883
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5644,7 +5668,7 @@ GameObject:
   - component: {fileID: 723476187}
   - component: {fileID: 723476186}
   m_Layer: 0
-  m_Name: doorT (1)
+  m_Name: MiddleDoorT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7807,6 +7831,122 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1 &911497188 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8570804339229874344, guid: 7e3c8b67931ccde48aee23927e86592d,
+    type: 3}
+  m_PrefabInstance: {fileID: 335054132}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &911497193
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 911497188}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 44d1fcf78cf65e447bb43a2e29c867c6, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.067
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &911497194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 911497188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 730b7d51a539224438892b84bf2b2d04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  footstepSound: {fileID: 8300000, guid: 44d1fcf78cf65e447bb43a2e29c867c6, type: 3}
+  footstepInterval: 0.5
 --- !u!1001 &948123229
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9846,6 +9986,58 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1204204170}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1209680830
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1209680832}
+  - component: {fileID: 1209680831}
+  m_Layer: 0
+  m_Name: MiddleDoorOpener
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1209680831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1209680830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cac7c945677b0b04b9bcef4bc53da22d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 636524831}
+  openSpeed: 2
+  door: {fileID: 1597984949}
+  doorLight: {fileID: 1018147415}
+  sideDoorLight: {fileID: 2094263491}
+  UpDoor: {fileID: 723476184}
+  DownDoor: {fileID: 1800373412}
+  interactionDistance: 10
+--- !u!4 &1209680832
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1209680830}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.8624477, y: 10.454731, z: 15.500078}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1210089799
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12262,7 +12454,7 @@ GameObject:
   - component: {fileID: 1597984952}
   - component: {fileID: 1597984951}
   m_Layer: 0
-  m_Name: drivewaydoor2 (1)
+  m_Name: Middledrivewaydoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14114,7 +14306,7 @@ GameObject:
   - component: {fileID: 1800373415}
   - component: {fileID: 1800373414}
   m_Layer: 0
-  m_Name: doorU (1)
+  m_Name: MiddleDoorD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16606,6 +16798,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2075071122}
   m_Mesh: {fileID: -7491993912271112574, guid: 830140fcecc9558498cec852fc402bb0, type: 3}
+--- !u!1 &2094263491 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -3781978357432641981, guid: 143ffff93b68ce147b2995ff23b7c5de,
+    type: 3}
+  m_PrefabInstance: {fileID: 1175640766}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2095947489
 GameObject:
   m_ObjectHideFlags: 0
@@ -20582,3 +20780,4 @@ SceneRoots:
   - {fileID: 1999104427}
   - {fileID: 335054132}
   - {fileID: 1178862939}
+  - {fileID: 1209680832}
