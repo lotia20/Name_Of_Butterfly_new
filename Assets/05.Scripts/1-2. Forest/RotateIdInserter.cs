@@ -12,10 +12,13 @@ public class RotateIdInserter : MonoBehaviour
     [SerializeField] private float interactDistance;
     public GameObject idInserter;
     public GameObject player;
+    public GameObject DoorRock;
+    public GameObject gun;
     public CampingCarHighlighter campingCarHighlighter;
 
+    private CameraShaker cameraShaker;
     private GameObject idCardObject;
-    private bool IsDoorOpened = false;
+    public static bool IsDoorOpened { get; private set; } = false;
 
     private Vector3 originalCameraPosition;
     private Quaternion originalCameraRotation;
@@ -23,6 +26,7 @@ public class RotateIdInserter : MonoBehaviour
 
     private void Start()
     {
+        cameraShaker = Camera.main.GetComponent<CameraShaker>();
         campingCarHighlighter = GetComponent<CampingCarHighlighter>();
         idCardObject = GameObject.FindGameObjectWithTag("SelectableIdCard");
         if (idCardObject != null)
@@ -70,17 +74,19 @@ public class RotateIdInserter : MonoBehaviour
     }
     IEnumerator ActivateIDCardSequence(GameObject idCardObject)
     {
+        gun.SetActive(false);
         Vector3 targetPosition = new Vector3(-453.146f, 3.087f, 103.19f);
         Quaternion targetRotation = Quaternion.Euler(5.268f, 213.531f, -4.972f);
         yield return StartCoroutine(MoveCameraToSide(targetPosition, targetRotation));
         ActivateIDCard();
         yield return StartCoroutine(InsertIDCard(idCardObject));
         yield return new WaitForSeconds(3f);
-        RestoreOriginalCameraTransform();
         DeactivateIDCard();
+        yield return StartCoroutine(ResetCameraPositionAndRotation());
         yield return StartCoroutine(ShakeAndDisappearRock());
         player.GetComponent<PlayerController>().enabled = true;
         IsDoorOpened = true;
+        gun.SetActive(true);
     }
     void ActivateIDCard()
     {
@@ -114,9 +120,11 @@ public class RotateIdInserter : MonoBehaviour
     IEnumerator ShakeAndDisappearRock()
     {
         GameObject shakingRock = GameObject.FindGameObjectWithTag("ShakingRock");
-        yield return StartCoroutine(MoveCameraToLookAtObject(shakingRock.transform));
         StartCoroutine(ShakeAndDisappearRock(shakingRock));
-        yield return new WaitForSeconds(5f);
+        StartCoroutine(cameraShaker.Shake(3f));
+        yield return StartCoroutine(MoveCameraToLookAtObject(DoorRock.transform));
+        StartCoroutine(cameraShaker.Shake(4f));
+        yield return new WaitForSeconds(7f);
         yield return StartCoroutine(ResetCameraPositionAndRotation());
     }
     IEnumerator MoveCameraToSide(Vector3 targetPosition, Quaternion targetRotation)
@@ -154,35 +162,27 @@ public class RotateIdInserter : MonoBehaviour
         }
         obj.transform.rotation = targetRotation;
     }
-
     IEnumerator ShakeAndDisappearRock(GameObject rock)
     {
-        float shakeSpeed = 20f; // 흔들림 속도
-        float disappearSpeed = 0.2f; // 사라짐 속도
-        float shakeRange = 1f; // 흔들림 범위
+        float shakeSpeed = 1f; 
+        float shakeRange = 0.5f; 
 
-        Vector3 startPosition = rock.transform.position;
-
-        while (rock.activeSelf && rock.transform.localScale.y > 0)
+        while (rock.activeSelf && rock.transform.position.y > -80f)
         {
-            // 흔들림 효과 적용
-            float shakeOffsetX = UnityEngine.Random.Range(-shakeRange, shakeRange);
-            float shakeOffsetZ = UnityEngine.Random.Range(-shakeRange, shakeRange);
+            float shakeOffsetX = Random.Range(-shakeRange, shakeRange);
+            float shakeOffsetZ = Random.Range(-shakeRange, shakeRange);
             Vector3 shakeOffset = new Vector3(shakeOffsetX, 0, shakeOffsetZ);
-            rock.transform.position = startPosition + shakeOffset;
 
-            // Y축으로 감소
+            rock.transform.position += shakeOffset;
+
             Vector3 newPosition = rock.transform.position;
-            newPosition.y -= disappearSpeed * Time.deltaTime;
+            newPosition.y -= 20 * Time.deltaTime; // 시간에 따라 Y 위치를 서서히 감소
             rock.transform.position = newPosition;
 
             yield return new WaitForSeconds(shakeSpeed * Time.deltaTime);
         }
-
-        // GameObject를 비활성화하여 사라지게 함
         rock.SetActive(false);
     }
-
 
     void RestoreOriginalCameraTransform()
     {
@@ -231,4 +231,3 @@ public class RotateIdInserter : MonoBehaviour
         Camera.main.transform.rotation = originalCameraRotation;
     }
 }
-
