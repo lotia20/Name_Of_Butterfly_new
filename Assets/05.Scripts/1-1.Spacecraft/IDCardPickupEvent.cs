@@ -23,6 +23,7 @@ public class IDCardPickupEvent : MonoBehaviour
     private Quaternion initialFingerR2Rotation;
     private Quaternion initialFingerR3Rotation;
     private Quaternion initialFingerR4Rotation;
+    private bool eventInProgress = false;
 
     private OutlineSelection outlineSelectionScript;
 
@@ -32,6 +33,9 @@ public class IDCardPickupEvent : MonoBehaviour
     }
     void Update()
     {
+        if (eventInProgress)
+            return;
+
         if (Input.GetKeyDown(KeyCode.E))
         {
             if (OutlineSelection.IsOutlineEnabled)
@@ -40,6 +44,7 @@ public class IDCardPickupEvent : MonoBehaviour
 
                 if (closestObject != null && closestObject.CompareTag("SelectableIdCard"))
                 {
+                    eventInProgress = true;
                     player.GetComponent<PlayerController>().enabled = false;
                     StoreInitialArmRotations();
                     MoveObjectToFront(closestObject);
@@ -128,7 +133,7 @@ public class IDCardPickupEvent : MonoBehaviour
             finger4.transform.rotation = Quaternion.Slerp(startRotation4, targetRotation, elapsedTime / rotationDuration);
             yield return null;
         }
-
+        yield return new WaitForSeconds(1.5f);
         StartCoroutine(ChangeEmissionColor());
         if (pickupSound != null)
         {
@@ -147,7 +152,7 @@ public class IDCardPickupEvent : MonoBehaviour
                 Material material = renderer.material;
                 Color originalColor = material.GetColor("_EmissionColor");
                 material.SetColor("_EmissionColor", Color.green);
-                yield return new WaitForSeconds(1.0f);
+                yield return new WaitForSeconds(1.5f);
                 material.SetColor("_EmissionColor", originalColor);
                 DeactivateAndResetArms();
             }
@@ -156,6 +161,7 @@ public class IDCardPickupEvent : MonoBehaviour
 
     void DeactivateAndResetArms()
     {
+        eventInProgress = false;
         //추후 넣을지 안넣을지 결정할거임
         //StartCoroutine(ShowMessageForSeconds(3f));
 

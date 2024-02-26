@@ -22,6 +22,7 @@ public class RotateIdInserter : MonoBehaviour
     private CameraShaker cameraShaker;
     private GameObject idCardObject; 
     private AudioSource audioSource;
+    private bool eventInProgress = false;
     public static bool IsDoorOpened { get; private set; } = false;
 
     private Vector3 originalCameraPosition;
@@ -49,8 +50,13 @@ public class RotateIdInserter : MonoBehaviour
 
     private void Update()
     {
+        if (eventInProgress)
+            return;
+
         if (CanInteract() && Input.GetKeyDown(KeyCode.E) && !IsRockRotated)
         {
+            eventInProgress = true;
+
             player.GetComponent<PlayerController>().enabled = false;
             StartCoroutine(SequentialRockRotation(idInserter));
         }
@@ -59,6 +65,8 @@ public class RotateIdInserter : MonoBehaviour
             //objectHighlighter.UpdateOutline(idInserter);
             if (CanInteract() && Input.GetKeyDown(KeyCode.E) && !IsDoorOpened)
             {
+                eventInProgress = true;
+
                 player.GetComponent<PlayerController>().enabled = false;
                 playerMesh.SetActive(false);
                 StartCoroutine(ActivateIDCardSequence(idCardObject));
@@ -79,15 +87,19 @@ public class RotateIdInserter : MonoBehaviour
     }
     IEnumerator SequentialRockRotation(GameObject idInserter)
     {
+        eventInProgress = true;
         yield return StartCoroutine(MoveCameraToLookAtObject(idInserter.transform));
         PlaySound(idInserter);
         yield return StartCoroutine(RotateRock(idInserter));
         yield return StartCoroutine(ResetCameraPositionAndRotation());
         player.GetComponent<PlayerController>().enabled = true;
         IsRockRotated = true;
+        eventInProgress = false;
     }
     IEnumerator ActivateIDCardSequence(GameObject idCardObject)
     {
+        eventInProgress = true;
+
         gun.SetActive(false);
         Vector3 targetPosition = new Vector3(-453.146f, 3.087f, 103.19f);
         Quaternion targetRotation = Quaternion.Euler(5.268f, 213.531f, -4.972f);
@@ -106,6 +118,7 @@ public class RotateIdInserter : MonoBehaviour
         gun.SetActive(true);
         stoneParticle.SetActive(false);
         playerMesh.SetActive(true);
+        eventInProgress = false;
     }
     void ActivateIDCard()
     {

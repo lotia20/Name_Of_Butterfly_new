@@ -6,6 +6,7 @@ public class PasswordEventCameraController : MonoBehaviour
     public static bool IsPasswordActive { get; private set; } = false;
     public float distanceToCamera = 2f;
     private bool hasIDCardInserted = false;
+    private bool eventInProgress = false;
 
     public static Vector3 originalCameraPosition { get; private set; }
     public static Quaternion originalCameraRotation { get; private set; }
@@ -13,6 +14,7 @@ public class PasswordEventCameraController : MonoBehaviour
     private GameObject idCardObject;
     public GameObject player;
     private AudioSource audioSource;
+
 
     private void Start()
     {
@@ -25,11 +27,15 @@ public class PasswordEventCameraController : MonoBehaviour
 
     void Update()
     {
+        if (eventInProgress)
+            return;
+
         GameObject closestObject = OutlineSelection.ClosestObject;
         if (Input.GetKeyDown(KeyCode.E) && closestObject != null && closestObject.CompareTag("SelectablePasswordScreen"))
         {
             if (!IsPasswordActive && IDCardPickupEvent.IdCardPickedUp && !hasIDCardInserted)
             {
+                eventInProgress = true;
                 StartCoroutine(ActivateIDCardSequence(idCardObject));               
             }
             else
@@ -54,6 +60,7 @@ public class PasswordEventCameraController : MonoBehaviour
         HandlePasswordActivation();
         DeactivateIDCard();
         hasIDCardInserted = true;
+        eventInProgress = false;
     }
 
     void ActivateIDCard()
