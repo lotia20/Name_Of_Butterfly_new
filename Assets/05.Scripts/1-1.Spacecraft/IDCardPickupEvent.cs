@@ -1,15 +1,17 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class IDCardPickupEvent : MonoBehaviour
 {
     float distanceToCamera = 0.45f;
-    public GameObject UpperArmL;
-    public GameObject HandL;
-    public GameObject FingerL2;
-    public GameObject FingerL3;
-    public GameObject FingerL4;
+    public GameObject PlayerArmR;
+    public GameObject ForeArmR;
+    public GameObject HandR;
+    public GameObject FingerR2;
+    public GameObject FingerR3;
+    public GameObject FingerR4;
     public GameObject player;
 
     public Image messageImage;
@@ -17,14 +19,17 @@ public class IDCardPickupEvent : MonoBehaviour
     public AudioSource pickupSound;
     public static bool IdCardPickedUp { get; private set; } = false;
 
-    private Quaternion initialUpperArmLRotation;
-    private Quaternion initialHandLRotation;
-    private Quaternion initialFingerL2Rotation;
-    private Quaternion initialFingerL3Rotation;
-    private Quaternion initialFingerL4Rotation;
+    private Quaternion initialHandRRotation;
+    private Quaternion initialFingerR2Rotation;
+    private Quaternion initialFingerR3Rotation;
+    private Quaternion initialFingerR4Rotation;
 
     private OutlineSelection outlineSelectionScript;
 
+    private void Start()
+    {
+        PlayerArmR.SetActive(false);
+    }
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
@@ -45,11 +50,10 @@ public class IDCardPickupEvent : MonoBehaviour
 
     void StoreInitialArmRotations()
     {
-        initialUpperArmLRotation = UpperArmL.transform.rotation;
-        initialHandLRotation = HandL.transform.rotation;
-        initialFingerL2Rotation = FingerL2.transform.rotation;
-        initialFingerL3Rotation = FingerL3.transform.rotation;
-        initialFingerL4Rotation = FingerL4.transform.rotation;
+        initialHandRRotation = HandR.transform.rotation;
+        initialFingerR2Rotation = FingerR2.transform.rotation;
+        initialFingerR3Rotation = FingerR3.transform.rotation;
+        initialFingerR4Rotation = FingerR4.transform.rotation;
     }
 
     void MoveObjectToFront(GameObject obj)
@@ -62,20 +66,15 @@ public class IDCardPickupEvent : MonoBehaviour
         Quaternion targetRotation = Quaternion.LookRotation(Camera.main.transform.forward, Vector3.up) * localRotation;
 
         obj.transform.rotation = targetRotation;
-
+    
         StartCoroutine(SequentialArmRotations(obj));
     }
 
     IEnumerator SequentialArmRotations(GameObject obj)
     {
-        float objectHeight = obj.transform.position.y;
-        float rotationFactor = 74f;
-        float targetRotationAngle = objectHeight * rotationFactor;
-        yield return StartCoroutine(RotateUpperArm(UpperArmL, Vector3.forward, targetRotationAngle));
-        yield return StartCoroutine(RotateUpperArm(UpperArmL, Vector3.right, 80f));
-        yield return StartCoroutine(RotateUpperArm(UpperArmL, Vector3.forward, 19.2f));
-        yield return StartCoroutine(RotateHandZ(HandL));
-        yield return StartCoroutine(RotateFingers(FingerL2, FingerL3, FingerL4));
+        PlayerArmR.SetActive(true);
+        yield return StartCoroutine(RotateHandZ(HandR));
+        yield return StartCoroutine(RotateFingers(FingerR2, FingerR3, FingerR4));
     }
 
     IEnumerator RotateUpperArm(GameObject arm, Vector3 rotationAxis, float rotationAngle)
@@ -96,11 +95,11 @@ public class IDCardPickupEvent : MonoBehaviour
 
     IEnumerator RotateHandZ(GameObject hand)
     {
-        float rotationDuration = 1.0f;
+        float rotationDuration = 2.0f;
         float elapsedTime = 0f;
         Quaternion startRotation = hand.transform.rotation;
 
-        Quaternion targetRotation = startRotation * Quaternion.Euler(0f, 0f, 60f);
+        Quaternion targetRotation = startRotation * Quaternion.Euler(0f, 0f, 40f);
 
         while (elapsedTime < rotationDuration)
         {
@@ -109,6 +108,7 @@ public class IDCardPickupEvent : MonoBehaviour
             yield return null;
         }
     }
+
 
     IEnumerator RotateFingers(GameObject finger2, GameObject finger3, GameObject finger4)
     {
@@ -176,11 +176,10 @@ public class IDCardPickupEvent : MonoBehaviour
 
     void ResetArmPositions()
     {
-        UpperArmL.transform.rotation = initialUpperArmLRotation;
-        HandL.transform.rotation = initialHandLRotation;
-        FingerL2.transform.rotation = initialFingerL2Rotation;
-        FingerL3.transform.rotation = initialFingerL3Rotation;
-        FingerL4.transform.rotation = initialFingerL4Rotation;
+        HandR.transform.rotation = initialHandRRotation;
+        FingerR2.transform.rotation = initialFingerR2Rotation;
+        FingerR3.transform.rotation = initialFingerR3Rotation;
+        FingerR4.transform.rotation = initialFingerR4Rotation;
         player.GetComponent<PlayerController>().enabled = true;
     }
 }
