@@ -4,16 +4,20 @@ using UnityEngine;
 
 public class ObjectHighlighter : MonoBehaviour
 {
-    [SerializeField] private Transform player;
-    [SerializeField] private float distanceThreshold = 30f;
+    public static bool IsHighlightOn { get; private set; } = false;
+
+    [SerializeField] private float distanceThreshold = 7f;
     [SerializeField] private float startWidth = 1f;
     [SerializeField] private float maxOutlineWidth = 7f;
     [SerializeField] private float pulseSpeed = 7f;
+
+    private GameObject player;
 
     private bool increasingWidth = true;
 
     private void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         GameObject[] selectableObjects = GameObject.FindGameObjectsWithTag("Selectable");
         foreach (GameObject obj in selectableObjects)
         {
@@ -35,7 +39,7 @@ public class ObjectHighlighter : MonoBehaviour
     {
         if (targetObject != null && player != null)
         {
-            float distanceToPlayer = Vector3.Distance(targetObject.transform.position, player.position);
+            float distanceToPlayer = Vector3.Distance(targetObject.transform.position, player.transform.position);
 
             if (CanInteract(targetObject))
             {
@@ -43,6 +47,7 @@ public class ObjectHighlighter : MonoBehaviour
                 if (outline != null)
                 {
                     outline.enabled = true;
+                    IsHighlightOn = true;
                     AlterOutlineWidth(outline);
                 }
             }
@@ -52,6 +57,7 @@ public class ObjectHighlighter : MonoBehaviour
                 if (outline != null)
                 {
                     outline.enabled = false;
+                    IsHighlightOn = false;
                 }
             }
         }

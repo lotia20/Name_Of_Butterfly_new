@@ -1,80 +1,157 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MiddleDoorOpener : MonoBehaviour
 {
     [SerializeField] private Transform player;
     [SerializeField] private float openSpeed;
+    [SerializeField] private float cameraMoveSpeed = 10f;
+    [SerializeField] private float cameraDistanceFromObject = 3f;
 
+    public GameObject idCardObject;
     public GameObject door;
-    public GameObject doorLight;
-    public GameObject sideDoorLight;
+    public GameObject idDisplay;
     public GameObject UpDoor;
     public GameObject DownDoor;
+    public GameObject IDdevice;
+    public GameObject gun;
+
+    public GameObject upperArmR;
+    public GameObject handR;
+
     public float interactionDistance = 10f;
 
     private AudioSource audioSource;
-    private bool soundPlayed = false; 
+    private bool soundPlayed = false;
+
+    private ObjectHighlighter objectHighlighter;
+
+    private Vector3 originalCameraPosition;
+    private Quaternion originalCameraRotation;
+
 
     public static bool isDoorOpen { get; private set; } = false;
 
-    void Update()
+    private void Start()
     {
-        if (IsPlayerNearDoor())
+        objectHighlighter = GetComponent<ObjectHighlighter>();
+        if (idCardObject != null)
         {
-            OpenDoor();
-            StartCoroutine(TurnOnDoorLight(doorLight));
-            //StartCoroutine(TurnOnDoorLight(sideDoorLight));
-            isDoorOpen = true;
+            idCardObject.SetActive(false);
         }
     }
-
-    bool IsPlayerNearDoor()
+    void Update()
     {
-        float distanceToPlayer = Vector3.Distance(door.transform.position, player.position);
-        return distanceToPlayer <= interactionDistance;
+        objectHighlighter.UpdateOutline(IDdevice);
+        if(ObjectHighlighter.IsHighlightOn && Input.GetKeyDown(KeyCode.E))
+        {
+            player.GetComponent<PlayerController>().enabled = false;
+            gun.SetActive(false);
+            StartCoroutine(SequentialDoorOpen(IDdevice));
+        }
     }
+    IEnumerator SequentialDoorOpen(GameObject obj)
+    {
+        Vector3 targetPosition = new Vector3(-2.8f, 9.68f, 164.31f);
+        Quaternion targetRotation = Quaternion.Euler(2.554f, -177.188f, -0.549f);
+        yield return StartCoroutine(MoveCameraToLookAtObject(targetPosition, targetRotation));
+        idCardObject.SetActive(true);
+        yield return StartCoroutine(RotateUpperArm(upperArmR, Vector3.up, -45f));
+        yield return StartCoroutine(RotateUpperArm(handR, Vector3.forward, 10f));
+        yield return new WaitForSeconds(2f);
+        TurnOnIdLight();
+        PlaySound(idCardObject);
+        yield return new WaitForSeconds(1f);
+        idCardObject.SetActive(false);
+        yield return StartCoroutine(MoveCameraToLookAtObject(originalCameraPosition, originalCameraRotation));
+        yield return StartCoroutine(MoveCameraToLookAtObject(UpDoor.transform));
+        isDoorOpen = true;
+        yield return StartCoroutine(OpenDoor());
+        yield return StartCoroutine(MoveCameraToLookAtObject(originalCameraPosition, originalCameraRotation));
+        player.GetComponent<PlayerController>().enabled = true;
+        gun.SetActive(true);
+    }
+    IEnumerator MoveCameraToLookAtObject(Vector3 targetPosition, Quaternion targetRotation)
+    {
+        SaveOriginalCameraTransform();
+        float duration = 2.0f;
+        float elapsedTime = 0f;
 
-    void OpenDoor()
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = elapsedTime / duration;
+            Camera.main.transform.position = Vector3.Lerp(originalCameraPosition, targetPosition, t);
+            Camera.main.transform.rotation = Quaternion.Slerp(originalCameraRotation, targetRotation, t);
+            yield return null;
+        }
+
+        Camera.main.transform.position = targetPosition;
+        Camera.main.transform.rotation = targetRotation;
+    }
+    IEnumerator RotateUpperArm(GameObject arm, Vector3 rotationAxis, float rotationAngle)
+    {
+        float rotationDuration = 1.0f;
+        float elapsedTime = 0f;
+        Quaternion startRotation = arm.transform.rotation;
+
+        Quaternion targetRotation = startRotation * Quaternion.Euler(rotationAxis * rotationAngle);
+
+        while (elapsedTime < rotationDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            arm.transform.rotation = Quaternion.Slerp(startRotation, targetRotation, elapsedTime / rotationDuration);
+            yield return null;
+        }
+    }
+    void SaveOriginalCameraTransform()
+    {
+        originalCameraPosition = Camera.main.transform.position;
+        originalCameraRotation = Camera.main.transform.rotation;
+    }
+    IEnumerator MoveCameraToLookAtObject(Transform obj)
+    {
+        SaveOriginalCameraTransform();
+
+        Vector3 directionToObj = obj.position - Camera.main.transform.position;
+        Quaternion desiredRotation = Quaternion.LookRotation(directionToObj);
+        float rotationSpeed = 5.0f;
+
+        while (Quaternion.Angle(Camera.main.transform.rotation, desiredRotation) > 0.01f)
+        {
+            Camera.main.transform.rotation = Quaternion.Lerp(Camera.main.transform.rotation, desiredRotation, Time.deltaTime * rotationSpeed);
+
+            yield return null;
+        }
+    }
+    void TurnOnIdLight()
+    {
+        Renderer idLightRenderer = idDisplay.GetComponent<Renderer>();
+        if (idLightRenderer != null)
+        {
+            idLightRenderer.material.SetColor("_EmissionColor", Color.cyan);
+
+            float intensity = 25f;
+            Color emissionColor = Color.cyan * intensity;
+            idLightRenderer.material.SetColor("_EmissionColor", emissionColor);
+        }
+    }
+    IEnumerator OpenDoor()
     {
         if (!soundPlayed)
         {
             PlaySound(door);
             soundPlayed = true;
         }
-        if (UpDoor.transform.position.y <= 10f)
-            UpDoor.transform.Translate(Vector3.up * Time.deltaTime * openSpeed, Space.World);
-        if (DownDoor.transform.position.y >= -1f)
-            DownDoor.transform.Translate(Vector3.down * Time.deltaTime * openSpeed, Space.World);
-    }
 
-    IEnumerator TurnOnDoorLight(GameObject obj)
-    {
-        Renderer objRenderer = obj.GetComponent<Renderer>();
-        if (objRenderer != null)
+        float targetUpDoorPositionY = UpDoor.transform.position.y + 10f; 
+        float targetDownDoorPositionY = DownDoor.transform.position.y - 10f; 
+
+        while (UpDoor.transform.position.y < targetUpDoorPositionY && DownDoor.transform.position.y > targetDownDoorPositionY)
         {
-
-            Color targetColor = objRenderer.material.GetColor("_EmissionColor");
-            float targetIntensity = 40f;
-
-            float currentIntensity = 3f;
-
-            float elapsedTime = 0f;
-            while (elapsedTime < 7f)
-            {
-
-                float t = elapsedTime / 7f;
-                float intensity = Mathf.Lerp(currentIntensity, targetIntensity, Mathf.Sqrt(t));
-                Color newColor = targetColor * intensity;
-
-                objRenderer.material.SetColor("_EmissionColor", newColor);
-
-                elapsedTime += Time.deltaTime;
-                yield return null;
-            }
-
-            objRenderer.material.SetColor("_EmissionColor", targetColor * targetIntensity);
+            UpDoor.transform.Translate(Vector3.up * Time.deltaTime * openSpeed, Space.World);
+            DownDoor.transform.Translate(Vector3.down * Time.deltaTime * openSpeed, Space.World);
+            yield return null; 
         }
     }
     void PlaySound(GameObject obj)
