@@ -28,7 +28,7 @@ public class MiddleDoorOpener : MonoBehaviour
 
     private Vector3 originalCameraPosition;
     private Quaternion originalCameraRotation;
-
+    private bool eventInProgress = false;
 
     public static bool isDoorOpen { get; private set; } = false;
 
@@ -42,9 +42,13 @@ public class MiddleDoorOpener : MonoBehaviour
     }
     void Update()
     {
+        if (eventInProgress)
+            return;
+
         objectHighlighter.UpdateOutline(IDdevice);
         if(ObjectHighlighter.IsHighlightOn && Input.GetKeyDown(KeyCode.E))
         {
+            eventInProgress = true;
             player.GetComponent<PlayerController>().enabled = false;
             gun.SetActive(false);
             StartCoroutine(SequentialDoorOpen(IDdevice));
@@ -70,6 +74,7 @@ public class MiddleDoorOpener : MonoBehaviour
         yield return StartCoroutine(MoveCameraToLookAtObject(originalCameraPosition, originalCameraRotation));
         player.GetComponent<PlayerController>().enabled = true;
         gun.SetActive(true);
+        eventInProgress = false;
     }
     IEnumerator MoveCameraToLookAtObject(Vector3 targetPosition, Quaternion targetRotation)
     {
