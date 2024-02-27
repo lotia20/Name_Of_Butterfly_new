@@ -1,18 +1,20 @@
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class OutlineSelection : MonoBehaviour
 {
     [SerializeField] private AudioSource highlightSource;
     [SerializeField] private string[] selectableTags = { "SelectableDrawing", "SelectablePasswordScreen", "SelectableIdCard" };
     [SerializeField] private float maxDistance;
-
+    public TutorialExpose tutorialExpose;
+    public GameObject EKeyUi;
     public static bool IsOutlineEnabled { get; private set; } = false;
     public static GameObject ClosestObject { get; private set; }
 
     private Transform selection;
     private static Dictionary<GameObject, bool> objectSoundPlayedMap = new Dictionary<GameObject, bool>();
 
+    private bool tutorialExposed = false;
 
     void Start()
     {
@@ -22,7 +24,7 @@ public class OutlineSelection : MonoBehaviour
     void Update()
     {
         GameObject closestObject = FindClosestObject(selectableTags);
-
+        
         if (closestObject != null && IsObjectInView(closestObject))
         {
             UpdateClosestObject(closestObject);
@@ -30,6 +32,13 @@ public class OutlineSelection : MonoBehaviour
             if (ShouldHighlight(closestObject))
             {
                 ProcessHighlight(closestObject);
+
+                if (!tutorialExposed) 
+                {
+                    tutorialExpose.SetImage(EKeyUi);
+                    tutorialExpose.ShowAndHideImage(KeyCode.E);
+                    tutorialExposed = true;
+                }
             }
            
             ProcessSelection();
