@@ -33,7 +33,7 @@ public class OutlineSelection : MonoBehaviour
             {
                 ProcessHighlight(closestObject);
 
-                if (!tutorialExposed) 
+                if (!tutorialExposed && BasicTutorial.IsEkeyEnabled) 
                 {
                     tutorialExpose.SetImage(EKeyUi);
                     tutorialExpose.ShowAndHideImage(KeyCode.E);

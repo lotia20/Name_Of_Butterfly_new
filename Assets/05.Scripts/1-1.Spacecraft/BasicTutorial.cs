@@ -5,6 +5,7 @@ using UnityEngine;
 public class BasicTutorial : MonoBehaviour
 {
     public TutorialExpose tutorialExpose;
+    public static bool IsEkeyEnabled { get; private set; } = false;
 
     public GameObject movementUi;
     public GameObject uiA;
@@ -35,6 +36,10 @@ public class BasicTutorial : MonoBehaviour
         {
             tutorialExpose.SetImage(movementUi);
             tutorialExpose.ShowImage();
+        }
+        else
+        {
+            IsEkeyEnabled = true;
         }
 
         if (Input.GetKeyDown(KeyCode.A) && !eventA)

@@ -21,6 +21,7 @@ public class TutorialExpose : MonoBehaviour
         imageComponent = image.GetComponent<Image>();
     }
 
+    //ShowAndHide 에 두가지 버전이 있습니다!
     public void ShowAndHideImage(KeyCode keyCode)   //특정 키 누르면 UI 비활성화
     {
         ShowImage();
