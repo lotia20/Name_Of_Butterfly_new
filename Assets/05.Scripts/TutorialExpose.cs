@@ -8,11 +8,13 @@ public class TutorialExpose : MonoBehaviour
     public GameObject imageToShow;
     public float displayTime = 5f;
     public Color greenColor = Color.green;
+    public float minAlpha = 0.3f; 
+    public float maxAlpha = 1f; 
+    public float fadeDuration = 1f; 
 
     private KeyCode hideKeyCode;
     private Image imageComponent;
 
-   
     public void SetImage(GameObject image)
     {
         imageToShow = image;
@@ -25,6 +27,7 @@ public class TutorialExpose : MonoBehaviour
         hideKeyCode = keyCode;
         StartCoroutine(WaitAndHide());
     }
+
     public void ShowAndHideImage()  //displayTime 만큼이 흐르면 자동으로 비활성화 
     {
         ShowImage();
@@ -41,13 +44,42 @@ public class TutorialExpose : MonoBehaviour
 
     public void ShowImage()
     {
-        imageToShow.gameObject.SetActive(true);
+        imageToShow.SetActive(true);
+        StartCoroutine(FadeInOut());
     }
 
     public void HideImage()
     {
-        imageToShow.gameObject.SetActive(false);
+        imageToShow.SetActive(false);
+    }
+
+    IEnumerator FadeInOut()
+    {
+        while (true)
+        {
+            // Fade in
+            float elapsedTime = 0f;
+            while (elapsedTime < fadeDuration)
+            {
+                float alpha = Mathf.Lerp(minAlpha, maxAlpha, elapsedTime / fadeDuration);
+                imageComponent.color = new Color(imageComponent.color.r, imageComponent.color.g, imageComponent.color.b, alpha);
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+            imageComponent.color = new Color(imageComponent.color.r, imageComponent.color.g, imageComponent.color.b, maxAlpha);
+
+            elapsedTime = 0f;
+            while (elapsedTime < fadeDuration)
+            {
+                float alpha = Mathf.Lerp(maxAlpha, minAlpha, elapsedTime / fadeDuration);
+                imageComponent.color = new Color(imageComponent.color.r, imageComponent.color.g, imageComponent.color.b, alpha);
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+            imageComponent.color = new Color(imageComponent.color.r, imageComponent.color.g, imageComponent.color.b, minAlpha);
+        }
     }
 }
+
 
 
