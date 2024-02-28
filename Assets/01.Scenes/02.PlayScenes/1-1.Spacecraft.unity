@@ -822,7 +822,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -135}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &387097119
@@ -1130,6 +1130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   imageToShow: {fileID: 0}
   displayTime: 3
+  greenColor: {r: 0, g: 1, b: 0, a: 1}
 --- !u!4 &875712904 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7974559696276326530, guid: b890067b118837e4d97fafe73237b4ad,

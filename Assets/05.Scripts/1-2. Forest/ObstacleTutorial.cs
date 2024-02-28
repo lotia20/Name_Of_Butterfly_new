@@ -23,13 +23,13 @@ public class ObstacleTutorial : MonoBehaviour
 
     void Update()
     {
-        if (!eventsCompleted[0] && IsPlayerNearObject(object1, 10f))
+        if (!eventsCompleted[0] && IsPlayerNearObject(object1, 50f))
         {
             tutorialExpose.SetImage(shiftUi);
             tutorialExpose.ShowAndHideImage(KeyCode.LeftShift);
             eventsCompleted[0] = true;
         }
-        else if (!eventsCompleted[1] && IsPlayerNearObject(object2, 10f) && eventsCompleted[0])
+        else if (!eventsCompleted[1] && IsPlayerNearObject(object2, 15f) && eventsCompleted[0])
         {
             tutorialExpose.SetImage(spaceBarUi);
             tutorialExpose.ShowAndHideImage(KeyCode.Space);
@@ -47,7 +47,7 @@ public class ObstacleTutorial : MonoBehaviour
             tutorialExpose.ShowAndHideImage(KeyCode.R);
             eventsCompleted[3] = true;
         }
-        else if (!eventsCompleted[4] && IsPlayerNearObject(object5, 10f) && eventsCompleted[3])
+        else if (!eventsCompleted[4] && IsPlayerNearObject(object5, 30f) && eventsCompleted[3])
         {
             tutorialExpose.SetImage(leftMouseUi);
             tutorialExpose.ShowAndHideImage(KeyCode.Mouse0);

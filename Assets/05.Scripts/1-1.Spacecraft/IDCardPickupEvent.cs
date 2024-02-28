@@ -151,13 +151,18 @@ public class IDCardPickupEvent : MonoBehaviour
             {
                 Material material = renderer.material;
                 Color originalColor = material.GetColor("_EmissionColor");
-                material.SetColor("_EmissionColor", Color.green);
+
+                Color newEmissionColor = Color.green * 6f; 
+
+                material.SetColor("_EmissionColor", newEmissionColor);
                 yield return new WaitForSeconds(1.5f);
+
                 material.SetColor("_EmissionColor", originalColor);
                 DeactivateAndResetArms();
             }
         }
     }
+
 
     void DeactivateAndResetArms()
     {
