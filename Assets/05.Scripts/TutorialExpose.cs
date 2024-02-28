@@ -7,12 +7,16 @@ public class TutorialExpose : MonoBehaviour
 {
     public GameObject imageToShow;
     public float displayTime = 5f;
+    public Color greenColor = Color.green;
 
     private KeyCode hideKeyCode;
+    private Image imageComponent;
 
+   
     public void SetImage(GameObject image)
     {
         imageToShow = image;
+        imageComponent = image.GetComponent<Image>();
     }
 
     public void ShowAndHideImage(KeyCode keyCode)   //특정 키 누르면 UI 비활성화
@@ -30,6 +34,8 @@ public class TutorialExpose : MonoBehaviour
     IEnumerator WaitAndHide()
     {
         yield return new WaitUntil(() => Input.GetKeyDown(hideKeyCode));
+        imageComponent.color = greenColor;
+        yield return new WaitForSeconds(1f);
         HideImage();
     }
 

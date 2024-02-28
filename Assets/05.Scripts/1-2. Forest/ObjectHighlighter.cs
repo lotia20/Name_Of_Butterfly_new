@@ -70,6 +70,15 @@ public class ObjectHighlighter : MonoBehaviour
         float distanceToPlayer = Vector3.Distance(obj.transform.position, player.transform.position);
         return inCameraView && distanceToPlayer <= distanceThreshold;
     }
+    public void DisableOutline(GameObject obj)
+    {
+        Outline outline = obj.GetComponent<Outline>();
+        if (outline != null)
+        {
+            outline.enabled = false;
+            IsHighlightOn = false;
+        }
+    }
 
     private void AlterOutlineWidth(Outline outline)
     {

@@ -52,6 +52,7 @@ public class MiddleDoorOpener : MonoBehaviour
             player.GetComponent<PlayerController>().enabled = false;
             gun.SetActive(false);
             StartCoroutine(SequentialDoorOpen(IDdevice));
+            objectHighlighter.DisableOutline(IDdevice);
         }
     }
     IEnumerator SequentialDoorOpen(GameObject obj)
@@ -74,7 +75,6 @@ public class MiddleDoorOpener : MonoBehaviour
         yield return StartCoroutine(MoveCameraToLookAtObject(originalCameraPosition, originalCameraRotation));
         player.GetComponent<PlayerController>().enabled = true;
         gun.SetActive(true);
-        eventInProgress = false;
     }
     IEnumerator MoveCameraToLookAtObject(Vector3 targetPosition, Quaternion targetRotation)
     {
