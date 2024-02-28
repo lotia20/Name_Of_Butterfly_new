@@ -43,6 +43,10 @@ public class WakeUp : MonoBehaviour
     public AudioClip clothMovingSound;
     private AudioSource audioSource;
 
+    public BasicTutorial basicTutorial;
+
+    private bool isWakeUpComplete = false;
+
     void Start()
     {
         player.GetComponent<PlayerController>().enabled = false;
@@ -60,6 +64,14 @@ public class WakeUp : MonoBehaviour
         audioSource = gameObject.AddComponent<AudioSource>();
         
         StartCoroutine(WakeUpSequence());
+    }
+
+    void Update()
+    {
+        if (isWakeUpComplete)
+        {
+            basicTutorial.CheckInputs();
+        }
     }
 
     // Update is called once per frame
@@ -174,7 +186,8 @@ public class WakeUp : MonoBehaviour
         player.transform.position = new Vector3(-1.438f, 0.733f, -0.031f);
 
         player.GetComponent<PlayerController>().enabled = true;
-        
+        isWakeUpComplete = true;
+
         yield return null;
     }
 

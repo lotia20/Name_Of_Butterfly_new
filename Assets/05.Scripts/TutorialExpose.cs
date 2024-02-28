@@ -57,7 +57,6 @@ public class TutorialExpose : MonoBehaviour
     {
         while (true)
         {
-            // Fade in
             float elapsedTime = 0f;
             while (elapsedTime < fadeDuration)
             {
