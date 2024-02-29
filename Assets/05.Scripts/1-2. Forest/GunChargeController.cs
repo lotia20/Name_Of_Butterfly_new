@@ -10,7 +10,7 @@ public class GunChargeController : MonoBehaviour
     public GameObject targetPosition;
 
     public GameObject[] gauges;
-    private int gaugeIndex;
+    public int gaugeIndex;
 
     private Quaternion originRotation;
     private Vector3 originPosition;
@@ -24,6 +24,7 @@ public class GunChargeController : MonoBehaviour
     public AudioClip chargingSound;
     public AudioClip chargedSound;
     private AudioSource audioSource;
+
 
     void Start()
     {
@@ -100,7 +101,6 @@ public class GunChargeController : MonoBehaviour
             yield return new WaitForSeconds(gaugeChargeDelay);
         }
         gaugeIndex = 10;
-        
         audioSource.Stop();
         ResetCamera();
     }

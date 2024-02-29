@@ -11,6 +11,7 @@ public class CleanController : MonoBehaviour
 
     private Texture2D templateDirtMask;
     public static bool isCleaning{ get; private set; } = false;
+    public GunChargeController gunChargeControllerInstance;
 
     //마우스 범위 조절 
     private int minX;
@@ -21,6 +22,7 @@ public class CleanController : MonoBehaviour
 
     private void Start()
     {
+        gunChargeControllerInstance = FindObjectOfType<GunChargeController>();
         CreateTexture();
     }
 
@@ -30,22 +32,25 @@ public class CleanController : MonoBehaviour
 
         Vector3 mousePosition = Input.mousePosition;
         bool isInCleaningArea = mousePosition.x >= minX && mousePosition.x <= maxX && mousePosition.y >= minY && mousePosition.y <= maxY;
-
-        if (Input.GetMouseButtonDown(0) && isInCleaningArea)
-        {
-            isCleaning = true;
-            // 청소 중일 때 Particle System 활성화
-            washParticles.Play();
-        }
-        if (Input.GetMouseButtonUp(0))
-        {
-            isCleaning = false;
-            // 청소 중이 아닐 때 Particle System 비활성화
-            washParticles.Stop();
-        }
-        if (isCleaning)
-        {
-            Clean();
+        
+        if(gunChargeControllerInstance.gaugeIndex != 0)
+        { 
+            if (Input.GetMouseButtonDown(0) && isInCleaningArea)
+            {
+                isCleaning = true;
+                // 청소 중일 때 Particle System 활성화
+                washParticles.Play();
+            }
+            if (Input.GetMouseButtonUp(0))
+            {
+                isCleaning = false;
+                // 청소 중이 아닐 때 Particle System 비활성화
+                washParticles.Stop();
+            }
+            if (isCleaning)
+            {
+                Clean();
+            }
         }
     }
 
