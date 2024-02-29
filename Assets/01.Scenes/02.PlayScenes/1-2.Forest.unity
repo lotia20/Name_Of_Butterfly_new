@@ -17627,6 +17627,9 @@ MonoBehaviour:
   imageToShow: {fileID: 0}
   displayTime: 5
   greenColor: {r: 0, g: 1, b: 0, a: 1}
+  minAlpha: 0.3
+  maxAlpha: 1
+  fadeDuration: 1
 --- !u!1 &1535039606 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5089803723387107676, guid: 7e424729ea9023f45a4f9238d4b83204,
@@ -41938,17 +41941,17 @@ PrefabInstance:
     - target: {fileID: 6837012748916749546, guid: 7e3c8b67931ccde48aee23927e86592d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 29.36
+      value: -444
       objectReference: {fileID: 0}
     - target: {fileID: 6837012748916749546, guid: 7e3c8b67931ccde48aee23927e86592d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.22
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6837012748916749546, guid: 7e3c8b67931ccde48aee23927e86592d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -13.92
+      value: 72
       objectReference: {fileID: 0}
     - target: {fileID: 6837012748916749546, guid: 7e3c8b67931ccde48aee23927e86592d,
         type: 3}

@@ -12,6 +12,13 @@ public class CleanController : MonoBehaviour
     private Texture2D templateDirtMask;
     public static bool isCleaning{ get; private set; } = false;
 
+    //마우스 범위 조절 
+    private int minX;
+    private int maxX;
+    private int minY;
+    private int maxY;
+
+
     private void Start()
     {
         CreateTexture();
@@ -19,7 +26,12 @@ public class CleanController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        UpdateMouseCoordinates();
+
+        Vector3 mousePosition = Input.mousePosition;
+        bool isInCleaningArea = mousePosition.x >= minX && mousePosition.x <= maxX && mousePosition.y >= minY && mousePosition.y <= maxY;
+
+        if (Input.GetMouseButtonDown(0) && isInCleaningArea)
         {
             isCleaning = true;
             // 청소 중일 때 Particle System 활성화
@@ -69,5 +81,13 @@ public class CleanController : MonoBehaviour
         templateDirtMask.Apply();
 
         material.SetTexture("_MaskTexture", templateDirtMask);
+    }
+
+    private void UpdateMouseCoordinates()
+    {
+        minX = (int)(0.375f * Screen.width); // 예시: 화면 가로 크기의 75%
+        maxX = (int)(0.6f * Screen.width);
+        minY = 0;
+        maxY = Screen.height;
     }
 }
