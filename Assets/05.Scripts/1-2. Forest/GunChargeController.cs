@@ -105,6 +105,12 @@ public class GunChargeController : MonoBehaviour
         ResetCamera();
     }
 
+    public void DecreaseGauge(int currentIndex)
+    {
+        gauges[currentIndex].SetActive(true);
+        DisableOtherGauges(currentIndex);
+    }
+
     void DisableOtherGauges(int currentIndex)
     {
         for(int j = 1; j < gauges.Length; j++)

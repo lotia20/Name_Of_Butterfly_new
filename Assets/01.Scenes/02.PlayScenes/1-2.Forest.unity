@@ -6040,6 +6040,7 @@ MonoBehaviour:
   brush: {fileID: 2800000, guid: 5c8c5f66c63ba49eb93cb4a116e97890, type: 3}
   material: {fileID: 2100000, guid: 2f34e183734404d689e1d316ea3cec73, type: 2}
   washParticles: {fileID: 1730601358849714715}
+  gunChargeControllerInstance: {fileID: 0}
 --- !u!64 &525209250
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -9721,6 +9722,7 @@ MonoBehaviour:
   brush: {fileID: 2800000, guid: 5c8c5f66c63ba49eb93cb4a116e97890, type: 3}
   material: {fileID: 2100000, guid: cb18894f96ffb4785be05a1c76b7eb87, type: 2}
   washParticles: {fileID: 1730601358849714715}
+  gunChargeControllerInstance: {fileID: 0}
 --- !u!64 &894013409
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -9788,6 +9790,7 @@ MonoBehaviour:
   brush: {fileID: 2800000, guid: 5c8c5f66c63ba49eb93cb4a116e97890, type: 3}
   material: {fileID: 2100000, guid: cb18894f96ffb4785be05a1c76b7eb87, type: 2}
   washParticles: {fileID: 1730601358849714715}
+  gunChargeControllerInstance: {fileID: 0}
 --- !u!1001 &910742857
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12540,6 +12543,7 @@ MonoBehaviour:
   - {fileID: 231483471520901562}
   - {fileID: 8963302547834706097}
   - {fileID: 8368458843748880904}
+  gaugeIndex: 0
   gaugeChargeDelay: 0.8
   chargingSound: {fileID: 0}
   chargedSound: {fileID: 0}
@@ -15300,6 +15304,7 @@ MonoBehaviour:
   brush: {fileID: 2800000, guid: 5c8c5f66c63ba49eb93cb4a116e97890, type: 3}
   material: {fileID: 2100000, guid: cb18894f96ffb4785be05a1c76b7eb87, type: 2}
   washParticles: {fileID: 1730601358849714715}
+  gunChargeControllerInstance: {fileID: 0}
 --- !u!64 &1361832658
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -17311,6 +17316,7 @@ MonoBehaviour:
   brush: {fileID: 2800000, guid: 5c8c5f66c63ba49eb93cb4a116e97890, type: 3}
   material: {fileID: 2100000, guid: cb18894f96ffb4785be05a1c76b7eb87, type: 2}
   washParticles: {fileID: 1730601358849714715}
+  gunChargeControllerInstance: {fileID: 0}
 --- !u!64 &1515363281
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -17653,6 +17659,7 @@ MonoBehaviour:
   brush: {fileID: 2800000, guid: 5c8c5f66c63ba49eb93cb4a116e97890, type: 3}
   material: {fileID: 2100000, guid: 2f34e183734404d689e1d316ea3cec73, type: 2}
   washParticles: {fileID: 1730601358849714715}
+  gunChargeControllerInstance: {fileID: 0}
 --- !u!64 &1535039611
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -20282,6 +20289,7 @@ MonoBehaviour:
   brush: {fileID: 2800000, guid: 5c8c5f66c63ba49eb93cb4a116e97890, type: 3}
   material: {fileID: 2100000, guid: cb18894f96ffb4785be05a1c76b7eb87, type: 2}
   washParticles: {fileID: 1730601358849714715}
+  gunChargeControllerInstance: {fileID: 0}
 --- !u!64 &1762455554
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -41941,17 +41949,17 @@ PrefabInstance:
     - target: {fileID: 6837012748916749546, guid: 7e3c8b67931ccde48aee23927e86592d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -444
+      value: -235.79
       objectReference: {fileID: 0}
     - target: {fileID: 6837012748916749546, guid: 7e3c8b67931ccde48aee23927e86592d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: -5.79
       objectReference: {fileID: 0}
     - target: {fileID: 6837012748916749546, guid: 7e3c8b67931ccde48aee23927e86592d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 72
+      value: 113.2
       objectReference: {fileID: 0}
     - target: {fileID: 6837012748916749546, guid: 7e3c8b67931ccde48aee23927e86592d,
         type: 3}

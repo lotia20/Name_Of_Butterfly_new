@@ -11,6 +11,7 @@ public class CleanController : MonoBehaviour
 
     private Texture2D templateDirtMask;
     public static bool isCleaning{ get; private set; } = false;
+    public static bool isDecreasing{ get; set; } = false;
     public GunChargeController gunChargeControllerInstance;
 
     //마우스 범위 조절 
@@ -33,9 +34,9 @@ public class CleanController : MonoBehaviour
         Vector3 mousePosition = Input.mousePosition;
         bool isInCleaningArea = mousePosition.x >= minX && mousePosition.x <= maxX && mousePosition.y >= minY && mousePosition.y <= maxY;
         
-        if(gunChargeControllerInstance.gaugeIndex != 0)
+        if(gunChargeControllerInstance.gaugeIndex != 0 && isInCleaningArea)
         { 
-            if (Input.GetMouseButtonDown(0) && isInCleaningArea)
+            if (Input.GetMouseButtonDown(0))
             {
                 isCleaning = true;
                 // 청소 중일 때 Particle System 활성화
@@ -45,11 +46,19 @@ public class CleanController : MonoBehaviour
             {
                 isCleaning = false;
                 // 청소 중이 아닐 때 Particle System 비활성화
+                if(isDecreasing)
+                {
+                    gunChargeControllerInstance.gaugeIndex -= 1;
+                    Debug.Log(gunChargeControllerInstance.gaugeIndex);
+                    gunChargeControllerInstance.DecreaseGauge(gunChargeControllerInstance.gaugeIndex);
+                    isDecreasing = false;
+                }
                 washParticles.Stop();
             }
             if (isCleaning)
             {
                 Clean();
+                isDecreasing = true;
             }
         }
     }
