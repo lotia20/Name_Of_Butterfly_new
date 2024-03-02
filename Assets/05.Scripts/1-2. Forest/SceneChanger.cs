@@ -5,12 +5,21 @@ using UnityEngine.SceneManagement;
 
 public class SceneChanger : MonoBehaviour
 {
+    FadeEffect fade;
     public GameObject door;
 
-    void LoadLaboratoryScene()
+    void Start()
     {
-        SceneManager.LoadScene("1-3.Laboratory");
+        fade = FindObjectOfType<FadeEffect>();
     }
+
+    public IEnumerator FadeScene(string sceneName)
+    {
+        fade.FadeIn();
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadScene(sceneName);
+    }
+
 
     void OnTriggerEnter(Collider other)
     {
@@ -20,7 +29,8 @@ public class SceneChanger : MonoBehaviour
             {
                 Debug.Log("load Scene");
                 gameObject.GetComponent<PlayerController>().enabled = false;
-                LoadLaboratoryScene();
+
+                StartCoroutine(FadeScene("1-3.Laboratory"));
             }
         }
     }

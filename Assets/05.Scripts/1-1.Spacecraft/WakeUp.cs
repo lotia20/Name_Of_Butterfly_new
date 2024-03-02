@@ -47,8 +47,13 @@ public class WakeUp : MonoBehaviour
 
     private bool isWakeUpComplete = false;
 
+    FadeEffect fade;
+
     void Start()
     {
+        fade = FindObjectOfType<FadeEffect>();
+        fade.FadeOut();
+
         player.GetComponent<PlayerController>().enabled = false;
         closedRotation = cover.transform.rotation;
         openRotation = Quaternion.Euler(0f, 0f, openAngle);

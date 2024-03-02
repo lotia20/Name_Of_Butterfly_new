@@ -5,11 +5,19 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
+    FadeEffect fade;
     public GameObject door;
-    
-    void LoadForestScene()
+
+    void Start()
     {
-        SceneManager.LoadScene("1-2.Forest");
+        fade = FindObjectOfType<FadeEffect>();
+    }
+
+    public IEnumerator FadeScene(string sceneName)
+    {
+        fade.FadeIn();
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadScene(sceneName);
     }
 
     void OnTriggerEnter(Collider other)
@@ -20,7 +28,8 @@ public class SceneController : MonoBehaviour
             {
                 Debug.Log("load Scene");
                 gameObject.GetComponent<PlayerController>().enabled = false;
-                LoadForestScene();
+                
+                StartCoroutine(FadeScene("1-2.Forest"));
             }
         }
     }

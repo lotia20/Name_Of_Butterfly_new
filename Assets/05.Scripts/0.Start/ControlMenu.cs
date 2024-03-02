@@ -5,12 +5,29 @@ using UnityEngine.SceneManagement;
 
 public class ControlMenu : MonoBehaviour
 {
+    //fadeIn 추가 부분
+    FadeEffect fade;
+
+    void Start()
+    {
+        fade = FindObjectOfType<FadeEffect>();
+    }
+
+    public IEnumerator FadeScene(int sceneIndex)
+    {
+        fade.FadeIn();
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadScene(sceneIndex);
+    }
+
+
     public void OnClickStart()
     {
         Debug.Log("Start");
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         int nextSceneIndex = currentSceneIndex + 1;
-        SceneManager.LoadScene(nextSceneIndex);
+        StartCoroutine(FadeScene(nextSceneIndex));
+        // SceneManager.LoadScene(nextSceneIndex);
     }
 
     public void OnClickSetting()
