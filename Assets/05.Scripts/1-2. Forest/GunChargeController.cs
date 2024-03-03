@@ -38,6 +38,7 @@ public class GunChargeController : MonoBehaviour
         if(isColliding && Input.GetKeyDown(KeyCode.R))
         {
             player.GetComponent<PlayerController>().enabled = false;
+            player.transform.rotation = Quaternion.Euler(0f, 2500f, 0f);
             FixCameraPosition();
         }
     }
