@@ -34,9 +34,9 @@ public class CleanController : MonoBehaviour
         Vector3 mousePosition = Input.mousePosition;
         bool isInCleaningArea = mousePosition.x >= minX && mousePosition.x <= maxX && mousePosition.y >= minY && mousePosition.y <= maxY;
         
-        if(gunChargeControllerInstance.gaugeIndex != 0)
+        if(gunChargeControllerInstance.gaugeIndex != 0 && isInCleaningArea)
         { 
-            if (Input.GetMouseButtonDown(0) && isInCleaningArea)
+            if (Input.GetMouseButtonDown(0))
             {
                 isCleaning = true;
                 // 청소 중일 때 Particle System 활성화
