@@ -18,6 +18,7 @@ public class GunChargeController : MonoBehaviour
     private float moveSpeed = 1f;
 
     private bool isColliding = false;
+    public bool IsColliding { get { return isColliding; } }
 
     [SerializeField] private float gaugeChargeDelay = 0.5f;
 
