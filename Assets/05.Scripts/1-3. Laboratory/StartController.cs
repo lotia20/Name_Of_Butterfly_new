@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class StartController : MonoBehaviour
 {
     FadeEffect fade;
@@ -11,5 +10,7 @@ public class StartController : MonoBehaviour
     {
         fade = FindObjectOfType<FadeEffect>();
         fade.FadeOut();
+        PlayerController.isLoad = true;
     }
+
 }

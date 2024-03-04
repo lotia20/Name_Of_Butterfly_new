@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
      private bool isRun = false;
      private bool isGround = true;
      private bool isCrouch = false;
+     public static bool isLoad{ get; set; } = false;
 
      //앉은 상태일 때 얼마나 앉을 지 결정하는 변수
      [SerializeField] 
@@ -95,13 +96,16 @@ public class PlayerController : MonoBehaviour
 
     private void TryRun()
     {
-        if (Input.GetKey(KeyCode.LeftShift))
+        if(!isLoad)
         {
-            Running();
-        }
-        if (Input.GetKeyUp(KeyCode.LeftShift))
-        {
-            RunningCancel();
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                Running();
+            }
+            if (Input.GetKeyUp(KeyCode.LeftShift))
+            {
+                RunningCancel();
+            }
         }
     }
 
