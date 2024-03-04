@@ -27,11 +27,6 @@ public class ObstacleTutorial : MonoBehaviour
     {
         gunChargeController = FindObjectOfType<GunChargeController>();
     }
-
-    private void Start()
-    {
-        gunChargeController = FindObjectOfType<GunChargeController>();
-    }
     void Update()
     {
         IsPlayerColliding();
