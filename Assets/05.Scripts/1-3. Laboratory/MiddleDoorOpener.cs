@@ -69,10 +69,10 @@ public class MiddleDoorOpener : MonoBehaviour
         yield return new WaitForSeconds(1f);
         idCardObject.SetActive(false);
         yield return StartCoroutine(MoveCameraToLookAtObject(originalCameraPosition, originalCameraRotation));
-        yield return StartCoroutine(MoveCameraToLookAtObject(UpDoor.transform));
+        //yield return StartCoroutine(MoveCameraToLookAtObject(UpDoor.transform));
         isDoorOpen = true;
         yield return StartCoroutine(OpenDoor());
-        yield return StartCoroutine(MoveCameraToLookAtObject(originalCameraPosition, originalCameraRotation));
+        //yield return StartCoroutine(MoveCameraToLookAtObject(originalCameraPosition, originalCameraRotation));
         player.GetComponent<PlayerController>().enabled = true;
         gun.SetActive(true);
     }
