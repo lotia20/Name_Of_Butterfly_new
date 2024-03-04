@@ -12,7 +12,7 @@ public class CleanController : MonoBehaviour
     // private Texture2D templateDirtMask;
     public static bool isCleaning{ get; private set; } = false;
     public static bool isDecreasing{ get; set; } = false;
-    public GunChargeController gunChargeControllerInstance;
+    // public GunChargeController gunChargeControllerInstance;
 
     //마우스 범위 조절 
     private int minX;
@@ -21,11 +21,11 @@ public class CleanController : MonoBehaviour
     private int maxY;
 
 
-    private void Start()
-    {
-        gunChargeControllerInstance = FindObjectOfType<GunChargeController>();
-        // CreateTexture();
-    }
+    // private void Start()
+    // {
+    //     gunChargeControllerInstance = FindObjectOfType<GunChargeController>();
+    //     // CreateTexture();
+    // }
 
     private void Update()
     {
@@ -34,11 +34,12 @@ public class CleanController : MonoBehaviour
         Vector3 mousePosition = Input.mousePosition;
         bool isInCleaningArea = mousePosition.x >= minX && mousePosition.x <= maxX && mousePosition.y >= minY && mousePosition.y <= maxY;
         
-        if(gunChargeControllerInstance.gaugeIndex != 0 )
+        if(GunChargeController.isCharging)
         { 
             if (Input.GetMouseButtonDown(0) && isInCleaningArea)
             {
                 isCleaning = true;
+                GunChargeController.isCharging = true;
                 // 청소 중일 때 Particle System 활성화
                 washParticles.Play();
             }
@@ -46,13 +47,6 @@ public class CleanController : MonoBehaviour
             {
                 isCleaning = false;
                 //청소 중이 아닐 때 Particle System 비활성화
-                if(isDecreasing)
-                {
-                    gunChargeControllerInstance.gaugeIndex -= 1;
-                    Debug.Log(gunChargeControllerInstance.gaugeIndex);
-                    gunChargeControllerInstance.DecreaseGauge(gunChargeControllerInstance.gaugeIndex);
-                    isDecreasing = false;
-                }
                 washParticles.Stop();
             }
             if (isCleaning)
