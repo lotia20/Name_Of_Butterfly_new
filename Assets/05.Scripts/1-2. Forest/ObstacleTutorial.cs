@@ -19,6 +19,7 @@ public class ObstacleTutorial : MonoBehaviour
 
     private bool[] eventsCompleted = new bool[5];
     public TutorialExpose tutorialExpose;
+    private bool isColliding = false;
 
     GunChargeController gunChargeController;
 
@@ -26,8 +27,15 @@ public class ObstacleTutorial : MonoBehaviour
     {
         gunChargeController = FindObjectOfType<GunChargeController>();
     }
+
+    private void Start()
+    {
+        gunChargeController = FindObjectOfType<GunChargeController>();
+    }
     void Update()
     {
+        IsPlayerColliding();
+
         if (!eventsCompleted[0] && IsPlayerNearObject(object1, 50f))
         {
             tutorialExpose.SetImage(shiftUi);
@@ -46,7 +54,7 @@ public class ObstacleTutorial : MonoBehaviour
             tutorialExpose.ShowAndHideImage(KeyCode.LeftControl);
             eventsCompleted[2] = true;
         }
-        else if (!eventsCompleted[3] && gunChargeController.IsColliding && eventsCompleted[2])
+        else if (!eventsCompleted[3] && isColliding && eventsCompleted[2])
         {
             tutorialExpose.SetImage(rKeyUi);
             tutorialExpose.ShowAndHideImage(KeyCode.R);
@@ -68,6 +76,14 @@ public class ObstacleTutorial : MonoBehaviour
             return distance <= distanceThreshold;
         }
         return false;
+    }
+
+    void IsPlayerColliding()
+    {
+        if (gunChargeController.IsColliding)
+        {
+            isColliding = true;
+        }
     }
 }
 
