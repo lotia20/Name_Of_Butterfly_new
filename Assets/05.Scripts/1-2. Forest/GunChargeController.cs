@@ -18,7 +18,7 @@ public class GunChargeController : MonoBehaviour
     private float moveSpeed = 1f;
 
     private bool isColliding = false;
-    public static bool isCharging{ get; set; } = false;
+
     [SerializeField] private float gaugeChargeDelay = 0.5f;
 
     public AudioClip chargingSound;
@@ -41,11 +41,6 @@ public class GunChargeController : MonoBehaviour
             player.transform.rotation = Quaternion.Euler(0f, 2500f, 0f);
             FixCameraPosition();
         }
-        // if(CleanController.isDecreasing && !CleanController.isCleaning)
-        // {
-        //     DecreaseGauge();
-        //     CleanController.isDecreasing = false;
-        // }
     }
 
     void InitilalizeGauges()
@@ -108,24 +103,14 @@ public class GunChargeController : MonoBehaviour
         }
         gaugeIndex = 10;
         audioSource.Stop();
-        isCharging = true;
         ResetCamera();
     }
 
-    // public void DecreaseGauge()
-    // {
-    //     if(gaugeIndex >= 1)
-    //     {
-    //         gaugeIndex -= 1;
-    //         gauges[gaugeIndex].SetActive(true);
-    //         DisableOtherGauges(gaugeIndex);
-    //     }
-    //     else
-    //     {
-    //         isCharging = false;
-    //     }
-    
-    // }
+    public void DecreaseGauge(int currentIndex)
+    {
+        gauges[currentIndex].SetActive(true);
+        DisableOtherGauges(currentIndex);
+    }
 
     void DisableOtherGauges(int currentIndex)
     {

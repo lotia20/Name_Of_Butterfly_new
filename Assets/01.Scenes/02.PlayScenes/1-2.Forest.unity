@@ -823,7 +823,8 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: cb18894f96ffb4785be05a1c76b7eb87, type: 2}
+      objectReference: {fileID: -876546973899608171, guid: 5373d8da089a648a6bc7003a2146cb6d,
+        type: 3}
     - target: {fileID: 919132149155446097, guid: 65965e9bc6abcf942888c5548fa0d94b,
         type: 3}
       propertyPath: m_Name
@@ -5400,7 +5401,8 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: cb18894f96ffb4785be05a1c76b7eb87, type: 2}
+      objectReference: {fileID: -876546973899608171, guid: 5373d8da089a648a6bc7003a2146cb6d,
+        type: 3}
     - target: {fileID: 919132149155446097, guid: 65965e9bc6abcf942888c5548fa0d94b,
         type: 3}
       propertyPath: m_Name
@@ -6038,8 +6040,10 @@ MonoBehaviour:
   _camera: {fileID: 8275272778983993013}
   dirtMaskBase: {fileID: 2800000, guid: a79db2819fd2c4f439a3541b4ed76769, type: 3}
   brush: {fileID: 2800000, guid: 5c8c5f66c63ba49eb93cb4a116e97890, type: 3}
-  material: {fileID: 2100000, guid: 2f34e183734404d689e1d316ea3cec73, type: 2}
+  material: {fileID: -876546973899608171, guid: 5373d8da089a648a6bc7003a2146cb6d,
+    type: 3}
   washParticles: {fileID: 1730601358849714715}
+  gunChargeControllerInstance: {fileID: 0}
 --- !u!64 &525209250
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -9807,8 +9811,10 @@ MonoBehaviour:
   _camera: {fileID: 8275272778983993013}
   dirtMaskBase: {fileID: 2800000, guid: a79db2819fd2c4f439a3541b4ed76769, type: 3}
   brush: {fileID: 2800000, guid: 5c8c5f66c63ba49eb93cb4a116e97890, type: 3}
-  material: {fileID: 2100000, guid: cb18894f96ffb4785be05a1c76b7eb87, type: 2}
+  material: {fileID: -876546973899608171, guid: 5373d8da089a648a6bc7003a2146cb6d,
+    type: 3}
   washParticles: {fileID: 1730601358849714715}
+  gunChargeControllerInstance: {fileID: 0}
 --- !u!64 &894013409
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -9962,8 +9968,10 @@ MonoBehaviour:
   _camera: {fileID: 8275272778983993013}
   dirtMaskBase: {fileID: 2800000, guid: a79db2819fd2c4f439a3541b4ed76769, type: 3}
   brush: {fileID: 2800000, guid: 5c8c5f66c63ba49eb93cb4a116e97890, type: 3}
-  material: {fileID: 2100000, guid: cb18894f96ffb4785be05a1c76b7eb87, type: 2}
+  material: {fileID: -876546973899608171, guid: 5373d8da089a648a6bc7003a2146cb6d,
+    type: 3}
   washParticles: {fileID: 1730601358849714715}
+  gunChargeControllerInstance: {fileID: 0}
 --- !u!1001 &910742857
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15479,7 +15487,8 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: cb18894f96ffb4785be05a1c76b7eb87, type: 2}
+      objectReference: {fileID: -876546973899608171, guid: 5373d8da089a648a6bc7003a2146cb6d,
+        type: 3}
     - target: {fileID: 919132149155446097, guid: 65965e9bc6abcf942888c5548fa0d94b,
         type: 3}
       propertyPath: m_Name
@@ -15524,8 +15533,10 @@ MonoBehaviour:
   _camera: {fileID: 8275272778983993013}
   dirtMaskBase: {fileID: 2800000, guid: a79db2819fd2c4f439a3541b4ed76769, type: 3}
   brush: {fileID: 2800000, guid: 5c8c5f66c63ba49eb93cb4a116e97890, type: 3}
-  material: {fileID: 2100000, guid: cb18894f96ffb4785be05a1c76b7eb87, type: 2}
+  material: {fileID: -876546973899608171, guid: 5373d8da089a648a6bc7003a2146cb6d,
+    type: 3}
   washParticles: {fileID: 1730601358849714715}
+  gunChargeControllerInstance: {fileID: 0}
 --- !u!64 &1361832658
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -17490,7 +17501,8 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: cb18894f96ffb4785be05a1c76b7eb87, type: 2}
+      objectReference: {fileID: -876546973899608171, guid: 5373d8da089a648a6bc7003a2146cb6d,
+        type: 3}
     - target: {fileID: 919132149155446097, guid: 65965e9bc6abcf942888c5548fa0d94b,
         type: 3}
       propertyPath: m_Name
@@ -17535,8 +17547,10 @@ MonoBehaviour:
   _camera: {fileID: 8275272778983993013}
   dirtMaskBase: {fileID: 2800000, guid: a79db2819fd2c4f439a3541b4ed76769, type: 3}
   brush: {fileID: 2800000, guid: 5c8c5f66c63ba49eb93cb4a116e97890, type: 3}
-  material: {fileID: 2100000, guid: cb18894f96ffb4785be05a1c76b7eb87, type: 2}
+  material: {fileID: -876546973899608171, guid: 5373d8da089a648a6bc7003a2146cb6d,
+    type: 3}
   washParticles: {fileID: 1730601358849714715}
+  gunChargeControllerInstance: {fileID: 0}
 --- !u!64 &1515363281
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -17877,8 +17891,10 @@ MonoBehaviour:
   _camera: {fileID: 8275272778983993013}
   dirtMaskBase: {fileID: 2800000, guid: a79db2819fd2c4f439a3541b4ed76769, type: 3}
   brush: {fileID: 2800000, guid: 5c8c5f66c63ba49eb93cb4a116e97890, type: 3}
-  material: {fileID: 2100000, guid: 2f34e183734404d689e1d316ea3cec73, type: 2}
+  material: {fileID: -876546973899608171, guid: deaac2c56f0d248feb058060bc4dbe34,
+    type: 3}
   washParticles: {fileID: 1730601358849714715}
+  gunChargeControllerInstance: {fileID: 0}
 --- !u!64 &1535039611
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -20461,7 +20477,8 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: cb18894f96ffb4785be05a1c76b7eb87, type: 2}
+      objectReference: {fileID: -876546973899608171, guid: 5373d8da089a648a6bc7003a2146cb6d,
+        type: 3}
     - target: {fileID: 919132149155446097, guid: 65965e9bc6abcf942888c5548fa0d94b,
         type: 3}
       propertyPath: m_Name
@@ -20506,8 +20523,10 @@ MonoBehaviour:
   _camera: {fileID: 8275272778983993013}
   dirtMaskBase: {fileID: 2800000, guid: a79db2819fd2c4f439a3541b4ed76769, type: 3}
   brush: {fileID: 2800000, guid: 5c8c5f66c63ba49eb93cb4a116e97890, type: 3}
-  material: {fileID: 2100000, guid: cb18894f96ffb4785be05a1c76b7eb87, type: 2}
+  material: {fileID: -876546973899608171, guid: 5373d8da089a648a6bc7003a2146cb6d,
+    type: 3}
   washParticles: {fileID: 1730601358849714715}
+  gunChargeControllerInstance: {fileID: 0}
 --- !u!64 &1762455554
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -22326,7 +22345,8 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 2f34e183734404d689e1d316ea3cec73, type: 2}
+      objectReference: {fileID: -876546973899608171, guid: 5373d8da089a648a6bc7003a2146cb6d,
+        type: 3}
     - target: {fileID: 919132149155446097, guid: 7e424729ea9023f45a4f9238d4b83204,
         type: 3}
       propertyPath: m_Name
@@ -22356,7 +22376,8 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 2f34e183734404d689e1d316ea3cec73, type: 2}
+      objectReference: {fileID: -876546973899608171, guid: deaac2c56f0d248feb058060bc4dbe34,
+        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
