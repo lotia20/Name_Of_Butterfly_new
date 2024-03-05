@@ -4886,7 +4886,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e9074247cdee3b7479a1ae617e55091a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 84d9a181240e3410aa409a121359672c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6037,7 +6037,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _camera: {fileID: 8275272778983993013}
   washParticles: {fileID: 1730601358849714715}
-  gunChargeControllerInstance: {fileID: 0}
 --- !u!64 &525209250
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -9804,7 +9803,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _camera: {fileID: 8275272778983993013}
   washParticles: {fileID: 1730601358849714715}
-  gunChargeControllerInstance: {fileID: 0}
 --- !u!64 &894013409
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -9957,7 +9955,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _camera: {fileID: 8275272778983993013}
   washParticles: {fileID: 1730601358849714715}
-  gunChargeControllerInstance: {fileID: 0}
 --- !u!1001 &910742857
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15517,7 +15514,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _camera: {fileID: 8275272778983993013}
   washParticles: {fileID: 1730601358849714715}
-  gunChargeControllerInstance: {fileID: 0}
 --- !u!64 &1361832658
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -17526,7 +17522,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _camera: {fileID: 8275272778983993013}
   washParticles: {fileID: 1730601358849714715}
-  gunChargeControllerInstance: {fileID: 0}
 --- !u!64 &1515363281
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -17866,7 +17861,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _camera: {fileID: 8275272778983993013}
   washParticles: {fileID: 1730601358849714715}
-  gunChargeControllerInstance: {fileID: 0}
 --- !u!64 &1535039611
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -20493,7 +20487,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _camera: {fileID: 8275272778983993013}
   washParticles: {fileID: 1730601358849714715}
-  gunChargeControllerInstance: {fileID: 0}
 --- !u!64 &1762455554
 MeshCollider:
   m_ObjectHideFlags: 0
