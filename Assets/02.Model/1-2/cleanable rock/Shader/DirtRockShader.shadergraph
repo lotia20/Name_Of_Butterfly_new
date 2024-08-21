@@ -2334,10 +2334,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1390.999755859375,
-            "y": -1475.999755859375,
-            "width": 226.99951171875,
-            "height": 277.999755859375
+            "x": -1391.0001220703125,
+            "y": -1476.0001220703125,
+            "width": 227.0,
+            "height": 278.0
         }
     },
     "m_Slots": [
@@ -2359,7 +2359,7 @@
     "m_SourceType": 1,
     "m_FunctionName": "CustomLight",
     "m_FunctionSource": "",
-    "m_FunctionBody": "Direction = half3(0,0,0); // 기본값 설정\n\n#ifdef SHADERGRAPH_PREVIEW \n    Direction = half3(1,1,1);\n#else\n    Light light = GetMainLight();\n    Direction = light.direction;\n#endif\n"
+    "m_FunctionBody": "#ifdef SHADERGRAPH_PREVIEW \n    Direction = half3(1,1,1);\n#else\n    Light light = GetMainLight();\n    Direction = light.direction;\n#endif"
 }
 
 {
@@ -3398,10 +3398,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1585.0,
-            "y": -398.0000305175781,
-            "width": 227.0001220703125,
-            "height": 277.9998474121094
+            "x": -1585.0001220703125,
+            "y": -397.99993896484377,
+            "width": 227.0,
+            "height": 278.0000305175781
         }
     },
     "m_Slots": [
@@ -3423,7 +3423,7 @@
     "m_SourceType": 1,
     "m_FunctionName": "CustomLight",
     "m_FunctionSource": "",
-    "m_FunctionBody": "Direction = half3(0,0,0); // 기본값 설정\n\n#ifdef SHADERGRAPH_PREVIEW \n    Direction = half3(1,1,1);\n#else\n    Light light = GetMainLight();\n    Direction = light.direction;\n#endif\n"
+    "m_FunctionBody": "#ifdef SHADERGRAPH_PREVIEW \n    Direction = half3(1,1,1);\n#else\n    Light light = GetMainLight();\n    Direction = light.direction;\n#endif"
 }
 
 {

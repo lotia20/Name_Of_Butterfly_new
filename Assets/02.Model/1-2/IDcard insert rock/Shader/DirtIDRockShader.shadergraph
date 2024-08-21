@@ -2044,7 +2044,7 @@
     "m_SourceType": 1,
     "m_FunctionName": "CustomLight",
     "m_FunctionSource": "",
-    "m_FunctionBody": "Direction = half3(0,0,0); // 기본값 설정\n\n#ifdef SHADERGRAPH_PREVIEW \n    Direction = half3(1,1,1);\n#else\n    Light light = GetMainLight();\n    Direction = light.direction;\n#endif\n"
+    "m_FunctionBody": "#ifdef SHADERGRAPH_PREVIEW \n    Direction = half3(1,1,1);\n#else\n    Light light = GetMainLight();\n    Direction = light.direction;\n#endif"
 }
 
 {
@@ -2269,7 +2269,7 @@
     "m_SourceType": 1,
     "m_FunctionName": "CustomLight",
     "m_FunctionSource": "",
-    "m_FunctionBody": "Direction = half3(0,0,0); // 기본값 설정\n\n#ifdef SHADERGRAPH_PREVIEW \n    Direction = half3(1,1,1);\n#else\n    Light light = GetMainLight();\n    Direction = light.direction;\n#endif\n"
+    "m_FunctionBody": "#ifdef SHADERGRAPH_PREVIEW \n    Direction = half3(1,1,1);\n#else\n    Light light = GetMainLight();\n    Direction = light.direction;\n#endif"
 }
 
 {
