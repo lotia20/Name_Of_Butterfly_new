@@ -4986,6 +4986,7 @@ GameObject:
   m_Component:
   - component: {fileID: 410175675}
   - component: {fileID: 410175674}
+  - component: {fileID: 410175673}
   - component: {fileID: 410175676}
   m_Layer: 0
   m_Name: IDCardSequencer
@@ -4994,6 +4995,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &410175673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 410175672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09cd0170d76be39428492fd940a355f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &410175674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42252,8 +42265,7 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1850963324495342366, guid: 7e3c8b67931ccde48aee23927e86592d, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 1544218772227759022, guid: 7e3c8b67931ccde48aee23927e86592d,
