@@ -823,8 +823,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: -876546973899608171, guid: 5373d8da089a648a6bc7003a2146cb6d,
-        type: 3}
+      objectReference: {fileID: 2100000, guid: 31a50d45f8c14634ba695893ba318e77, type: 2}
     - target: {fileID: 919132149155446097, guid: 65965e9bc6abcf942888c5548fa0d94b,
         type: 3}
       propertyPath: m_Name
@@ -5069,7 +5068,6 @@ GameObject:
   m_Component:
   - component: {fileID: 410175675}
   - component: {fileID: 410175674}
-  - component: {fileID: 410175673}
   - component: {fileID: 410175676}
   m_Layer: 0
   m_Name: IDCardSequencer
@@ -5078,18 +5076,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &410175673
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 410175672}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09cd0170d76be39428492fd940a355f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &410175674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5484,8 +5470,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: -876546973899608171, guid: 5373d8da089a648a6bc7003a2146cb6d,
-        type: 3}
+      objectReference: {fileID: 2100000, guid: 31a50d45f8c14634ba695893ba318e77, type: 2}
     - target: {fileID: 919132149155446097, guid: 65965e9bc6abcf942888c5548fa0d94b,
         type: 3}
       propertyPath: m_Name
@@ -6121,12 +6106,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 8275272778983993013}
-  dirtMaskBase: {fileID: 2800000, guid: a79db2819fd2c4f439a3541b4ed76769, type: 3}
-  brush: {fileID: 2800000, guid: 5c8c5f66c63ba49eb93cb4a116e97890, type: 3}
-  material: {fileID: -876546973899608171, guid: 5373d8da089a648a6bc7003a2146cb6d,
-    type: 3}
   washParticles: {fileID: 1730601358849714715}
-  gunChargeControllerInstance: {fileID: 0}
 --- !u!64 &525209250
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -9892,12 +9872,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 8275272778983993013}
-  dirtMaskBase: {fileID: 2800000, guid: a79db2819fd2c4f439a3541b4ed76769, type: 3}
-  brush: {fileID: 2800000, guid: 5c8c5f66c63ba49eb93cb4a116e97890, type: 3}
-  material: {fileID: -876546973899608171, guid: 5373d8da089a648a6bc7003a2146cb6d,
-    type: 3}
   washParticles: {fileID: 1730601358849714715}
-  gunChargeControllerInstance: {fileID: 0}
 --- !u!64 &894013409
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -10049,12 +10024,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 8275272778983993013}
-  dirtMaskBase: {fileID: 2800000, guid: a79db2819fd2c4f439a3541b4ed76769, type: 3}
-  brush: {fileID: 2800000, guid: 5c8c5f66c63ba49eb93cb4a116e97890, type: 3}
-  material: {fileID: -876546973899608171, guid: 5373d8da089a648a6bc7003a2146cb6d,
-    type: 3}
   washParticles: {fileID: 1730601358849714715}
-  gunChargeControllerInstance: {fileID: 0}
 --- !u!1001 &910742857
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15570,8 +15540,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: -876546973899608171, guid: 5373d8da089a648a6bc7003a2146cb6d,
-        type: 3}
+      objectReference: {fileID: 2100000, guid: 31a50d45f8c14634ba695893ba318e77, type: 2}
     - target: {fileID: 919132149155446097, guid: 65965e9bc6abcf942888c5548fa0d94b,
         type: 3}
       propertyPath: m_Name
@@ -15614,12 +15583,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 8275272778983993013}
-  dirtMaskBase: {fileID: 2800000, guid: a79db2819fd2c4f439a3541b4ed76769, type: 3}
-  brush: {fileID: 2800000, guid: 5c8c5f66c63ba49eb93cb4a116e97890, type: 3}
-  material: {fileID: -876546973899608171, guid: 5373d8da089a648a6bc7003a2146cb6d,
-    type: 3}
   washParticles: {fileID: 1730601358849714715}
-  gunChargeControllerInstance: {fileID: 0}
 --- !u!64 &1361832658
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -17584,8 +17548,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: -876546973899608171, guid: 5373d8da089a648a6bc7003a2146cb6d,
-        type: 3}
+      objectReference: {fileID: 2100000, guid: 31a50d45f8c14634ba695893ba318e77, type: 2}
     - target: {fileID: 919132149155446097, guid: 65965e9bc6abcf942888c5548fa0d94b,
         type: 3}
       propertyPath: m_Name
@@ -17628,12 +17591,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 8275272778983993013}
-  dirtMaskBase: {fileID: 2800000, guid: a79db2819fd2c4f439a3541b4ed76769, type: 3}
-  brush: {fileID: 2800000, guid: 5c8c5f66c63ba49eb93cb4a116e97890, type: 3}
-  material: {fileID: -876546973899608171, guid: 5373d8da089a648a6bc7003a2146cb6d,
-    type: 3}
   washParticles: {fileID: 1730601358849714715}
-  gunChargeControllerInstance: {fileID: 0}
 --- !u!64 &1515363281
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -17972,12 +17930,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 8275272778983993013}
-  dirtMaskBase: {fileID: 2800000, guid: a79db2819fd2c4f439a3541b4ed76769, type: 3}
-  brush: {fileID: 2800000, guid: 5c8c5f66c63ba49eb93cb4a116e97890, type: 3}
-  material: {fileID: -876546973899608171, guid: deaac2c56f0d248feb058060bc4dbe34,
-    type: 3}
   washParticles: {fileID: 1730601358849714715}
-  gunChargeControllerInstance: {fileID: 0}
 --- !u!64 &1535039611
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -20560,8 +20513,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: -876546973899608171, guid: 5373d8da089a648a6bc7003a2146cb6d,
-        type: 3}
+      objectReference: {fileID: 2100000, guid: 31a50d45f8c14634ba695893ba318e77, type: 2}
     - target: {fileID: 919132149155446097, guid: 65965e9bc6abcf942888c5548fa0d94b,
         type: 3}
       propertyPath: m_Name
@@ -20604,12 +20556,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 8275272778983993013}
-  dirtMaskBase: {fileID: 2800000, guid: a79db2819fd2c4f439a3541b4ed76769, type: 3}
-  brush: {fileID: 2800000, guid: 5c8c5f66c63ba49eb93cb4a116e97890, type: 3}
-  material: {fileID: -876546973899608171, guid: 5373d8da089a648a6bc7003a2146cb6d,
-    type: 3}
   washParticles: {fileID: 1730601358849714715}
-  gunChargeControllerInstance: {fileID: 0}
 --- !u!64 &1762455554
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -42348,7 +42295,8 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1850963324495342366, guid: 7e3c8b67931ccde48aee23927e86592d, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 1544218772227759022, guid: 7e3c8b67931ccde48aee23927e86592d,
@@ -47010,6 +46958,11 @@ PrefabInstance:
       propertyPath: washParticles
       value: 
       objectReference: {fileID: 1730601358849714715}
+    - target: {fileID: 2817326477352922240, guid: fdd8eb45551a5114f8cd6c290560372a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2e58c8bd371cedb448f7aab07fe97fb2, type: 2}
     - target: {fileID: 7307902151873395626, guid: fdd8eb45551a5114f8cd6c290560372a,
         type: 3}
       propertyPath: m_Name
