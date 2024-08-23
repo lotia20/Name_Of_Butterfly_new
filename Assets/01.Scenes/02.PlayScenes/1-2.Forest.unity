@@ -42203,6 +42203,16 @@ PrefabInstance:
       propertyPath: walkSpeed
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 3963679131618612261, guid: 7e3c8b67931ccde48aee23927e86592d,
+        type: 3}
+      propertyPath: cameraBounceSpeed
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3963679131618612261, guid: 7e3c8b67931ccde48aee23927e86592d,
+        type: 3}
+      propertyPath: cameraBounceAmount
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 6188971855641394251, guid: 7e3c8b67931ccde48aee23927e86592d,
         type: 3}
       propertyPath: waterWall
