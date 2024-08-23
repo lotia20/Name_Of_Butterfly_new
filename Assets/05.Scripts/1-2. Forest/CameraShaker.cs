@@ -11,7 +11,7 @@ public class CameraShaker : MonoBehaviour
     {
         float halfDuration = duration / 2;
         float elapsed = 0f;
-        float tick = Random.Range(-10f, 10f);
+        float tick = Random.Range(-1f, 1f);
 
         Vector3 originalPosition = transform.localPosition; 
 

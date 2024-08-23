@@ -55,7 +55,7 @@ public class PasswordButtonColorChanger : MonoBehaviour
                             }
                             else if (buttonNumber == 12)
                             {
-                                if (passwordTextBox.text == "9555")
+                                if (passwordTextBox.text == "905505")
                                 //if (passwordTextBox.text == "12341234")
                                 {
                                     PlaySound(successSound);

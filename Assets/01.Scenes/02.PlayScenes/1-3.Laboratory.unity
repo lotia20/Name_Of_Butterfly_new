@@ -164,7 +164,7 @@ MonoBehaviour:
     roll: 0
   - position: {x: -0.06438267, y: -0.5472111, z: -4.8054714}
     roll: 0
-  - position: {x: -0.12876534, y: -1.0944222, z: -14.610943}
+  - position: {x: -0.12876534, y: -1.0944233, z: -11.363302}
     roll: 0
 --- !u!4 &11586763
 Transform:
@@ -175,7 +175,7 @@ Transform:
   m_GameObject: {fileID: 11586761}
   serializedVersion: 2
   m_LocalRotation: {x: 0.13481194, y: -0, z: -0, w: 0.99087125}
-  m_LocalPosition: {x: 0.15, y: 10.155145, z: 14.2}
+  m_LocalPosition: {x: 0.15, y: 10.155145, z: 13.43}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6403,7 +6403,7 @@ RectTransform:
   m_GameObject: {fileID: 583689343}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.59, y: 0.59, z: 0.59}
+  m_LocalScale: {x: 0.35, y: 0.35, z: 0.35}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1967134986}
@@ -7169,7 +7169,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 1466923676}
   m_Follow: {fileID: 1249840610}
   m_Lens:
-    FieldOfView: 110
+    FieldOfView: 100
     OrthographicSize: 5
     NearClipPlane: 0.3
     FarClipPlane: 1000
@@ -7195,14 +7195,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 718928563}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.002886527, y: 0.9764519, z: -0.21531852, w: 0.013090165}
-  m_LocalPosition: {x: 0.15, y: 8.819332, z: 19.018257}
+  m_LocalRotation: {x: 0.003117077, y: 0.9746942, z: -0.22310574, w: 0.013617744}
+  m_LocalPosition: {x: 0.15, y: 8.819332, z: 18.248257}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1572396716}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 9.914, y: 178.399, z: 0}
 --- !u!1 &723476184
 GameObject:
   m_ObjectHideFlags: 0
@@ -12698,8 +12698,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1249840609}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0005330693, y: 0.99423826, z: 0.107143186, w: -0.0032393767}
-  m_LocalPosition: {x: 0.15, y: 8.819332, z: 19.018257}
+  m_LocalRotation: {x: -0.0004859408, y: 0.99400884, z: 0.10925829, w: -0.0029927094}
+  m_LocalPosition: {x: 0.15, y: 8.819332, z: 18.248257}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12720,7 +12720,7 @@ MonoBehaviour:
   m_Path: {fileID: 11586762}
   m_UpdateMethod: 0
   m_PositionUnits: 0
-  m_Speed: 0.1
+  m_Speed: 0.2
   m_Position: 0
 --- !u!1001 &1252953285
 PrefabInstance:
@@ -16512,7 +16512,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -16574,7 +16574,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 110
+  field of view: 100
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -16600,8 +16600,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1708765710}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.002886527, y: 0.9764519, z: -0.21531852, w: 0.013090165}
-  m_LocalPosition: {x: 0.15, y: 8.819332, z: 19.018257}
+  m_LocalRotation: {x: 0.003117077, y: 0.9746942, z: -0.22310574, w: 0.013617744}
+  m_LocalPosition: {x: 0.15, y: 8.819332, z: 18.248257}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -20142,7 +20142,7 @@ RectTransform:
   m_GameObject: {fileID: 2070585991}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.58, y: 0.58, z: 0.58}
+  m_LocalScale: {x: 0.35, y: 0.35, z: 0.35}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1967134986}
@@ -24546,7 +24546,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 6837012748581695966}
-  openSpeed: 2
+  openSpeed: 4
   triggerDistance: 10
   vcam: {fileID: 718928564}
   mainCamera: {fileID: 2096330485}
@@ -24555,7 +24555,7 @@ MonoBehaviour:
   panel1CanvasGroup: {fileID: 583689345}
   panel2CanvasGroup: {fileID: 2070585993}
   panelFadeDuration: 3
-  cinemachineDuration: 20
+  cinemachineDuration: 10
   door: {fileID: 436885236}
   UpDoor: {fileID: 41332836}
   DownDoor: {fileID: 1270324200}
