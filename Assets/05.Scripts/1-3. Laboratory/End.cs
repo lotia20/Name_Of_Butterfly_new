@@ -12,6 +12,10 @@ public class End : MonoBehaviour
     [SerializeField] private Camera mainCamera; // 메인 카메라
     [SerializeField] private Camera secondaryCamera; // 두 번째 카메라
     [SerializeField] private CinemachineDollyCart dollyCart; // Dolly Cart
+    [SerializeField] private CanvasGroup panel1CanvasGroup; // 첫 번째 패널의 CanvasGroup
+    [SerializeField] private CanvasGroup panel2CanvasGroup; // 두 번째 패널의 CanvasGroup
+    [SerializeField] private float panelFadeDuration = 3f; // 패널 페이드 인/아웃 지속 시간
+    [SerializeField] private float cinemachineDuration = 30f; // 시네머신 카메라 연출 지속 시간
 
     FadeEffect fade;
     public GameObject door;
@@ -21,7 +25,6 @@ public class End : MonoBehaviour
     private AudioSource audioSource;
     private bool soundPlayed = false;
     private bool isTriggered = false;
-    private float cinemachineDuration = 5f; // 시네머신 연출 지속 시간
 
     void Start()
     {
@@ -29,6 +32,8 @@ public class End : MonoBehaviour
         vcam.gameObject.SetActive(false); // 초기에는 시네머신 카메라 비활성화
         secondaryCamera.gameObject.SetActive(false); // 두 번째 카메라도 비활성화
         dollyCart.gameObject.SetActive(false); // Dolly Cart 비활성화
+        panel1CanvasGroup.alpha = 0f; // 첫 번째 패널 초기 비활성화
+        panel2CanvasGroup.alpha = 0f; // 두 번째 패널 초기 비활성화
     }
 
     void Update()
@@ -60,22 +65,48 @@ public class End : MonoBehaviour
         // 4. Dolly Cart 활성화 및 이동
         yield return StartCoroutine(OpenDoor());
         dollyCart.gameObject.SetActive(true); // Dolly Cart 활성화
+        yield return new WaitForSeconds(cinemachineDuration); // 시네머신 카메라 연출 지속 시간 대기
 
+        fade.FadeIn();
+        // 5. 패널 전환 및 씬 전환 처리
+        yield return StartCoroutine(HandlePanelTransition());
     }
 
-    private IEnumerator MoveDollyCart()
+    private IEnumerator HandlePanelTransition()
     {
-        float startTime = Time.time;
-        float journeyLength = 5f; // 원하는 이동 시간
+        // 첫 번째 패널 처리
+        yield return StartCoroutine(FadePanel(panel1CanvasGroup));
 
-        while (Time.time - startTime < journeyLength)
+        // 두 번째 패널 처리
+        yield return StartCoroutine(FadePanel(panel2CanvasGroup));
+
+        // 3초 대기 후 씬 전환
+        yield return new WaitForSeconds(3f);
+        SceneManager.LoadScene("0.Start"); // 변경하려는 씬 이름으로 대체
+    }
+
+    private IEnumerator FadePanel(CanvasGroup canvasGroup)
+    {
+        // 패널 페이드 인 (투명도 증가)
+        yield return StartCoroutine(FadeCanvasGroup(canvasGroup, 0f, 1f, panelFadeDuration));
+
+        // 패널 1초 동안 유지 (필요에 따라 조정 가능)
+        yield return new WaitForSeconds(1f);
+
+        // 패널 페이드 아웃 (투명도 감소)
+        yield return StartCoroutine(FadeCanvasGroup(canvasGroup, 1f, 0f, panelFadeDuration));
+    }
+
+    private IEnumerator FadeCanvasGroup(CanvasGroup canvasGroup, float start, float end, float duration)
+    {
+        float elapsedTime = 0f;
+        while (elapsedTime < duration)
         {
-            float distanceCovered = (Time.time - startTime) / journeyLength;
-            dollyCart.m_Position = Mathf.Lerp(0, 1, distanceCovered); // 0에서 1까지 이동
+            canvasGroup.alpha = Mathf.Lerp(start, end, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
             yield return null;
         }
-
-        dollyCart.m_Position = 1; // 최종 위치 설정
+        canvasGroup.alpha = end;
     }
 
     IEnumerator OpenDoor()
@@ -110,6 +141,5 @@ public class End : MonoBehaviour
         }
     }
 }
-
 
 
