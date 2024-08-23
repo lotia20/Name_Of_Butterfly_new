@@ -6,43 +6,62 @@ public class FadeEffect : MonoBehaviour
 {
     public CanvasGroup fadeInCanvasGroup;
     public CanvasGroup fadeOutCanvasGroup;
-    public bool fadeIn = false;
-    public bool fadeOut = false;
     public float TimeToFade;
+
+    public bool isFadingIn = false;
+    public bool isFadingOut = false;
 
     // Update is called once per frame
     void Update()
     {
-        if(fadeIn == true)
+        if (isFadingIn)
         {
-            if(fadeInCanvasGroup.alpha < 1)
+            if (fadeInCanvasGroup.alpha < 1)
             {
                 fadeInCanvasGroup.alpha += TimeToFade * Time.deltaTime;
-                if(fadeInCanvasGroup.alpha >= 1)
+                if (fadeInCanvasGroup.alpha >= 1)
                 {
-                    fadeIn = false;
+                    fadeInCanvasGroup.alpha = 1;
+                    isFadingIn = false;
                 }
             }
         }
-        if(fadeOut == true)
+        else if (isFadingOut)
         {
-            if(fadeOutCanvasGroup.alpha >= 0)
+            if (fadeOutCanvasGroup.alpha > 0)
             {
                 fadeOutCanvasGroup.alpha -= TimeToFade * Time.deltaTime;
-                if(fadeOutCanvasGroup.alpha == 0)
+                if (fadeOutCanvasGroup.alpha <= 0)
                 {
-                    fadeOut = false;
+                    fadeOutCanvasGroup.alpha = 0;
+                    isFadingOut = false;
                 }
             }
         }
     }
+
     public void FadeIn()
     {
-        fadeIn = true;
+        if (isFadingOut)
+        {
+            return;
+        }
+
+        fadeInCanvasGroup.alpha = 0; 
+        fadeInCanvasGroup.gameObject.SetActive(true);
+        isFadingIn = true;
     }
 
     public void FadeOut()
     {
-        fadeOut = true;
+        if (isFadingIn)
+        {
+            return;
+        }
+
+        fadeInCanvasGroup.alpha = 0;
+        fadeOutCanvasGroup.alpha = 1; 
+        fadeOutCanvasGroup.gameObject.SetActive(true); 
+        isFadingOut = true;
     }
 }
