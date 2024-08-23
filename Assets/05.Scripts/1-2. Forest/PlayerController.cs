@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    //스피드 조정 변수
+    // 스피드 조정 변수
     [SerializeField]
     private float walkSpeed;
     [SerializeField] 
@@ -13,21 +13,21 @@ public class PlayerController : MonoBehaviour
     private float crouchSpeed;
     private float applySpeed;
 
-    //점프 정도
+    // 점프 정도
     [SerializeField]
-     private float jumpForce;
+    private float jumpForce;
 
-     //상태변수
-     private bool isRun = false;
-     private bool isGround = true;
-     private bool isCrouch = false;
-     public static bool isLoad{ get; set; } = false;
+    // 상태 변수
+    private bool isRun = false;
+    private bool isGround = true;
+    private bool isCrouch = false;
+    public static bool isLoad{ get; set; } = false;
 
-     //앉은 상태일 때 얼마나 앉을 지 결정하는 변수
-     [SerializeField] 
-     private float crouchPosY;
-     private float originPosY;
-     private float applyCrouchPosY;
+    // 앉은 상태일 때 얼마나 앉을 지 결정하는 변수
+    [SerializeField] 
+    private float crouchPosY;
+    private float originPosY;
+    private float applyCrouchPosY;
 
     [SerializeField]
     private float lookSensitivity; 
@@ -41,19 +41,26 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rigidbody;
     private CapsuleCollider capsuleCollider;
 
-    //zoom 변수 
-    private float xRotate = 0.0f; // 내부 사용할 X축 회전량은 별도 정의 ( 카메라 위 아래 방향 )
+    // 줌 변수 
+    private float xRotate = 0.0f;
     private float yRotate = 0.0f;
     public float zoomSpeed = 10.0f;
+
+    // 뛸 때 카메라 흔들림 정도와 속도
+    [SerializeField] 
+    private float cameraBounceAmount = 0.01f; 
+    [SerializeField]
+    private float cameraBounceSpeed = 5f; 
+
+    private bool isBouncing = false;
 
     void Start()
     {
         capsuleCollider = GetComponent<CapsuleCollider>();
         rigidbody = GetComponent<Rigidbody>();
 
-        //초기화
+        // 초기화
         applySpeed = walkSpeed;
-
         originPosY = camera.transform.localPosition.y;
         Debug.Log(originPosY);
         applyCrouchPosY = originPosY;
@@ -68,7 +75,6 @@ public class PlayerController : MonoBehaviour
         Move();
         CameraControl();
         PlayerRotation();
-
         Zoom();
     }
 
@@ -85,7 +91,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // 점프
     private void Jump()
     {
         if (isCrouch)
@@ -109,19 +114,28 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-     private void Running()
+    private void Running()
     {
         if (isCrouch)
             Crouch();
 
         isRun = true;
         applySpeed = runSpeed;
+
+        if (!isBouncing)
+        {
+            StartCoroutine(CameraBounce());
+        }
     }
 
     private void RunningCancel()
     {
         isRun = false;
         applySpeed = walkSpeed;
+
+        StopCoroutine(CameraBounce());
+        isBouncing = false;
+        camera.transform.localPosition = new Vector3(camera.transform.localPosition.x, originPosY, camera.transform.localPosition.z);
     }
 
     private void TryCrouch()
@@ -135,7 +149,7 @@ public class PlayerController : MonoBehaviour
     private void Crouch()
     {
         isCrouch = !isCrouch;
-        if (isCrouch) //앉은 상태
+        if (isCrouch)
         {
             applySpeed = crouchSpeed;
             applyCrouchPosY = crouchPosY;
@@ -168,7 +182,6 @@ public class PlayerController : MonoBehaviour
         camera.transform.localPosition = new Vector3(posX, applyCrouchPosY, posZ);
     }
 
-
     private void Move()
     {
         float moveDirX = Input.GetAxis("Horizontal");  
@@ -180,7 +193,7 @@ public class PlayerController : MonoBehaviour
 
         rigidbody.MovePosition(transform.position + velocity * Time.deltaTime);
     }
-    
+
     private void CameraControl()
     {
         if(CleanController.isCleaning == true)
@@ -224,8 +237,24 @@ public class PlayerController : MonoBehaviour
             float maxZoom = 80f;
 
             camera.fieldOfView = Mathf.Clamp(viewLimit, minZoom, maxZoom);
-
-
         }
-    } 
+    }
+
+    private IEnumerator CameraBounce()
+    {
+        isBouncing = true;
+        float timer = 0f;
+
+        while (isRun)
+        {
+            float newY = originPosY + Mathf.Sin(timer * cameraBounceSpeed) * cameraBounceAmount;
+            camera.transform.localPosition = new Vector3(camera.transform.localPosition.x, newY, camera.transform.localPosition.z);
+
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        camera.transform.localPosition = new Vector3(camera.transform.localPosition.x, originPosY, camera.transform.localPosition.z);
+        isBouncing = false;
+    }
 }
