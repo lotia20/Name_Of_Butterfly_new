@@ -6106,7 +6106,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 8275272778983993013}
-  washParticles: {fileID: 1730601358849714715}
+  washParticles: {fileID: 1307219864}
 --- !u!64 &525209250
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -9872,7 +9872,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 8275272778983993013}
-  washParticles: {fileID: 1730601358849714715}
+  washParticles: {fileID: 1307219864}
 --- !u!64 &894013409
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -10024,7 +10024,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 8275272778983993013}
-  washParticles: {fileID: 1730601358849714715}
+  washParticles: {fileID: 1307219864}
 --- !u!1001 &910742857
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15062,6 +15062,86 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!1001 &1307219863
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2044300035236911579}
+    m_Modifications:
+    - target: {fileID: 3769113334037422224, guid: e5930dac3677447a0aaacc3f550544e9,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3769113334037422224, guid: e5930dac3677447a0aaacc3f550544e9,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3769113334037422224, guid: e5930dac3677447a0aaacc3f550544e9,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 10.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3769113334037422224, guid: e5930dac3677447a0aaacc3f550544e9,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9958766
+      objectReference: {fileID: 0}
+    - target: {fileID: 3769113334037422224, guid: e5930dac3677447a0aaacc3f550544e9,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.015368968
+      objectReference: {fileID: 0}
+    - target: {fileID: 3769113334037422224, guid: e5930dac3677447a0aaacc3f550544e9,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.06325575
+      objectReference: {fileID: 0}
+    - target: {fileID: 3769113334037422224, guid: e5930dac3677447a0aaacc3f550544e9,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.06318513
+      objectReference: {fileID: 0}
+    - target: {fileID: 3769113334037422224, guid: e5930dac3677447a0aaacc3f550544e9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 1.296
+      objectReference: {fileID: 0}
+    - target: {fileID: 3769113334037422224, guid: e5930dac3677447a0aaacc3f550544e9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 7.352
+      objectReference: {fileID: 0}
+    - target: {fileID: 3769113334037422224, guid: e5930dac3677447a0aaacc3f550544e9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 7.344
+      objectReference: {fileID: 0}
+    - target: {fileID: 6876119839139488895, guid: e5930dac3677447a0aaacc3f550544e9,
+        type: 3}
+      propertyPath: m_Name
+      value: WaterSpray
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e5930dac3677447a0aaacc3f550544e9, type: 3}
+--- !u!198 &1307219864 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2971760758543161070, guid: e5930dac3677447a0aaacc3f550544e9,
+    type: 3}
+  m_PrefabInstance: {fileID: 1307219863}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1307219865 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3769113334037422224, guid: e5930dac3677447a0aaacc3f550544e9,
+    type: 3}
+  m_PrefabInstance: {fileID: 1307219863}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1310291601
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15583,7 +15663,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 8275272778983993013}
-  washParticles: {fileID: 1730601358849714715}
+  washParticles: {fileID: 1307219864}
 --- !u!64 &1361832658
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -17591,7 +17671,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 8275272778983993013}
-  washParticles: {fileID: 1730601358849714715}
+  washParticles: {fileID: 1307219864}
 --- !u!64 &1515363281
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -17930,7 +18010,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 8275272778983993013}
-  washParticles: {fileID: 1730601358849714715}
+  washParticles: {fileID: 1307219864}
 --- !u!64 &1535039611
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -20556,7 +20636,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 8275272778983993013}
-  washParticles: {fileID: 1730601358849714715}
+  washParticles: {fileID: 1307219864}
 --- !u!64 &1762455554
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -22375,8 +22455,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: -876546973899608171, guid: 5373d8da089a648a6bc7003a2146cb6d,
-        type: 3}
+      objectReference: {fileID: 2100000, guid: 27c4e385f42814a448e806bae7786129, type: 2}
     - target: {fileID: 919132149155446097, guid: 7e424729ea9023f45a4f9238d4b83204,
         type: 3}
       propertyPath: m_Name
@@ -22406,8 +22485,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: -876546973899608171, guid: deaac2c56f0d248feb058060bc4dbe34,
-        type: 3}
+      objectReference: {fileID: 2100000, guid: 27c4e385f42814a448e806bae7786129, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -36876,7 +36954,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1947440976192489893
 GameObject:
   m_ObjectHideFlags: 0
@@ -42302,6 +42380,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1544218772227759022, guid: 7e3c8b67931ccde48aee23927e86592d,
         type: 3}
       insertIndex: -1
+      addedObject: {fileID: 1307219865}
+    - targetCorrespondingSourceObject: {fileID: 1544218772227759022, guid: 7e3c8b67931ccde48aee23927e86592d,
+        type: 3}
+      insertIndex: -1
       addedObject: {fileID: 1924220356483534615}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8570804339229874344, guid: 7e3c8b67931ccde48aee23927e86592d,
@@ -46957,7 +47039,7 @@ PrefabInstance:
         type: 3}
       propertyPath: washParticles
       value: 
-      objectReference: {fileID: 1730601358849714715}
+      objectReference: {fileID: 1307219864}
     - target: {fileID: 2817326477352922240, guid: fdd8eb45551a5114f8cd6c290560372a,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
